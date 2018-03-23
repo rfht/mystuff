@@ -1,0 +1,26 @@
+$OpenBSD$
+
+include OpenBSD in definitions
+absolute path needed for gl.h?? and glx.h??
+
+Index: renderer/qgl.h
+--- renderer/qgl.h.orig
++++ renderer/qgl.h
+@@ -33,14 +33,14 @@
+ #define GL_GLEXT_LEGACY
+ #include <OpenGL/gl.h>
+ 
+-#elif defined( __linux__ )
++#elif defined( __linux__ ) || defined(__OpenBSD__)
+ 
+ // using our local glext.h
+ // http://oss.sgi.com/projects/ogl-sample/ABI/
+ #define GL_GLEXT_LEGACY
+ #define GLX_GLXEXT_LEGACY
+-#include <GL/gl.h>
+-#include <GL/glx.h>
++#include </usr/X11R6/include/GL/gl.h>
++#include </usr/X11R6/include/GL/glx.h>
+ 
+ #else
+ 

@@ -1,0 +1,29 @@
+$OpenBSD$
+
+EXPERIMENTAL: manually add upstream patch
+https://github.com/mono/mono/pull/7507/files
+
+Index: mono/utils/mono-threads.c
+--- mono/utils/mono-threads.c.orig
++++ mono/utils/mono-threads.c
+@@ -1142,17 +1142,13 @@ mono_thread_info_abort_socket_syscall_for_close (MonoN
+ 	if (tid == mono_native_thread_id_get ())
+ 		return;
+ 
++	mono_thread_info_suspend_lock ();
+ 	hp = mono_hazard_pointer_get ();
+ 	info = mono_thread_info_lookup (tid);
+-	if (!info)
++	if (!info) {
++		mono_thread_info_suspend_unlock ();
+ 		return;
+-
+-	if (mono_thread_info_run_state (info) == STATE_DETACHED) {
+-		mono_hazard_pointer_clear (hp, 1);
+-		return;
+ 	}
+-
+-	mono_thread_info_suspend_lock ();
+ 	mono_threads_begin_global_suspend ();
+ 
+ 	mono_threads_suspend_abort_syscall (info);

@@ -1,0 +1,79 @@
+$OpenBSD$
+
+DEBUG printf's
+
+Index: mono/utils/mono-threads.c
+--- mono/utils/mono-threads.c.orig
++++ mono/utils/mono-threads.c
+@@ -117,18 +117,21 @@ mono_threads_notify_initiator_of_resume (MonoThreadInf
+ static gboolean
+ begin_async_suspend (MonoThreadInfo *info, gboolean interrupt_kernel)
+ {
++	printf("in function begin_async_suspend (file mono-threads.c)\n");
+ 	if (mono_threads_is_coop_enabled ()) {
+ 		/* There's nothing else to do after we async request the thread to suspend */
+ 		mono_threads_add_to_pending_operation_set (info);
+ 		return TRUE;
+ 	}
+ 
++	printf("calling mono_threads_suspend_begin_async_suspend from begin_async_suspend in mono-threads.c\n");
+ 	return mono_threads_suspend_begin_async_suspend (info, interrupt_kernel);
+ }
+ 
+ static gboolean
+ check_async_suspend (MonoThreadInfo *info)
+ {
++	printf("in function check_async_suspend (file mono-threads.c)\n");
+ 	if (mono_threads_is_coop_enabled ()) {
+ 		/* Async suspend can't async fail on coop */
+ 		return TRUE;
+@@ -140,6 +143,7 @@ check_async_suspend (MonoThreadInfo *info)
+ static void
+ resume_async_suspended (MonoThreadInfo *info)
+ {
++	printf("in function resume_async_suspended (file mono-threads.c)\n");
+ 	if (mono_threads_is_coop_enabled ())
+ 		g_assert_not_reached ();
+ 
+@@ -548,6 +552,9 @@ mono_thread_info_current (void)
+ 	if (info)
+ 		return info;
+ 
++	if (info == NULL)
++		printf("mono_thread_info_current: no thread-specific data value is associated with key\n");
++
+ 	info = mono_thread_info_lookup (mono_native_thread_id_get ()); /*info on HP1*/
+ 
+ 	/*
+@@ -830,6 +837,7 @@ mono_thread_info_core_resume (MonoThreadInfo *info)
+ 		res = TRUE;
+ 		break;
+ 	case ResumeInitAsyncResume:
++		printf("calling resume_async_suspended from mono_thread_info_core_resume (mono-threads.c)\n");
+ 		resume_async_suspended (info);
+ 		res = TRUE;
+ 		break;
+@@ -881,6 +889,7 @@ mono_thread_info_begin_suspend (MonoThreadInfo *info)
+ 		mono_threads_add_to_pending_operation_set (info);
+ 		return TRUE;
+ 	case AsyncSuspendInitSuspend:
++		printf("calling begin_async_suspend from mono_thread_info_core_resume (mono-threads.c)\n");
+ 		return begin_async_suspend (info, FALSE);
+ 	default:
+ 		g_assert_not_reached ();
+@@ -956,6 +965,7 @@ suspend_sync (MonoNativeThreadId tid, gboolean interru
+ 		mono_threads_add_to_pending_operation_set (info);
+ 		break;
+ 	case AsyncSuspendInitSuspend:
++		printf("calling begin_async_suspend from suspend_sync (mono-threads.c)\n");
+ 		if (!begin_async_suspend (info, interrupt_kernel)) {
+ 			mono_hazard_pointer_clear (hp, 1);
+ 			return NULL;
+@@ -973,6 +983,7 @@ suspend_sync (MonoNativeThreadId tid, gboolean interru
+ 	//Wait for the pending suspend to finish
+ 	mono_threads_wait_pending_operations ();
+ 
++	printf("calling check_async_suspend from suspend_sync (mono-threads.c)\n");
+ 	if (!check_async_suspend (info)) {
+ 		mono_thread_info_core_resume (info);
+ 		mono_threads_wait_pending_operations ();

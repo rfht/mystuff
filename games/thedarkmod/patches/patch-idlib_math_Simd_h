@@ -1,0 +1,17 @@
+$OpenBSD$
+
+Since CPUID_NONE definition was removed from sys....h, replace it here
+with its value 0x00000
+
+Index: idlib/math/Simd.h
+--- idlib/math/Simd.h.orig
++++ idlib/math/Simd.h
+@@ -86,7 +86,7 @@ typedef enum {
+ 
+ class idSIMDProcessor {
+ public:
+-									idSIMDProcessor( void ) { cpuid = CPUID_NONE; }
++									idSIMDProcessor( void ) { cpuid = 0x00000; } // 0x00000 is the value of CPUID_NONE in original code
+ 
+ 	cpuid_t							cpuid;
+ 

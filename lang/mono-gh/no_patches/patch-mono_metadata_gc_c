@@ -1,0 +1,14 @@
+$OpenBSD$
+
+debug printf's
+
+Index: mono/metadata/gc.c
+--- mono/metadata/gc.c.orig
++++ mono/metadata/gc.c
+@@ -1237,5 +1237,6 @@ mono_gc_reference_queue_add (MonoReferenceQueue *queue
+ void
+ mono_gc_reference_queue_free (MonoReferenceQueue *queue)
+ {
++	printf("  in function mono_gc_reference_queue_free (gc.c)\n");
+ 	queue->should_be_deleted = TRUE;
+ }

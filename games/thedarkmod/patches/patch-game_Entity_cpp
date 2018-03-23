@@ -1,0 +1,15 @@
+$OpenBSD$
+
+float.h needed for FLOAT_MAX used in this file
+
+Index: game/Entity.cpp
+--- game/Entity.cpp.orig
++++ game/Entity.cpp
+@@ -36,6 +36,7 @@ static bool versioned = RegisterVersionedFile("$Id: En
+ #include "Inventory/Cursor.h"
+ #include "AbsenceMarker.h"
+ #include "Objectives/MissionData.h"
++#include <float.h>
+ 
+ /*
+ ===============================================================================

@@ -1,0 +1,15 @@
+$OpenBSD$
+
+DEBUG printf
+
+Index: mono/utils/mono-threads-posix.c
+--- mono/utils/mono-threads-posix.c.orig
++++ mono/utils/mono-threads-posix.c
+@@ -248,6 +248,7 @@ mono_native_thread_join (MonoNativeThreadId tid)
+ gboolean
+ mono_threads_suspend_begin_async_suspend (MonoThreadInfo *info, gboolean interrupt_kernel)
+ {
++	printf("in function mono_threads_suspend_begin_async_suspend in file mono-threads-posix.c\n");
+ 	int sig = interrupt_kernel ? mono_threads_suspend_get_abort_signal () :  mono_threads_suspend_get_suspend_signal ();
+ 
+ 	if (!mono_threads_pthread_kill (info, sig)) {

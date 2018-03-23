@@ -1,0 +1,18 @@
+$OpenBSD$
+
+use pkg-config to complete the environment
+add CPPPATH
+
+Index: SConstruct
+--- SConstruct.orig
++++ SConstruct
+@@ -362,6 +362,9 @@ if ( ID_MCHECK == '1' ):
+ 	
+ # create the build environements
+ g_base_env = Environment( ENV = os.environ, CC = CC, CXX = CXX, LINK = LINK, CPPFLAGS = BASECPPFLAGS, LINKFLAGS = BASELINKFLAGS, CPPPATH = CORECPPPATH, LIBPATH = CORELIBPATH )
++g_base_env.ParseConfig("pkg-config x11 --cflags --libs")
++flags = { '-I/usr/include/c++' }
++g_base_env.MergeFlags(flags)
+ scons_utils.SetupUtils( g_base_env )
+ 
+ #######################################################################################

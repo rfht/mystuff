@@ -1,0 +1,31 @@
+$OpenBSD$
+
+remove steam header and associated function
+
+Index: src/Level/DynamicTiles/LeverTile.cpp
+--- src/Level/DynamicTiles/LeverTile.cpp.orig
++++ src/Level/DynamicTiles/LeverTile.cpp
+@@ -3,7 +3,6 @@
+ #include "Level/LevelMainCharacter.h"
+ #include "GameObjectComponents/InteractComponent.h"
+ #include "Registrar.h"
+-#include "Steam/AchievementManager.h"
+ 
+ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
+ 
+@@ -116,8 +115,6 @@ void LeverTile::switchLever() {
+ 	for (auto& tile : m_dependentTiles) {
+ 		tile->switchTile();
+ 	}
+-
+-	g_achievementManager->notifyAchievement(ACH_MINIMALIST, "turn");
+ }
+ 
+ std::string LeverTile::getSpritePath() const {
+@@ -126,4 +123,4 @@ std::string LeverTile::getSpritePath() const {
+ 
+ std::string LeverTile::getSoundPath() const {
+ 	return "res/sound/tile/lever_click.ogg";
+-}
+\ No newline at end of file
++}

@@ -1,0 +1,15 @@
+$OpenBSD$
+
+debug printf
+
+Index: mono/metadata/threads.c
+--- mono/metadata/threads.c.orig
++++ mono/metadata/threads.c
+@@ -5271,6 +5271,7 @@ mono_threads_attach_coop (MonoDomain *domain, gpointer
+ void
+ mono_threads_detach_coop (gpointer cookie, gpointer *dummy)
+ {
++	printf("  in function mono_threads_detach_coop (metadata/threads.c)\n");
+ 	MonoDomain *domain, *orig;
+ 
+ 	orig = (MonoDomain*) cookie;

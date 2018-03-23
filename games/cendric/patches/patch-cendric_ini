@@ -1,0 +1,17 @@
+$OpenBSD$
+
+turn off multithreading. This appears to cause a segfault when gameplay starts
+(possibly related to https://github.com/tizian/Cendric2/issues/194)
+
+Index: cendric.ini
+--- cendric.ini.orig
++++ cendric.ini
+@@ -94,7 +94,7 @@ fps.max:60
+ # 0 means the resizing is handled with Nearest Neighbor, 1 means with interpolation (smoothing)
+ smoothing.on:1
+ # 0 means multithreaded loading is off, 1 means multithreaded loading is on
+-multithreading.on:1
++multithreading.on:0
+ # 0 means debug rendering is off, 1 means debug rendering on
+ # if the debug rendering is on, the game will display hitboxes and framerate.
+ debugrendering.on:0

@@ -1,0 +1,18 @@
+$OpenBSD$
+
+change type AchievementID to int (Steam type)
+
+Index: include/Registrar.h
+--- include/Registrar.h.orig
++++ include/Registrar.h
+@@ -24,6 +24,6 @@ class Registrar final { (public)
+ 	Registrar(EnemyID id, EnemyConstructor constructor);
+ 	Registrar(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);
+ 	Registrar(MapDynamicTileID id, MapDynamicTileConstructor constructor);
+-	Registrar(AchievementID id, AchievementConstructor constructor);
+-	Registrar(const std::vector<std::pair<AchievementID, AchievementConstructor>>& ids);
+-};
+\ No newline at end of file
++	Registrar(int id, AchievementConstructor constructor);
++	Registrar(const std::vector<std::pair<int, AchievementConstructor>>& ids);
++};

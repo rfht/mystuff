@@ -1,0 +1,23 @@
+$OpenBSD$
+
+debug printfs
+
+Index: mono/metadata/object.c
+--- mono/metadata/object.c.orig
++++ mono/metadata/object.c
+@@ -12,6 +12,7 @@
+  * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+  */
+ #include <config.h>
++#include <pthread.h>
+ #ifdef HAVE_ALLOCA_H
+ #include <alloca.h>
+ #endif
+@@ -1683,6 +1684,7 @@ mono_method_add_generic_virtual_invocation (MonoDomain
+ 											gpointer *vtable_slot,
+ 											MonoMethod *method, gpointer code)
+ {
++	printf("mono_method_add_generic_virtual_invocation (object.c), thread: %p, acquiring domain lock\n", pthread_self());
+ 	MONO_REQ_GC_NEUTRAL_MODE;
+ 
+ 	static gboolean inited = FALSE;

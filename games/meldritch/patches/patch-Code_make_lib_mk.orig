@@ -1,0 +1,24 @@
+$OpenBSD$
+
+attempt to fix lines
+attempt to fix why $(BUILD_PATH)/%.o: %.c isn't working
+
+Index: Code/make_lib.mk
+--- Code/make_lib.mk.orig
++++ Code/make_lib.mk
+@@ -4,7 +4,7 @@ OBJS=$(CXXFILES:%.cpp=$(BUILD_PATH)/%.o)
+ OBJS+=$(CFILES:%.c=$(BUILD_PATH)/%.o)
+ OBJS+=$(OBJCFILES:%.mm=$(BUILD_PATH)/%.o)
+ 
+-$(BUILD_PATH)/%.o: %.c
++$(BUILD_PATH)/%.o: $(BUILD_PATH)/%.c
+ 	@mkdir -p $(shell dirname $@)
+ 	$(CC) $(CXXFLAGS) $(SYSCXXFLAGS) -c -o $@ $<
+ 
+@@ -27,5 +27,5 @@ clean:
+ 	rm -rf $(BUILDS) $(DEPDIR)
+ 
+ ### automatic dependency generation
+-$(DEP_PATH)/%.dep: %.cpp; @mkdir -p $(shell dirname $@) && $(MAKEDEPEND)
++$(DEP_PATH)/%.dep: %.cpp; @mkdir -p $(shell dirname $@) && $(MAKEDEPEND) \
+ -include $(CXXFILES:%.cpp=$(DEP_PATH)/%.dep)

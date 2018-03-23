@@ -1,0 +1,51 @@
+$OpenBSD$
+
+
+add state_name function to help in debugging
+
+Index: mono/utils/mono-threads-posix.c
+--- mono/utils/mono-threads-posix.c.orig
++++ mono/utils/mono-threads-posix.c
+@@ -155,14 +155,18 @@ mono_threads_pthread_kill (MonoThreadInfo *info, int s
+ 		errno = old_errno;
+ 	}
+ #elif defined (HAVE_PTHREAD_KILL)
++	printf("executing pthreadkill on thread %p, with signal %d\n", pthread_self(), signum);
+ 	result = pthread_kill (mono_thread_info_get_tid (info), signum);
+ #else
++	printf("HAVE_PTHREAD_KILL was not satisfied, should lead to an error\n");
+ 	result = -1;
+ 	g_error ("pthread_kill () is not supported by this platform");
+ #endif
+ 
+-	if (result && result != ESRCH)
++	if (result && result != ESRCH) {
++		printf("pthread_kill failed with error %d - potential kernel OOM or signal queue overflow", __func__, result);
+ 		g_error ("%s: pthread_kill failed with error %d - potential kernel OOM or signal queue overflow", __func__, result);
++	}
+ 
+ 	return result;
+ }
+@@ -236,6 +240,7 @@ mono_native_thread_set_name (MonoNativeThreadId tid, c
+ gboolean
+ mono_native_thread_join (MonoNativeThreadId tid)
+ {
++	printf("in mono_native_thread_join (mono-threads-posix.c)\n");
+ 	void *res;
+ 
+ 	return !pthread_join (tid, &res);
+@@ -249,11 +254,14 @@ gboolean
+ mono_threads_suspend_begin_async_suspend (MonoThreadInfo *info, gboolean interrupt_kernel)
+ {
+ 	int sig = interrupt_kernel ? mono_threads_suspend_get_abort_signal () :  mono_threads_suspend_get_suspend_signal ();
++	printf("mono_threads_suspend_begin_async_suspend (mono-threads-posix.c), thread: %p, sig: %d\n", pthread_self(), sig);
+ 
+ 	if (!mono_threads_pthread_kill (info, sig)) {
++		printf("mono_threads_suspend_begin_async_suspend: pthread_kill returned FALSE (likely 0 for successful)\n");
+ 		mono_threads_add_to_pending_operation_set (info);
+ 		return TRUE;
+ 	}
++		printf("mono_threads_suspend_begin_async_suspend: pthread_kill returned TRUE (likely unsuccessful)\n");
+ 	return FALSE;
+ }
+ 

@@ -1,0 +1,23 @@
+$OpenBSD$
+
+cpuid_t conflicts with system types.h
+
+Index: sys/sys_public.h
+--- sys/sys_public.h.orig
++++ sys/sys_public.h
+@@ -130,6 +130,7 @@
+ #define id_attribute(x)  
+ #endif
+ 
++/*
+ typedef enum {
+ 	CPUID_NONE							= 0x00000,
+ 	CPUID_UNSUPPORTED					= 0x00001,	// unsupported (386/486)
+@@ -147,6 +148,7 @@ typedef enum {
+ 	CPUID_FTZ							= 0x04000,	// Flush-To-Zero mode (denormal results are flushed to zero)
+ 	CPUID_DAZ							= 0x08000	// Denormals-Are-Zero mode (denormal source operands are set to zero)
+ } cpuid_t;
++*/
+ 
+ typedef enum {
+ 	FPU_EXCEPTION_INVALID_OPERATION		= 1,

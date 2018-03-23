@@ -1,0 +1,39 @@
+$OpenBSD$
+
+debug printf's
+
+Index: mono/utils/mono-tls.c
+--- mono/utils/mono-tls.c.orig
++++ mono/utils/mono-tls.c
+@@ -296,26 +296,31 @@ mono_tls_get_tls_setter (MonoTlsKey key, gboolean name
+ /* Getters for each tls key */
+ gpointer mono_tls_get_thread (void)
+ {
++	//printf(" in mono_tls_get_thread (mono-tls.c)\n");
+ 	return MONO_TLS_GET_VALUE (mono_tls_thread, mono_tls_key_thread);
+ }
+ 
+ gpointer mono_tls_get_jit_tls (void)
+ {
++	//printf(" in mono_tls_get_jit_tls (mono-tls.c)\n");
+ 	return MONO_TLS_GET_VALUE (mono_tls_jit_tls, mono_tls_key_jit_tls);
+ }
+ 
+ gpointer mono_tls_get_domain (void)
+ {
++	//printf(" in mono_tls_get_domain (mono-tls.c)\n");
+ 	return MONO_TLS_GET_VALUE (mono_tls_domain, mono_tls_key_domain);
+ }
+ 
+ gpointer mono_tls_get_sgen_thread_info (void)
+ {
++	//printf(" in mono_tls_get_sgen_thread (mono-tls.c)\n");
+ 	return MONO_TLS_GET_VALUE (mono_tls_sgen_thread_info, mono_tls_key_sgen_thread_info);
+ }
+ 
+ gpointer mono_tls_get_lmf_addr (void)
+ {
++	//printf(" in mono_tls_get_lmf_addr (mono-tls.c)\n");
+ 	return MONO_TLS_GET_VALUE (mono_tls_lmf_addr, mono_tls_key_lmf_addr);
+ }
+ 

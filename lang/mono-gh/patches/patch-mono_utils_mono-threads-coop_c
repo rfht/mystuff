@@ -1,0 +1,15 @@
+$OpenBSD$
+
+debug printf
+
+Index: mono/utils/mono-threads-coop.c
+--- mono/utils/mono-threads-coop.c.orig
++++ mono/utils/mono-threads-coop.c
+@@ -242,6 +242,7 @@ mono_threads_enter_gc_safe_region_unbalanced_with_info
+ 
+ retry:
+ 	++coop_save_count;
++	printf("calling mono_threads_get_runtime_callbacks from mono_threads_enter_gc_safe_region_unbalanced_with_info\n");
+ 	mono_threads_get_runtime_callbacks ()->thread_state_init (&info->thread_saved_state [SELF_SUSPEND_STATE_INDEX]);
+ 
+ 	switch (mono_threads_transition_do_blocking (info)) {

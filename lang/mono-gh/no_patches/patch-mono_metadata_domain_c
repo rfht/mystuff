@@ -1,0 +1,30 @@
+$OpenBSD$
+
+debug printfs
+
+Index: mono/metadata/domain.c
+--- mono/metadata/domain.c.orig
++++ mono/metadata/domain.c
+@@ -16,6 +16,7 @@
+ #include <glib.h>
+ #include <string.h>
+ #include <sys/stat.h>
++#include <pthread.h>
+ 
+ #include <mono/metadata/gc-internals.h>
+ 
+@@ -1932,12 +1933,14 @@ mono_get_aot_cache_config (void)
+ void
+ mono_domain_lock (MonoDomain *domain)
+ {
++	printf("mono_domain_lock, thread: %p\n", pthread_self());
+ 	mono_locks_coop_acquire (&domain->lock, DomainLock);
+ }
+ 
+ void
+ mono_domain_unlock (MonoDomain *domain)
+ {
++	printf("mono_domain_unlock, thread: %p\n", pthread_self());
+ 	mono_locks_coop_release (&domain->lock, DomainLock);
+ }
+ 

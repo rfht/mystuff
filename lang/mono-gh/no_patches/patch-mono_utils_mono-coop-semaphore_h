@@ -1,0 +1,31 @@
+$OpenBSD$
+
+debug printfs
+
+Index: mono/utils/mono-coop-semaphore.h
+--- mono/utils/mono-coop-semaphore.h.orig
++++ mono/utils/mono-coop-semaphore.h
+@@ -7,6 +7,7 @@
+ 
+ #include <config.h>
+ #include <glib.h>
++#include <pthread.h>
+ 
+ #include "mono-os-semaphore.h"
+ #include "mono-threads-api.h"
+@@ -36,6 +37,7 @@ mono_coop_sem_destroy (MonoCoopSem *sem)
+ static inline gint
+ mono_coop_sem_wait (MonoCoopSem *sem, MonoSemFlags flags)
+ {
++	printf("mono_coop_sem_wait (mono-coop-semaphore.h), thread: %p\n", pthread_self());
+ 	gint res;
+ 
+ 	MONO_ENTER_GC_SAFE;
+@@ -50,6 +52,7 @@ mono_coop_sem_wait (MonoCoopSem *sem, MonoSemFlags fla
+ static inline MonoSemTimedwaitRet
+ mono_coop_sem_timedwait (MonoCoopSem *sem, guint timeout_ms, MonoSemFlags flags)
+ {
++	printf("mono_coop_sem_timedwait (mono-coop-semaphore.h), thread: %p\n", pthread_self());
+ 	MonoSemTimedwaitRet res;
+ 
+ 	MONO_ENTER_GC_SAFE;

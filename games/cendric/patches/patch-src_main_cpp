@@ -1,0 +1,36 @@
+$OpenBSD$
+
+remove steam header and associated function instance
+
+Index: src/main.cpp
+--- src/main.cpp.orig
++++ src/main.cpp
+@@ -3,7 +3,6 @@
+ #include "DatabaseManager.h"
+ #include "ResourceManager.h"
+ #include "InputController.h"
+-#include "Steam/AchievementManager.h"
+ #include "Logger.h"
+ #include "TextProvider.h"
+ 
+@@ -46,13 +45,11 @@ int main(int argc, char* argv[]) {
+ 	g_resourceManager = new ResourceManager();
+ 	g_textProvider = new TextProvider();
+ 	g_inputController = new InputController();
+-	g_achievementManager = new AchievementManager();
+ 
+ 	Game* game = new Game();
+ 	game->run();
+ 	delete game;
+ 
+-	delete g_achievementManager;
+ 	delete g_resourceManager;
+ 	delete g_inputController;
+ 	delete g_textProvider;
+@@ -60,4 +57,4 @@ int main(int argc, char* argv[]) {
+ 	delete g_logger;
+ 
+ 	return 0;
+-}
+\ No newline at end of file
++}

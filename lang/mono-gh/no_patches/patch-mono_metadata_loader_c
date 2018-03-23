@@ -1,0 +1,31 @@
+$OpenBSD$
+
+debug printfs
+
+Index: mono/metadata/loader.c
+--- mono/metadata/loader.c.orig
++++ mono/metadata/loader.c
+@@ -47,6 +47,7 @@
+ #include <mono/utils/mono-error-internals.h>
+ #include <mono/utils/mono-tls.h>
+ #include <mono/utils/mono-path.h>
++#include <pthread.h>
+ 
+ MonoDefaults mono_defaults;
+ 
+@@ -2348,6 +2349,7 @@ static gboolean loader_lock_track_ownership = FALSE;
+ void
+ mono_loader_lock (void)
+ {
++	printf("mono_loader_lock, thread: %p\n", pthread_self());
+ 	mono_locks_coop_acquire (&loader_mutex, LoaderLock);
+ 	if (G_UNLIKELY (loader_lock_track_ownership)) {
+ 		mono_native_tls_set_value (loader_lock_nest_id, GUINT_TO_POINTER (GPOINTER_TO_UINT (mono_native_tls_get_value (loader_lock_nest_id)) + 1));
+@@ -2360,6 +2362,7 @@ mono_loader_lock (void)
+ void
+ mono_loader_unlock (void)
+ {
++	printf("mono_loader_unlock, thread: %p\n", pthread_self());
+ 	mono_locks_coop_release (&loader_mutex, LoaderLock);
+ 	if (G_UNLIKELY (loader_lock_track_ownership)) {
+ 		mono_native_tls_set_value (loader_lock_nest_id, GUINT_TO_POINTER (GPOINTER_TO_UINT (mono_native_tls_get_value (loader_lock_nest_id)) - 1));

@@ -1,0 +1,91 @@
+$OpenBSD$
+
+DEBUG printf's
+
+Index: mono/metadata/sgen-stw.c
+--- mono/metadata/sgen-stw.c.orig
++++ mono/metadata/sgen-stw.c
+@@ -62,6 +62,7 @@ static void
+ update_current_thread_stack (void *start)
+ {
+ 	int stack_guard = 0;
++	//printf("calling mono_thread_info_current from function update_current_thread_stack in sgen-stw.c\n");
+ 	SgenThreadInfo *info = mono_thread_info_current ();
+ 
+ 	info->client_info.stack_start = align_pointer (&stack_guard);
+@@ -104,6 +105,7 @@ static guint64 time_restart_world;
+ void
+ sgen_client_stop_world (int generation)
+ {
++	printf("sgen_client_stop_world\n");
+ 	TV_DECLARE (end_handshake);
+ 
+ 	MONO_PROFILER_RAISE (gc_event, (MONO_GC_EVENT_PRE_STOP_WORLD, generation));
+@@ -118,6 +120,7 @@ sgen_client_stop_world (int generation)
+ 	update_current_thread_stack (&generation);
+ 
+ 	sgen_global_stop_count++;
++	//printf("calling mono_thread_info_current from function sgen_client_stop_world in sgen-stw.c\n");
+ 	SGEN_LOG (3, "stopping world n %d from %p %p", sgen_global_stop_count, mono_thread_info_current (), (gpointer) (gsize) mono_native_thread_id_get ());
+ 	TV_GETTIME (stop_world_time);
+ 
+@@ -139,6 +142,7 @@ sgen_client_stop_world (int generation)
+ void
+ sgen_client_restart_world (int generation, gint64 *stw_time)
+ {
++	printf("sgen_client_restart_world\n");
+ 	TV_DECLARE (end_sw);
+ 	TV_DECLARE (start_handshake);
+ 	unsigned long usec;
+@@ -189,6 +193,7 @@ sgen_client_restart_world (int generation, gint64 *stw
+ void
+ mono_sgen_init_stw (void)
+ {
++	printf("mono_sgen_init_stw\n");
+ 	mono_counters_register ("World stop", MONO_COUNTER_GC | MONO_COUNTER_ULONG | MONO_COUNTER_TIME, &time_stop_world);
+ 	mono_counters_register ("World restart", MONO_COUNTER_GC | MONO_COUNTER_ULONG | MONO_COUNTER_TIME, &time_restart_world);
+ }
+@@ -222,6 +227,7 @@ sgen_is_thread_in_current_stw (SgenThreadInfo *info, i
+ 	/*
+ 	Suspending the current thread will deadlock us, bad idea.
+ 	*/
++	//printf("calling mono_thread_info_current from function sgen_is_thread_in_current_stw in sgen-stw.c\n");
+ 	if (info == mono_thread_info_current ()) {
+ 		if (reason)
+ 			*reason = 3;
+@@ -254,9 +260,11 @@ sgen_is_thread_in_current_stw (SgenThreadInfo *info, i
+ static void
+ sgen_unified_suspend_stop_world (void)
+ {
++	printf("sgen_unified_suspend_stop_world\n");
+ 	int sleep_duration = -1;
+ 
+ 	mono_threads_begin_global_suspend ();
++	//printf("calling mono_thread_info_current from function sgen_unified_suspend_stop_world(1) in sgen-stw.c\n");
+ 	THREADS_STW_DEBUG ("[GC-STW-BEGIN][%p] *** BEGIN SUSPEND *** \n", mono_thread_info_get_tid (mono_thread_info_current ()));
+ 
+ 	FOREACH_THREAD (info) {
+@@ -274,6 +282,7 @@ sgen_unified_suspend_stop_world (void)
+ 		THREADS_STW_DEBUG ("[GC-STW-BEGIN-SUSPEND] SUSPEND thread %p skip %s\n", mono_thread_info_get_tid (info), info->client_info.skip ? "true" : "false");
+ 	} FOREACH_THREAD_END
+ 
++	//printf("calling mono_thread_info_current from function sgen_unified_suspend_stop_world(2) in sgen-stw.c\n");
+ 	mono_thread_info_current ()->client_info.suspend_done = TRUE;
+ 	mono_threads_wait_pending_operations ();
+ 
+@@ -351,6 +360,7 @@ sgen_unified_suspend_stop_world (void)
+ 
+ 		int reason = 0;
+ 		if (!sgen_is_thread_in_current_stw (info, &reason)) {
++			//printf("calling mono_thread_info_current from function sgen_unified_suspend_stop_world(3) in sgen-stw.c\n");
+ 			g_assert (!info->client_info.suspend_done || info == mono_thread_info_current ());
+ 
+ 			THREADS_STW_DEBUG ("[GC-STW-SUSPEND-END] thread %p is NOT suspended, reason %d\n", mono_thread_info_get_tid (info), reason);
+@@ -386,6 +396,7 @@ sgen_unified_suspend_stop_world (void)
+ static void
+ sgen_unified_suspend_restart_world (void)
+ {
++	printf("sgen_unified_suspend_restart_world\n");
+ 	THREADS_STW_DEBUG ("[GC-STW-END] *** BEGIN RESUME ***\n");
+ 	FOREACH_THREAD (info) {
+ 		int reason = 0;

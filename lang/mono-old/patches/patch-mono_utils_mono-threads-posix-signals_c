@@ -1,0 +1,15 @@
+$OpenBSD$
+
+DEBUG printf
+
+Index: mono/utils/mono-threads-posix-signals.c
+--- mono/utils/mono-threads-posix-signals.c.orig
++++ mono/utils/mono-threads-posix-signals.c
+@@ -142,6 +142,7 @@ suspend_signal_handler (int _dummy, siginfo_t *info, v
+ 	}
+ 
+ 	/* Have we raced with self suspend? */
++	printf("calling mono_threads_transition_finish_async_suspend from mono-thread-posix-signals.c\n");
+ 	if (!mono_threads_transition_finish_async_suspend (current)) {
+ 		current->suspend_can_continue = TRUE;
+ 		THREADS_SUSPEND_DEBUG ("\tlost race with self suspend %p\n", mono_thread_info_get_tid (current));

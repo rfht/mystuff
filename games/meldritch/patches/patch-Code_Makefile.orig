@@ -1,0 +1,59 @@
+$OpenBSD$
+
+remove hardcoded compiler and flags
+set BUILD to final
+pretend to be Linux (since BSD not accounted for)
+remove -ldl linker flag (should be in libc)
+
+Index: Code/Makefile
+--- Code/Makefile.orig
++++ Code/Makefile
+@@ -15,12 +15,6 @@
+ #	PLATFORM	linux, windows or mac, empty to attempt auto detection
+ #	BUILD		which build, debug, release or final. Used for install target
+ 
+-# compiler and flags
+-CC			=gcc
+-CXX			=g++
+-CXXFLAGS	=-Wall -Isrc $$(INCLUDES)
+-LDFLAGS		=
+-
+ # command for automatic dependency generation
+ DEPDIR		=autodeps
+ MAKEDEPEND	=gcc -M -I. $(CXXFLAGS) $$< | sed -e "s|^\([-a-z0-9_.]*\.o\):|$$(BUILD_PATH)/src/\1:|" > $$@
+@@ -30,7 +24,7 @@ AR			=ar
+ 
+ # Build version: debug release final, default is debug
+ # final has no level editor!
+-BUILD		?=debug
++BUILD		=final
+ 
+ # top dir, relative from source dirs
+ TOP			=../..
+@@ -53,7 +47,7 @@ endif
+ VERSION=$(shell if which hg >/dev/null && hg identify >/dev/null 2>&1; then hg identify --num > Build; fi; cat Build)
+ 
+ # list of platforms we build for
+-PLATFORMS=Linux MacOSX Windows
++PLATFORMS=Linux MacOSX Windows OpenBSD
+ 
+ # Auto detect platforms
+ ifndef PLATFORM
+@@ -62,6 +56,8 @@ ifeq ($(PLATFORM),Darwin)
+ PLATFORM			=MacOSX
+ else ifeq ($(PLATFORM),Linux)
+ PLATFORM			=Linux
++else ifeq ($(PLATFORM),OpenBSD)
++PLATFORM			=Linux
+ else
+ PLATFORM			=Windows
+ endif
+@@ -73,7 +69,7 @@ BUILDFLAGS	=-DBUILD_LINUX=1 -DBUILD_SDL=1
+ BACKEND		=GL
+ SYSCXXFLAGS	=-m32
+ SYSLDFLAGS	=-Wl,-R./ -m32
+-SYSLIBS		=-lGL -lpthread -ldl $(shell pkg-config --libs gtk+-2.0)
++SYSLIBS		=-lGL -lpthread $(shell pkg-config --libs gtk+-2.0)
+ else ifeq ($(PLATFORM),MacOSX)
+ CC			=gcc
+ CXX			=g++

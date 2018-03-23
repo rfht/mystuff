@@ -1,0 +1,29 @@
+$OpenBSD$
+
+remove steam achievement header and (some) associated functions
+
+Index: src/Structs/TriggerContent.cpp
+--- src/Structs/TriggerContent.cpp.orig
++++ src/Structs/TriggerContent.cpp
+@@ -3,7 +3,6 @@
+ #include "Screens/LoadingScreen.h"
+ #include "Screens/CutsceneScreen.h"
+ #include "Screens/CreditsScreen.h"
+-#include "Steam/AchievementManager.h"
+ 
+ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* screen) {
+ 	if (!content.isValid() || screen == nullptr) return;
+@@ -80,13 +79,10 @@ void TriggerContent::executeTrigger(const TriggerConte
+ 		g_resourceManager->playSound(content.s1);
+ 		break;
+ 	case TriggerContentType::AchievementUnlocked:
+-		g_achievementManager->unlockAchievement(content.s1);
+ 		break;
+ 	case TriggerContentType::AchievementNotify:
+-		g_achievementManager->notifyAchievement(content.s1, content.s2);
+ 		break;
+ 	case TriggerContentType::AchievementNotifyCore:
+-		g_achievementManager->notifyAchievementCore(content.s1);
+ 		break;
+ 	case TriggerContentType::LearnSpell: {
+ 		SpellID id = static_cast<SpellID>(content.i1);

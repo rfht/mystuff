@@ -1,0 +1,46 @@
+$OpenBSD$
+disable pulseaudio
+
+From upstream fb1627a696a3bbd47440db8c08246a341048102a,
+              eb4cae78aa75def726b88a853697b7adc6ef8fbd.
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -415,7 +415,7 @@ if(ANDROID)
+ 	# We are cross compiling, search only the toolchain for libraries and includes
+ 	SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+ 	SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+-elseif(NOT APPLE)
++elseif(NOT APPLE AND NOT CMAKE_SYSTEM_NAME MATCHES OpenBSD)
+ 	list(APPEND LIBS rt)
+ endif()
+ 
+@@ -471,14 +471,7 @@ else()
+ 	message("bluez NOT found, disabling bluetooth support")
+ endif(BLUEZ_FOUND)
+ 
+-check_lib(PULSEAUDIO libpulse pulse QUIET)
+-if(PULSEAUDIO_FOUND)
+-	add_definitions(-DHAVE_PULSEAUDIO=1)
+-	message("PulseAudio found, enabling PulseAudio sound backend")
+-else()
+-	add_definitions(-DHAVE_PULSEAUDIO=0)
+-	message("PulseAudio NOT found, disabling PulseAudio sound backend")
+-endif(PULSEAUDIO_FOUND)
++add_definitions(-DHAVE_PULSEAUDIO=0)
+ 
+ include(FindOpenAL OPTIONAL)
+ if(OPENAL_FOUND)
+@@ -989,10 +982,10 @@ add_subdirectory(Source)
+ if(NOT APPLE)
+ 	install(DIRECTORY Data/Sys/ DESTINATION ${datadir}/sys PATTERN)
+ endif()
+-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|Darwin")
++if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|OpenBSD|Darwin")
+ 	install(FILES Data/license.txt DESTINATION ${datadir})
+ endif()
+-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
++if(${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|OpenBSD")
+ 	# Install the application icon and menu item
+ 	install(FILES Data/dolphin-emu.svg
+ 		DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps)

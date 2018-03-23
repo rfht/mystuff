@@ -1,0 +1,25 @@
+$OpenBSD$
+
+fix comparison of pointer to integer by adding [0] to char*
+
+Index: game/Game_local.cpp
+--- game/Game_local.cpp.orig
++++ game/Game_local.cpp
+@@ -2081,7 +2081,7 @@ bool idGameLocal::InitFromSaveGame( const char *mapNam
+ 		if ( !InhibitEntitySpawn( mapEnt->epairs ) ) {
+ 			CacheDictionaryMedia( &mapEnt->epairs );
+ 			const char *classname = mapEnt->epairs.GetString( "classname" );
+-			if ( classname != '\0' ) {
++			if ( classname[0] != '\0' ) {
+ 				FindEntityDef( classname, false );
+ 			}
+ 		}
+@@ -2656,7 +2656,7 @@ void idGameLocal::GetShakeSounds( const idDict *dict )
+ 	idStr soundName;
+ 
+ 	soundShaderName = dict->GetString( "s_shader" );
+-	if ( soundShaderName != '\0' && dict->GetFloat( "s_shakes" ) != 0.0f ) {
++	if ( soundShaderName[0] != '\0' && dict->GetFloat( "s_shakes" ) != 0.0f ) {
+ 		soundShader = declManager->FindSound( soundShaderName );
+ 
+ 		for ( int i = 0; i < soundShader->GetNumSounds(); i++ ) {

@@ -1,0 +1,23 @@
+$OpenBSD$
+
+remove steam header and associated function
+
+Index: src/Screens/WorldScreen.cpp
+--- src/Screens/WorldScreen.cpp.orig
++++ src/Screens/WorldScreen.cpp
+@@ -4,7 +4,6 @@
+ #include "World/Item.h"
+ #include "World/Trigger.h"
+ #include "World/DoorTile.h"
+-#include "Steam/AchievementManager.h"
+ #include "GUI/Stopwatch.h"
+ 
+ const std::string WorldScreen::VERTEX_SHADER = \
+@@ -39,7 +38,6 @@ static const std::string foregroundFragmentShader = \
+ "}";
+ 
+ WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
+-	g_achievementManager->setCore(core);
+ 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+ 
+ 	m_lightLayerShader.setUniform("texture", sf::Shader::CurrentTexture);

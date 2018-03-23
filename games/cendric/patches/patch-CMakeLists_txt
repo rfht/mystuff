@@ -1,0 +1,64 @@
+$OpenBSD$
+
+remove check for bundled sfml and its subdirectory
+add include_directories
+remove -ldl linker flag
+
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -8,14 +8,6 @@ option(CENDRIC_STEAM "Include steamworks API?" OFF)
+ option(CENDRIC_EXTERNAL_DOCUMENT_FOLDER "Use external documents folder?" OFF)
+ option(CENDRIC_GERMAN "Use German as default language?" OFF)
+ 
+-if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
+-    message(FATAL_ERROR
+-        "Seems like some of the required dependencies are missing. "
+-        "This can happen if you did not clone the project with the --recursive flag. "
+-        "It is possible to recover by calling \"git submodule update --init --recursive\""
+-    )
+-endif()
+-
+ include(CheckCXXCompilerFlag)
+ 
+ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+@@ -28,8 +20,6 @@ if (APPLE)
+ 	option(SFML_BUILD_FRAMEWORKS "" ON)
+ endif()
+ 
+-add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
+-
+ if (MSVC)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+     add_definitions (/D "_CRT_SECURE_NO_WARNINGS")
+@@ -57,15 +47,18 @@ file(GLOB_RECURSE Cendric_FILES
+ 	"${PROJECT_SOURCE_DIR}/include/*.h"
+ 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
+ 	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
+-	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
+-	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
+-	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
++	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
++	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
++	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
++
+     if (CENDRIC_STEAM)
+         "${PROJECT_SOURCE_DIR}/ext/steam-sdk/public/steam/*.h"
+         "${PROJECT_SOURCE_DIR}/ext/steam-sdk/public/steam/*.cpp"
+     endif()
+ )
+ 
++include_directories(/usr/local/include)
++
+ if (WIN32)
+     # Windows
+ 
+@@ -124,7 +117,7 @@ if (CENDRIC_GERMAN)
+     add_definitions("-DGERMAN_DEFAULT_LANGUAGE")
+ endif()
+ 
+-set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
++set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread")
+ 
+ target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)
+ 

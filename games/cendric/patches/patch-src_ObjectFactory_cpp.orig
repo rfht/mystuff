@@ -1,0 +1,15 @@
+$OpenBSD$
+
+remove steam achievement header
+
+Index: src/ObjectFactory.cpp
+--- src/ObjectFactory.cpp.orig
++++ src/ObjectFactory.cpp
+@@ -4,7 +4,6 @@
+ #include "Spells/Spell.h"
+ #include "Level/LevelDynamicTile.h"
+ #include "Map/MapDynamicTile.h"
+-#include "Steam/Achievement.h"
+ 
+ ObjectFactory* ObjectFactory::Instance() {
+ 	static ObjectFactory factory;

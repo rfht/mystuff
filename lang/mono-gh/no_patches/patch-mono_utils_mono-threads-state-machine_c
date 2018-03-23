@@ -1,0 +1,105 @@
+$OpenBSD$
+
+DEBUG printf's
+
+(DEACTIVATED:) EXPERIMENTAL: if STATE_RUNNING, try to call mono_threads_suspend_begin_async_suspend
+
+Index: mono/utils/mono-threads-state-machine.c
+--- mono/utils/mono-threads-state-machine.c.orig
++++ mono/utils/mono-threads-state-machine.c
+@@ -87,6 +87,7 @@ check_thread_state (MonoThreadInfo* info)
+ static inline void
+ trace_state_change (const char *transition, MonoThreadInfo *info, int cur_raw_state, int next_state, int suspend_count_delta)
+ {
++	printf("trace_state_change: pthread_self: %p, cur_state: %s, next_state: %s, suspend_count_delta: %d\n", pthread_self(), state_name(get_thread_state(cur_raw_state)), state_name(next_state), suspend_count_delta);
+ 	check_thread_state (info);
+ 	THREADS_STATE_MACHINE_DEBUG ("[%s][%p] %s -> %s (%d -> %d)\n",
+ 		transition,
+@@ -173,11 +174,13 @@ Returns one of the following values:
+ MonoRequestAsyncSuspendResult
+ mono_threads_transition_request_async_suspension (MonoThreadInfo *info)
+ {
++	printf("mono_threads_transition_request_async_suspension (mono-threads-state-machine.c), thread %p, state: %s\n", pthread_self(), state_name(mono_thread_info_current_state(info)));
+ 	int raw_state, cur_state, suspend_count;
+ 	g_assert (info != mono_thread_info_current ());
+ 
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, info);
++	printf("thread: %p, UNWRAP_THREAD_STATE result: raw_state = %d, cur_state = %d, suspend_count = %d, info = %p\n", pthread_self(), raw_state, cur_state, suspend_count, info);
+ 
+ 	switch (cur_state) {
+ 	case STATE_RUNNING: //Post an async suspend request
+@@ -186,6 +189,7 @@ retry_state_change:
+ 		if (mono_atomic_cas_i32 (&info->thread_state, build_thread_state (STATE_ASYNC_SUSPEND_REQUESTED, 1), raw_state) != raw_state)
+ 			goto retry_state_change;
+ 		trace_state_change ("ASYNC_SUSPEND_REQUESTED", info, raw_state, STATE_ASYNC_SUSPEND_REQUESTED, 1);
++		printf("AsyncSuspendInitSuspend:Thread suspend requested, async suspend needs to be done. thread: %p, state: %s\n", pthread_self(), state_name(mono_thread_info_current_state(info)));
+ 		return AsyncSuspendInitSuspend; //This is the first async suspend request against the target
+ 
+ 	case STATE_ASYNC_SUSPENDED:
+@@ -196,6 +200,7 @@ retry_state_change:
+ 		if (mono_atomic_cas_i32 (&info->thread_state, build_thread_state (cur_state, suspend_count + 1), raw_state) != raw_state)
+ 			goto retry_state_change;
+ 		trace_state_change ("ASYNC_SUSPEND_REQUESTED", info, raw_state, cur_state, 1);
++		printf("AsyncSuspendAlreadySuspended: Thread already suspended, nothing to do. thread %p, state: %s\n", pthread_self(), state_name(mono_thread_info_current_state(info)));
+ 		return AsyncSuspendAlreadySuspended; //Thread is already suspended so we don't need to wait it to suspend
+ 
+ 	case STATE_SELF_SUSPEND_REQUESTED: //This suspend needs to notify the initiator, so we need to promote the suspend to async
+@@ -204,6 +209,7 @@ retry_state_change:
+ 		if (mono_atomic_cas_i32 (&info->thread_state, build_thread_state (STATE_ASYNC_SUSPEND_REQUESTED, suspend_count + 1), raw_state) != raw_state)
+ 			goto retry_state_change;
+ 		trace_state_change ("ASYNC_SUSPEND_REQUESTED", info, raw_state, STATE_ASYNC_SUSPEND_REQUESTED, 1);
++		printf("AsyncSuspendWait: Self suspend in progress, asked it to notify us. Caller must add target to the notification set. thread: %p, state: %s\n", pthread_self(), state_name(mono_thread_info_current_state(info)));
+ 		return AsyncSuspendWait; //This is the first async suspend request, change the thread and let it notify us [1]
+ 
+ 	case STATE_BLOCKING:
+@@ -212,6 +218,7 @@ retry_state_change:
+ 		if (mono_atomic_cas_i32 (&info->thread_state, build_thread_state (cur_state, suspend_count + 1), raw_state) != raw_state)
+ 			goto retry_state_change;
+ 		trace_state_change ("ASYNC_SUSPEND_REQUESTED", info, raw_state, cur_state, 1);
++		printf("AsyncSuspendBlocking: Thread in blocking state. thread: %p, state: %s\n", pthread_self(), state_name(mono_thread_info_current_state(info)));
+ 		return AsyncSuspendBlocking; //A thread in the blocking state has its state saved so we can treat it as suspended.
+ 
+ /*
+@@ -242,11 +249,13 @@ Returns one of the following values:
+ MonoSelfSupendResult
+ mono_threads_transition_state_poll (MonoThreadInfo *info)
+ {
++	printf(" in mono_threads_transition_state_poll (mono-threads-state-machine.c), thread: %p\n", pthread_self());
+ 	int raw_state, cur_state, suspend_count;
+ 	g_assert (mono_thread_info_is_current (info));
+ 
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, info);
++	printf("thread: %p, UNWRAP_THREAD_STATE result: raw_state = %d, cur_state = %d, suspend_count = %d, info = %p\n", pthread_self(), raw_state, cur_state, suspend_count, info);
+ 	switch (cur_state) {
+ 	case STATE_RUNNING:
+ 		if (!(suspend_count == 0))
+@@ -302,11 +311,13 @@ This would make permits really harder to add.
+ MonoResumeResult
+ mono_threads_transition_request_resume (MonoThreadInfo* info)
+ {
++	printf(" in mono_threads_transition_request_resume (mono-threads-state-machine.c), thread: %p\n", pthread_self());
+ 	int raw_state, cur_state, suspend_count;
+ 	g_assert (info != mono_thread_info_current ()); //One can't self resume [3]
+ 
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, info);
++	printf("thread: %p, UNWRAP_THREAD_STATE result: raw_state = %d, cur_state = %d, suspend_count = %d, info = %p\n", pthread_self(), raw_state, cur_state, suspend_count, info);
+ 	switch (cur_state) {
+ 	case STATE_RUNNING: //Thread already running.
+ 		if (!(suspend_count == 0))
+@@ -388,10 +399,13 @@ Returns TRUE if the caller should wait for resume.
+ gboolean
+ mono_threads_transition_finish_async_suspend (MonoThreadInfo* info)
+ {
++	printf("mono_threads_transition_finish_async_suspend (mono-threads-state-machine.c), thread: %p\n", pthread_self());
+ 	int raw_state, cur_state, suspend_count;
+ 
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, info);
++	printf("thread: %p, UNWRAP_THREAD_STATE result: raw_state = %d, cur_state = %d, suspend_count = %d, info = %p\n", pthread_self(), raw_state, cur_state, suspend_count, info);
++	printf("cur_state: %s\n", state_name(cur_state));
+ 	switch (cur_state) {
+ 
+ 	case STATE_SELF_SUSPENDED: //async suspend raced with self suspend and lost

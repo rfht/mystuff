@@ -1,0 +1,24 @@
+$OpenBSD$
+
+change type AchievementID (steam type) to int
+
+Index: src/Registrar.cpp
+--- src/Registrar.cpp.orig
++++ src/Registrar.cpp
+@@ -12,12 +12,12 @@ Registrar::Registrar(MapDynamicTileID id, MapDynamicTi
+ 	ObjectFactory::Instance()->registerMapDynamicTile(id, constructor);
+ }
+ 
+-Registrar::Registrar(AchievementID id, AchievementConstructor constructor) {
++Registrar::Registrar(int id, AchievementConstructor constructor) {
+ 	ObjectFactory::Instance()->registerAchievement(id, constructor);
+ }
+ 
+-Registrar::Registrar(const std::vector<std::pair<AchievementID, AchievementConstructor>>& ids) {
++Registrar::Registrar(const std::vector<std::pair<int, AchievementConstructor>>& ids) {
+ 	for (auto pair : ids) {
+ 		ObjectFactory::Instance()->registerAchievement(pair.first, pair.second);
+ 	}
+-}
+\ No newline at end of file
++}

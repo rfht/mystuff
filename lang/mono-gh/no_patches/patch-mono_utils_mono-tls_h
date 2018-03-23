@@ -1,0 +1,22 @@
+$OpenBSD$
+
+debug printf's
+
+Index: mono/utils/mono-tls.h
+--- mono/utils/mono-tls.h.orig
++++ mono/utils/mono-tls.h
+@@ -52,12 +52,14 @@ typedef enum {
+ static inline int
+ mono_native_tls_alloc (MonoNativeTlsKey *key, void *destructor)
+ {
++	printf(" in mono_native_tls_alloc (mono-tls.h)\n");
+ 	return pthread_key_create (key, (void (*)(void*)) destructor) == 0;
+ }
+ 
+ static inline void
+ mono_native_tls_free (MonoNativeTlsKey key)
+ {
++	printf(" in mono_native_tls_free (mono-tls.h)\n");
+ 	pthread_key_delete (key);
+ }
+ 

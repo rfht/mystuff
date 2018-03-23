@@ -1,0 +1,23 @@
+$OpenBSD$
+
+debug printfs
+
+Index: mono/mini/mini-trampolines.c
+--- mono/mini/mini-trampolines.c.orig
++++ mono/mini/mini-trampolines.c
+@@ -7,6 +7,7 @@
+  */
+ #include <config.h>
+ #include <glib.h>
++#include <pthread.h>
+ 
+ #include <mono/metadata/appdomain.h>
+ #include <mono/metadata/metadata-internals.h>
+@@ -524,6 +525,7 @@ mini_add_method_wrappers_llvmonly (MonoMethod *m, gpoi
+ static gpointer
+ common_call_trampoline (mgreg_t *regs, guint8 *code, MonoMethod *m, MonoVTable *vt, gpointer *vtable_slot, MonoError *error)
+ {
++	printf("common_call_trampoline (mini-trampolines.c), thread: %p\n", pthread_self());
+ 	gpointer addr, compiled_method;
+ 	gboolean generic_shared = FALSE;
+ 	gboolean need_unbox_tramp = FALSE;

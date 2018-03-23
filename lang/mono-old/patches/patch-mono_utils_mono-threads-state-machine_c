@@ -1,0 +1,41 @@
+$OpenBSD$
+
+DEBUG printf's
+
+(DEACTIVATED:) EXPERIMENTAL: if STATE_RUNNING, try to call mono_threads_suspend_begin_async_suspend
+
+Index: mono/utils/mono-threads-state-machine.c
+--- mono/utils/mono-threads-state-machine.c.orig
++++ mono/utils/mono-threads-state-machine.c
+@@ -388,10 +388,12 @@ Returns TRUE if the caller should wait for resume.
+ gboolean
+ mono_threads_transition_finish_async_suspend (MonoThreadInfo* info)
+ {
++	printf("Entered mono_threads_transition_finish_async_suspend\n");
+ 	int raw_state, cur_state, suspend_count;
+ 
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, info);
++	printf("UNWRAP_THREAD_STATE result: raw_state = %d, cur_state = %d, suspend_count = %d\n", raw_state, cur_state, suspend_count);
+ 	switch (cur_state) {
+ 
+ 	case STATE_SELF_SUSPENDED: //async suspend raced with self suspend and lost
+@@ -411,6 +413,18 @@ STATE_ASYNC_SUSPENDED: There can be only one suspend i
+ STATE_SELF_SUSPEND_REQUESTED: When self suspend and async suspend happen together, they converge to async suspend so this state should not be visible.
+ STATE_BLOCKING: Async suspend only begins if a transition to async suspend requested happened. Blocking would have put us into blocking with positive suspend count if it raced with async finish.
+ */
++	/*
++	case STATE_RUNNING:
++		printf("state is RUNNING\n");
++		if(mono_threads_suspend_begin_async_suspend(info, FALSE)) {
++			printf("mono_threads_suspend_begin_async_suspend resulted TRUE\n");
++			return TRUE;
++		} else {
++			printf("mono_threads_suspend_begin_async_suspend resulted FALSE\n");
++			return FALSE;
++		}
++	*/
++
+ 	default:
+ 		mono_fatal_with_history ("Cannot transition thread %p from %s with FINISH_ASYNC_SUSPEND", mono_thread_info_get_tid (info), state_name (cur_state));
+ 	}

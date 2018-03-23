@@ -1,0 +1,23 @@
+$OpenBSD: patch-mono_utils_mono-threads-openbsd_c,v 1.2 2018/01/02 13:19:10 robert Exp $
+
+DEBUG printf
+
+Index: mono/utils/mono-threads-openbsd.c
+--- mono/utils/mono-threads-openbsd.c.orig
++++ mono/utils/mono-threads-openbsd.c
+@@ -6,6 +6,7 @@
+ 
+ #if defined(__OpenBSD__)
+ 
++#include <mono/utils/mono-threads.h>
+ #include <pthread.h>
+ #include <pthread_np.h>
+ 
+@@ -13,6 +14,7 @@ void
+ mono_threads_platform_get_stack_bounds (guint8 **staddr, size_t *stsize)
+ {
+ 	/* TODO :   Determine if this code is actually still needed. It may already be covered by the case above. */
++	printf("in mono_threads_platform_get_stack_bounds (mono-threads-openbsd.c)\n");
+ 	pthread_attr_t attr;
+ 	guint8 *current = (guint8*)&attr;
+ 

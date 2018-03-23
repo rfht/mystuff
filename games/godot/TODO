@@ -1,0 +1,5 @@
+Starts up sometimes, but is pretty crashy
+
+when loading/creating a project:
+OPENING: /home/thfr/code/godot/iso-example (::home::thfr::code::godot::iso-example)
+**ERROR** OS_Unix::execute - Could not create child process while executing: /usr/ports/mystuff/games/godot/godot
