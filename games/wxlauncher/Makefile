@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
+# $OpenBSD: Makefile.template,v 1.76 2017/02/25 16:04:20 danj Exp $
 #
 # Replace ??? with appropriate values
 # Remove extraneous comments before commit
@@ -25,17 +25,16 @@ DISTNAME =	???
 #PKGNAME-foo =	???	for multi packages
 
 #
-# github:
-# /releases/ -> preferred. ignore GH_*, just use MASTER_SITES and DISTNAME.
-# /archive/ ->  GH_ACCOUNT and GH_PROJECT, plus either GH_TAGNAME or GH_COMMIT.
+# For github: traditional tarballs in /releases/download are normally
+# preferred if available; use them with DISTNAME/MASTER_SITES lines as
+# normal. For projects using auto-generated tarballs, set GH_ACCOUNT,
+# GH_PROJECT, and *one* of GH_TAGNAME or GH_COMMIT. For GH_COMMIT, also
+# set DISTNAME. For GH_TAGNAME, set DISTNAME if the default is no good.
 #
-# set DISTNAME if using GH_COMMIT, or if using GH_TAGNAME and the tag is not in
-# the format "v1.00" or "1.00".
-#
-GH_ACCOUNT =	OpenHMD
-GH_PROJECT =	OpenHMD
+#GH_ACCOUNT =	username
+#GH_PROJECT =	project
 #GH_TAGNAME =	1.0
-GH_COMMIT =	3e0a641d3512f1849335aed16fbe53e5ed4315a4
+#GH_COMMIT =	abab123456789abacafeabab123123b1e4ble4bl
 
 # for any port that creates shared libraries.
 # both libtool and cmake automatically set filenames based on this variable.

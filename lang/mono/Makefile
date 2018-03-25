@@ -6,7 +6,7 @@ USE_WXNEEDED=	Yes
 
 COMMENT=	cross platform, open source .NET developement framework
 
-V=		5.10.0.179
+V=		5.10.1.14
 DISTNAME=	mono-${V}
 
 CATEGORIES=	lang devel
@@ -65,10 +65,11 @@ CONFIGURE_ENV+=	CFLAGS="-march=i586"
 CONFIGURE_ARGS=	--with-gc=included \
 		--with-tls=pthread \
 		--enable-btls \
-		--with-csc=mcs \
+		--with-csc=roslyn \
 		--disable-quiet-build \
 		--disable-shared-handles \
-		--without-sigaltstack
+		--without-sigaltstack \
+		--with-cooperative-gc=yes
 
 MAKE_ENV=	V=1
 

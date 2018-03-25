@@ -1,0 +1,29 @@
+$OpenBSD$
+
+add openbsd as recognized platform
+usb -> usb-1.0
+iconv_open -> libiconv_open
+
+Index: configure.ac
+--- configure.ac.orig
++++ configure.ac
+@@ -81,7 +81,7 @@ case $host in
+ 	threads="pthreads"
+ 	LIBS="${LIBS} -framework IOKit -framework CoreFoundation"
+ 	;;
+-*-freebsd*)
++*-freebsd* | *-openbsd*)
+ 	AC_MSG_RESULT([ (FreeBSD back-end)])
+ 	AC_DEFINE(OS_FREEBSD, 1, [FreeBSD implementation])
+ 	AC_SUBST(OS_FREEBSD)
+@@ -92,8 +92,8 @@ case $host in
+ 	CFLAGS="$CFLAGS -I/usr/local/include"
+ 	LDFLAGS="$LDFLAGS -L/usr/local/lib"
+ 	LIBS="${LIBS}"
+-	AC_CHECK_LIB([usb], [libusb_init], [LIBS_LIBUSB_PRIVATE="${LIBS_LIBUSB_PRIVATE} -lusb"], [hidapi_lib_error libusb])
+-	AC_CHECK_LIB([iconv], [iconv_open], [LIBS_LIBUSB_PRIVATE="${LIBS_LIBUSB_PRIVATE} -liconv"], [hidapi_lib_error libiconv])
++	AC_CHECK_LIB([usb-1.0], [libusb_init], [LIBS_LIBUSB_PRIVATE="${LIBS_LIBUSB_PRIVATE} -lusb-1.0"], [hidapi_lib_error libusb])
++	AC_CHECK_LIB([iconv], [libiconv_open], [LIBS_LIBUSB_PRIVATE="${LIBS_LIBUSB_PRIVATE} -liconv"], [hidapi_lib_error libiconv])
+ 	echo libs_priv: $LIBS_LIBUSB_PRIVATE
+ 	;;
+ *-kfreebsd*)

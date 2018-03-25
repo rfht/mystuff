@@ -1,0 +1,11 @@
+OpenHMD aims to provide a Free and Open Source API and drivers for immersive
+technology, such as head mounted displays with built in head tracking. Our aim
+is to implement support for as many devices as possible in a portable,
+cross-platform package.
+
+OpenHMD supports a wide range of devices such as Oculus Rift, HTC Vive, Sony
+PSVR, Deepoon E2 and others. We also support a Generic Android driver and a
+External Sesnsor data driver to allow the use of our Sensor Fusion and features,
+while providing your own data.
+For a full support list please check the devices page on the website or wiki.
+http://www.openhmd.net/index.php/devices/
