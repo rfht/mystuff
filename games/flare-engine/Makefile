@@ -1,8 +1,7 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # TODO:
-# register desktop file/icon file??
-# -> needs a post-install?
+# needs paths to be fixed to be able to run the mods
 
 COMMENT =	free/libre action roleplaying engine
 
