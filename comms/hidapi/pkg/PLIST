@@ -1,12 +1,12 @@
 @comment $OpenBSD$
-@bin bin/hidapi-testgui
+@bin bin/hidapi-libusb-testgui
 include/hidapi/
 include/hidapi/hidapi.h
-lib/libhidapi.a
-lib/libhidapi.la
-@lib lib/libhidapi.so.${LIBhidapi_VERSION}
-libdata/pkgconfig/
-libdata/pkgconfig/hidapi.pc
+lib/libhdapi.so.{LIBhidapi-libusb_VERSION}
+lib/libhidapi-libusb.a
+lib/libhidapi-libusb.la
+@lib lib/libhidapi-libusb.so.${LIBhidapi-libusb_VERSION}
+lib/pkgconfig/hidapi-libusb.pc
 share/doc/hidapi/
 share/doc/hidapi/AUTHORS.txt
 share/doc/hidapi/LICENSE-bsd.txt

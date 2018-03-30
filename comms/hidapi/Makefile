@@ -9,7 +9,7 @@ GH_ACCOUNT =	signal11
 GH_PROJECT =	hidapi
 GH_COMMIT =	a6a622ffb680c55da0de787ff93b80280498330f
 
-SHARED_LIBS +=  hidapi               0.0      # 0.0
+SHARED_LIBS +=  hidapi-libusb               0.0      # 0.0
 
 CATEGORIES =	comms
 
@@ -32,7 +32,9 @@ LIB_DEPENDS =		converters/libiconv \
 SEPARATE_BUILD =	simple
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ARGS+=	--enable-testgui
-CONFIGURE_ENV =	CPPFLAGS="-I${LOCALBASE}/include/libusb-1.0"
+CONFIGURE_ENV =	CPPFLAGS="-I${LOCALBASE}/include/libusb-1.0 -I${LOCALBASE}/include" \
+		CXXFLAGS="-O0 -pipe -g -L${LOCALBASE}/lib -lusb-1.0 -liconv" \
+		CFLAGS="-O0 -pipe -g"
 
 AUTOCONF_VERSION =	2.69
 AUTOMAKE_VERSION =	1.15
@@ -44,5 +46,9 @@ pre-configure:
 		AUTOCONF_VERSION=${AUTOCONF_VERSION} \
 		AUTOMAKE_VERSION=${AUTOMAKE_VERSION} \
 		autoreconf -fi
+post-install:
+	cd ${PREFIX}/lib && \
+		ln -sf libhidapi-libusb.so.${LIBhidapi-libusb_VERSION} \
+			libhdapi.so.{LIBhidapi-libusb_VERSION}
 
 .include <bsd.port.mk>

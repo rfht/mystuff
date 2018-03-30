@@ -28,6 +28,9 @@ MODULES =		devel/cmake
 LIB_DEPENDS =		comms/hidapi
 
 CONFIGURE_ARGS =	-DOPENHMD_EXAMPLE_SDL=ON
+CONFIGURE_ENV = CXXFLAGS="-O0 -pipe -g" \
+		CFLAGS="-O0 -pipe -g"
+
 
 #NO_TEST =		Yes
 
