@@ -1,0 +1,25 @@
+$OpenBSD$
+
+EXPERIMENTAL: disable async download, see if this fixes download issue
+
+Index: OpenRA.Game/Download.cs
+--- OpenRA.Game/Download.cs.orig
++++ OpenRA.Game/Download.cs
+@@ -50,7 +50,7 @@ namespace OpenRA
+ 				wc = new WebClient { Proxy = null };
+ 				wc.DownloadProgressChanged += (_, a) => onProgress(a);
+ 				wc.DownloadFileCompleted += (_, a) => { DisposeWebClient(); onComplete(a); };
+-				wc.DownloadFileAsync(new Uri(url), path);
++				wc.DownloadFile(new Uri(url), path);
+ 			}
+ 		}
+ 
+@@ -61,7 +61,7 @@ namespace OpenRA
+ 				wc = new WebClient { Proxy = null };
+ 				wc.DownloadProgressChanged += (_, a) => onProgress(a);
+ 				wc.DownloadDataCompleted += (_, a) => { DisposeWebClient(); onComplete(a); };
+-				wc.DownloadDataAsync(new Uri(url));
++				wc.DownloadData(new Uri(url));
+ 			}
+ 		}
+ 
