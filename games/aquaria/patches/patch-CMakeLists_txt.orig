@@ -1,0 +1,16 @@
+$OpenBSD$
+
+include dir for X11
+
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -266,7 +266,7 @@ INCLUDE_DIRECTORIES(${SDL_INCLUDE_DIR})
+ INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
+ INCLUDE_DIRECTORIES(${TINYXML2_INCLUDE_DIRS})
+ INCLUDE_DIRECTORIES(${EXTLIBDIR})
+-
++INCLUDE_DIRECTORIES("${X11BASE}/include")
+ 
+ 
+ # Custom build ID: e.g. "-custom", " (my very own build)"

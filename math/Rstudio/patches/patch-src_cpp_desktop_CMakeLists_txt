@@ -1,0 +1,15 @@
+$OpenBSD$
+
+fix outdated cmake use
+
+Index: src/cpp/desktop/CMakeLists.txt
+--- src/cpp/desktop/CMakeLists.txt.orig
++++ src/cpp/desktop/CMakeLists.txt
+@@ -69,7 +69,6 @@ else()
+ endif()
+ 
+ # set the cmake prefix path based on the location of the qmake executable
+-get_filename_component(QT_BIN_DIR ${QT_QMAKE_EXECUTABLE} PATH)
+ set(CMAKE_PREFIX_PATH "${QT_BIN_DIR}//..//lib//cmake")
+ 
+ # find and include Qt

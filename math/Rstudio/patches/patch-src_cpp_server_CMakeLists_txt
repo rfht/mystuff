@@ -1,0 +1,19 @@
+$OpenBSD$
+
+squash DL_LIBRARIES
+
+Index: src/cpp/server/CMakeLists.txt
+--- src/cpp/server/CMakeLists.txt.orig
++++ src/cpp/server/CMakeLists.txt
+@@ -102,11 +102,6 @@ endforeach()
+ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/server-config.h.in
+                ${CMAKE_CURRENT_BINARY_DIR}/server-config.h)
+ 
+-# required on Fedora for AppArmor-related code to compile
+-if(NOT APPLE)
+-   find_library(DL_LIBRARIES dl)
+-endif()
+-
+ # include directories and libraries
+ set(SERVER_SYSTEM_LIBRARIES ${DL_LIBRARIES})
+ 

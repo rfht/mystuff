@@ -1,51 +1,40 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # TODO:
-# - clarify: it fetches C# dependencies as part of make all
-# - most data is installed under PREFIX/lib, not PREFIX/share
-# - uses packaged glsl and lua??
-# - looks for zenity (x11/gnome/zenity - for dialog boxes) ?? not reproduced
-# - several external config files need entry for openbsd:
-#   - SDL2-CS.dll.config
-#   - OpenAL-CS.dll.config
-#   - SharpFont.dll.config
-# - DNS lookup failure when trying to fetch assets
-# - has telemetry; should maybe be turned off:
-#   - https://github.com/OpenRA/OpenRA/wiki/Settings
+# - fix COMMENT
+# - source and binary distributions must retain copyright notice
+# - double check that this is really BSD 3-Clause
+# - tries to bring in unbound in external folder. Not sure how to use
+#   system unbound
 
-COMMENT =	open-source real-time strategy game engine
+COMMENT =	client for cryptocurrency
 
-V =	20180307
+V = 0.12.0.0
+#DISTNAME =	???
+#PKGNAME =	???
 
-DISTNAME =	OpenRA-release-${V}-source
-PKGNAME =	openra-${V}
-
-#GH_ACCOUNT =	OpenRA
-#GH_PROJECT =	OpenRA
-#GH_TAGNAME =	1.0
+GH_ACCOUNT =	monero-project
+GH_PROJECT =	monero
+GH_TAGNAME =	v${V}
 
 # for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
 #SHARED_LIBS =	???
 
-CATEGORIES =	games
-
-HOMEPAGE =	https://www.openra.net
+CATEGORIES =	net
 
 MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
 
-#GPLv3
+#BSD 3-Clause
 PERMIT_PACKAGE_CDROM =	Yes
 
 #WANTLIB =		???
 
-MASTER_SITES =  https://github.com/OpenRA/OpenRA/releases/download/release-${V}/
-
-EXTRACT_SUFX =		.tar.bz2
-
-MODULES =	lang/mono
-#BUILD_DEPENDS =	???
+MODULES =	devel/cmake
+BUILD_DEPENDS =	devel/boost
 #RUN_DEPENDS =		???
-#LIB_DEPENDS =		???
+LIB_DEPENDS =	net/miniupnp/miniupnpc \
+		net/zeromq \
+		converters/libiconv
 #TEST_DEPENDS =		???
 
 #MAKE_FLAGS =		???
@@ -57,7 +46,7 @@ MODULES =	lang/mono
 #
 #SEPARATE_BUILD =	Yes (build in a directory other than WRKSRC)
 #SEPARATE_BUILD =	flavored (distinct flavors may share a common WRKSRC)
-USE_GMAKE =		Yes
+#USE_GMAKE =		Yes
 #USE_GROFF =		Yes
 # Programs that require GNU libtool to build instead of the OpenBSD one
 # should use this option. Add a comment explaining why. Don't use this if
@@ -77,7 +66,7 @@ USE_GMAKE =		Yes
 # 	  simple: port has its own configure script
 #CONFIGURE_STYLE =	
 #CONFIGURE_SCRIPT =	??? (if other than configure)
-#CONFIGURE_ARGS =	???
+#CONFIGURE_ARGS =	-DUNBOUND_INCLUDE_DIR=/usr/src/usr.
 #CONFIGURE_ENV =	???
 
 # for gnu stuff
@@ -129,7 +118,7 @@ USE_GMAKE =		Yes
 #LDFLAGS =		???
 #MAKE_FILE =		???
 #PKG_ARCH =		??? (* for arch-independent packages)
-WRKDIST =		${WRKDIR}
+#WRKDIST =		??? if other than ${WRKDIR}/${DISTNAME}
 #WRKSRC =		??? if other than ${WRKDIST}
 #WRKBUILD =		??? if other than ${WRKSRC}
 #WRKCONF =		??? if other than ${WRKBUILD}
@@ -137,8 +126,5 @@ WRKDIST =		${WRKDIR}
 #ALL_TARGET =		???
 #INSTALL_TARGET =	???
 #TEST_TARGET =		???
-
-post-install:
-	cd ${WRKSRC} && ${MAKE_PROGRAM} install-linux-shortcuts
 
 .include <bsd.port.mk>

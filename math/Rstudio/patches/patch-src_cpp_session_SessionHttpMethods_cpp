@@ -1,0 +1,16 @@
+$OpenBSD$
+
+neuter git revision hash check
+
+Index: src/cpp/session/SessionHttpMethods.cpp
+--- src/cpp/session/SessionHttpMethods.cpp.orig
++++ src/cpp/session/SessionHttpMethods.cpp
+@@ -326,7 +326,7 @@ std::string clientVersion()
+       return std::string();
+ 
+    // clientVersion is the git revision hash
+-   return RSTUDIO_GIT_REVISION_HASH;
++   return 0;
+ }
+ 
+ void waitForMethodInitFunction(const ClientEvent& initEvent)

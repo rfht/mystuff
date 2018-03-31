@@ -1,0 +1,15 @@
+$OpenBSD$
+
+don't look for librt
+
+Index: src/cpp/core/CMakeLists.txt
+--- src/cpp/core/CMakeLists.txt.orig
++++ src/cpp/core/CMakeLists.txt
+@@ -161,7 +161,6 @@ if (UNIX)
+    if(NOT APPLE)
+       find_library(UTIL_LIBRARIES util)
+       find_library(UUID_LIBRARIES uuid)
+-      find_library(RT_LIBRARIES rt)
+    endif()
+    find_package(ZLIB REQUIRED QUIET)
+ 

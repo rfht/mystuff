@@ -1,48 +1,49 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
+# github repo: https://github.com/arescentral/antares
+# source as zip and homepage: https://arescentral.org/antares/
+
+# can't use https with the MASTER_SITES download link
+# Github could be an alternative
+
 # TODO:
-# - clarify: it fetches C# dependencies as part of make all
-# - most data is installed under PREFIX/lib, not PREFIX/share
-# - uses packaged glsl and lua??
-# - looks for zenity (x11/gnome/zenity - for dialog boxes) ?? not reproduced
-# - several external config files need entry for openbsd:
-#   - SDL2-CS.dll.config
-#   - OpenAL-CS.dll.config
-#   - SharpFont.dll.config
-# - DNS lookup failure when trying to fetch assets
-# - has telemetry; should maybe be turned off:
-#   - https://github.com/OpenRA/OpenRA/wiki/Settings
+# - add license stuff
+# - need build dependency of unzip?
+# - needs python for the configure script
 
-COMMENT =	open-source real-time strategy game engine
+COMMENT =	tactical space combat game
 
-V =	20180307
+V = 0.8.3
+DISTNAME =	antares-${V}
+#PKGNAME =	???
+#PKGNAME-foo =	???	for multi packages
 
-DISTNAME =	OpenRA-release-${V}-source
-PKGNAME =	openra-${V}
-
-#GH_ACCOUNT =	OpenRA
-#GH_PROJECT =	OpenRA
+#GH_ACCOUNT =	username
+#GH_PROJECT =	project
 #GH_TAGNAME =	1.0
+#GH_COMMIT =	abab123456789abacafeabab123123b1e4ble4bl
 
 # for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
 #SHARED_LIBS =	???
 
 CATEGORIES =	games
 
-HOMEPAGE =	https://www.openra.net
+HOMEPAGE =	https://arescentral.org/antares/
 
 MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
 
-#GPLv3
+# GPLv3, LGPLv3
 PERMIT_PACKAGE_CDROM =	Yes
 
 #WANTLIB =		???
 
-MASTER_SITES =  https://github.com/OpenRA/OpenRA/releases/download/release-${V}/
+MASTER_SITES =	http://downloads.arescentral.org/Antares/
 
-EXTRACT_SUFX =		.tar.bz2
+#DISTFILES =		???
+#EXTRACT_ONLY =		???
+EXTRACT_SUFX =		.zip
 
-MODULES =	lang/mono
+MODULES =	lang/python
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
 #LIB_DEPENDS =		???
@@ -129,7 +130,7 @@ USE_GMAKE =		Yes
 #LDFLAGS =		???
 #MAKE_FILE =		???
 #PKG_ARCH =		??? (* for arch-independent packages)
-WRKDIST =		${WRKDIR}
+#WRKDIST =		??? if other than ${WRKDIR}/${DISTNAME}
 #WRKSRC =		??? if other than ${WRKDIST}
 #WRKBUILD =		??? if other than ${WRKSRC}
 #WRKCONF =		??? if other than ${WRKBUILD}
@@ -137,8 +138,5 @@ WRKDIST =		${WRKDIR}
 #ALL_TARGET =		???
 #INSTALL_TARGET =	???
 #TEST_TARGET =		???
-
-post-install:
-	cd ${WRKSRC} && ${MAKE_PROGRAM} install-linux-shortcuts
 
 .include <bsd.port.mk>

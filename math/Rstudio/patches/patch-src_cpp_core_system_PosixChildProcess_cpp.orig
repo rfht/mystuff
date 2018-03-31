@@ -1,0 +1,19 @@
+$OpenBSD$
+
+replace pty.h (linux) with termios.h and util.h - see openpty(3)
+replace asm/ioctls.h with sys/ioctl.h
+
+Index: src/cpp/core/system/PosixChildProcess.cpp
+--- src/cpp/core/system/PosixChildProcess.cpp.orig
++++ src/cpp/core/system/PosixChildProcess.cpp
+@@ -25,8 +25,8 @@
+ #include <sys/ttycom.h>
+ #include <sys/ioctl.h>
+ #else
+-#include <pty.h>
+-#include <asm/ioctls.h>
++#include <termios.h>
++#include <util.h>
+ #endif
+ 
+ #include <sys/wait.h>

@@ -1,0 +1,16 @@
+$OpenBSD$
+
+it can't find ::group_member, so try without it
+
+Index: src/cpp/core/r_util/RSessionContext.cpp
+--- src/cpp/core/r_util/RSessionContext.cpp.orig
++++ src/cpp/core/r_util/RSessionContext.cpp
+@@ -138,7 +138,7 @@ bool isSharedPath(const std::string& projectPath,
+       // not shared if we're in any of the groups that own the directory
+       // (note that this checks supplementary group IDs only, so the check
+       // against the primary group ID above is still required)
+-      if (::group_member(st.st_gid))
++      if (st.st_gid)
+          return false;
+ #endif 
+ 
