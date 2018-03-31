@@ -56,7 +56,35 @@ Index: src/cpp/core/system/PosixSystem.cpp
     struct sysinfo info;
     if (::sysinfo(&info) == -1)
        return systemError(errno, ERROR_LOCATION);
-@@ -1520,7 +1525,7 @@ void printCoreDumpable(const std::string& context)
+@@ -1232,6 +1237,10 @@ core::Error pidof(const std::string& process, std::vec
+ 
+ Error processInfo(const std::string& process, std::vector<ProcessInfo>* pInfo, ProcessFilter filter)
+ {
++
++#ifndef __OpenBSD__
++   // not supported on OpenBSD
++   return Success;
+    // clear the existing process info
+    pInfo->clear();
+ 
+@@ -1354,6 +1363,7 @@ Error processInfo(const std::string& process, std::vec
+    if (pDir != NULL)
+       ::closedir(pDir);
+ 
++#endif
+    return Success();
+ }
+ 
+@@ -1494,7 +1504,7 @@ Error restrictCoreDumps()
+       return error;
+ 
+    // no ptrace core dumps permitted
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__OpenBSD__)
+    int res = ::prctl(PR_SET_DUMPABLE, 0);
+    if (res == -1)
+       return systemError(errno, ERROR_LOCATION);
+@@ -1520,7 +1530,7 @@ void printCoreDumpable(const std::string& context)
     ostr << "  hard limit: " << rLimitHard << std::endl;
  
     // ptrace

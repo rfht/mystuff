@@ -1,0 +1,20 @@
+$OpenBSD$
+
+attempt to fix backtrace function names
+
+Index: src/cpp/core/Backtrace.cpp
+--- src/cpp/core/Backtrace.cpp.orig
++++ src/cpp/core/Backtrace.cpp
+@@ -54,10 +54,10 @@ void printBacktrace(std::ostream& os)
+    std::size_t stackDepth;
+    
+    void* stackAddrs[maxDepth];
+-   stackDepth = ::backtrace(stackAddrs, maxDepth);
++   stackDepth = std::backtrace(stackAddrs, maxDepth);
+    
+    char** stackStrings;
+-   stackStrings = ::backtrace_symbols(stackAddrs, stackDepth);
++   stackStrings = std::backtrace_symbols(stackAddrs, stackDepth);
+    
+    std::vector<std::string> demangled;
+    demangled.reserve(stackDepth);

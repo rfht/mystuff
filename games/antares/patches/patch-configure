@@ -1,0 +1,13 @@
+$OpenBSD$
+
+set python to 3.6
+
+Index: configure
+--- configure.orig
++++ configure
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3.6
+ # Copyright (C) 2017 The Antares Authors
+ # This file is part of Antares, a tactical space combat game.
+ # Antares is free software, distributed under the LGPL+. See COPYING.
