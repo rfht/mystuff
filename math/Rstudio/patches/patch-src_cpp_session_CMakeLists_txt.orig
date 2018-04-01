@@ -39,11 +39,23 @@ Index: src/cpp/session/CMakeLists.txt
  # include files
  file(GLOB_RECURSE SESSION_HEADER_FILES "*.h*")
  
-@@ -515,6 +497,9 @@ if (NOT RSTUDIO_SESSION_WIN64)
-       install(PROGRAMS ${LIBCLANG_FILES}
-               DESTINATION  ${RSTUDIO_INSTALL_BIN}/rsclang)
-    endif()
-+
+@@ -502,19 +484,8 @@ if (NOT RSTUDIO_SESSION_WIN64)
+    install(DIRECTORY "resources/profiler"
+            DESTINATION ${RSTUDIO_INSTALL_SUPPORTING}/resources)
+ 
+-   # install libclang
+-   if(WIN32)
+-      file(GLOB LIBCLANG_32_FILES "${LIBCLANG_DIR}/x86/libclang.*")
+-      install(PROGRAMS ${LIBCLANG_32_FILES}
+-              DESTINATION  ${RSTUDIO_INSTALL_BIN}/rsclang/x86)
+-      file(GLOB LIBCLANG_64_FILES "${LIBCLANG_DIR}/x86_64/libclang.*")
+-      install(PROGRAMS ${LIBCLANG_64_FILES}
+-              DESTINATION  ${RSTUDIO_INSTALL_BIN}/rsclang/x86_64)
+-   else()
+-      file(GLOB_RECURSE LIBCLANG_FILES "${LIBCLANG_DIR}/libclang.*")
+-      install(PROGRAMS ${LIBCLANG_FILES}
+-              DESTINATION  ${RSTUDIO_INSTALL_BIN}/rsclang)
+-   endif()
 +   set(LIBCLANG_DIR "/usr/local/lib")
 +   set(LIBCLANG_HEADER_DIR "/usr/local/include/clang-c")
  

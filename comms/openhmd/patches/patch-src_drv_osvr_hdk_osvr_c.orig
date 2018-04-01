@@ -1,0 +1,17 @@
+$OpenBSD$
+
+fix path to what we use on openbsd
+
+Index: src/drv_osvr_hdk/osvr.c
+--- src/drv_osvr_hdk/osvr.c.orig
++++ src/drv_osvr_hdk/osvr.c
+@@ -158,8 +158,7 @@ static char* _hid_to_unix_path(char* path)
+ 	sprintf (bus, "%.*s\n", len, path);
+ 	sprintf (dev, "%.*s\n", len, path + 5);
+ 
+-	sprintf (result, "/dev/bus/usb/%03d/%03d",
+-		(int)strtol(bus, NULL, 16),
++	sprintf (result, "/dev/uhid%d",
+ 		(int)strtol(dev, NULL, 16));
+ 	return result;
+ }

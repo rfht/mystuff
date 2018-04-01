@@ -1,20 +1,16 @@
 $OpenBSD$
 
-attempt to fix backtrace function names
+stub printBacktrace which relies on libexecinfo
 
 Index: src/cpp/core/Backtrace.cpp
 --- src/cpp/core/Backtrace.cpp.orig
 +++ src/cpp/core/Backtrace.cpp
-@@ -54,10 +54,10 @@ void printBacktrace(std::ostream& os)
-    std::size_t stackDepth;
+@@ -46,7 +46,7 @@ std::string demangle(const std::string& name)
+ 
+ void printBacktrace(std::ostream& os)
+ {
+-#ifndef _WIN32
++#if !defined(_WIN32) && !defined(__OpenBSD__)
     
-    void* stackAddrs[maxDepth];
--   stackDepth = ::backtrace(stackAddrs, maxDepth);
-+   stackDepth = std::backtrace(stackAddrs, maxDepth);
+    os << "Backtrace (most recent calls first):" << std::endl << std::endl;
     
-    char** stackStrings;
--   stackStrings = ::backtrace_symbols(stackAddrs, stackDepth);
-+   stackStrings = std::backtrace_symbols(stackAddrs, stackDepth);
-    
-    std::vector<std::string> demangled;
-    demangled.reserve(stackDepth);

@@ -39,7 +39,7 @@ Index: src/cpp/session/CMakeLists.txt
  # include files
  file(GLOB_RECURSE SESSION_HEADER_FILES "*.h*")
  
-@@ -502,19 +484,8 @@ if (NOT RSTUDIO_SESSION_WIN64)
+@@ -502,23 +484,8 @@ if (NOT RSTUDIO_SESSION_WIN64)
     install(DIRECTORY "resources/profiler"
             DESTINATION ${RSTUDIO_INSTALL_SUPPORTING}/resources)
  
@@ -56,8 +56,12 @@ Index: src/cpp/session/CMakeLists.txt
 -      install(PROGRAMS ${LIBCLANG_FILES}
 -              DESTINATION  ${RSTUDIO_INSTALL_BIN}/rsclang)
 -   endif()
+-
+-   # install libclang builtin-headers
+-   install(DIRECTORY "${RSTUDIO_DEPENDENCIES_DIR}/common/libclang/builtin-headers"
+-           DESTINATION "${RSTUDIO_INSTALL_SUPPORTING}/resources/libclang")
 +   set(LIBCLANG_DIR "/usr/local/lib")
 +   set(LIBCLANG_HEADER_DIR "/usr/local/include/clang-c")
  
-    # install libclang builtin-headers
-    install(DIRECTORY "${RSTUDIO_DEPENDENCIES_DIR}/common/libclang/builtin-headers"
+    # install winpty on windows
+    if(WIN32)

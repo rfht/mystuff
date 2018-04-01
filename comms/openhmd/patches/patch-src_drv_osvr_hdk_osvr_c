@@ -1,11 +1,66 @@
 $OpenBSD$
 
 fix path to what we use on openbsd
+add development notes for USBHID
 
 Index: src/drv_osvr_hdk/osvr.c
 --- src/drv_osvr_hdk/osvr.c.orig
 +++ src/drv_osvr_hdk/osvr.c
-@@ -158,8 +158,7 @@ static char* _hid_to_unix_path(char* path)
+@@ -26,6 +26,7 @@
+ typedef struct {
+ 	ohmd_device base;
+ 
++	// USBHID: replace with handle from open(); ioctl() ??
+ 	hid_device* handle;
+ 	pkt_sensor_display_info display_info;
+ 	pkt_sensor_config sensor_config;
+@@ -45,11 +46,14 @@ static int get_feature_report(drv_priv* priv, drv_sens
+ {
+ 	memset(buf, 0, FEATURE_BUFFER_SIZE);
+ 	buf[0] = (unsigned char)cmd;
++	// USBHID: needs to return a feature report that conforms to drv_priv
++	// USBHID: implement hid_get_feature_report
+ 	return hid_get_feature_report(priv->handle, buf, FEATURE_BUFFER_SIZE);
+ }
+ 
+ static int send_feature_report(drv_priv* priv, const unsigned char *data, size_t length)
+ {
++	// USBHID: implement hid_send_feature_report
+ 	return hid_send_feature_report(priv->handle, data, length);
+ }
+ 
+@@ -61,6 +65,7 @@ void quatf_from_device_quat(const int16_t* smp, quatf*
+ 	out_quat->w = ((float)smp[3] / (1 << 14)) * -1;
+ 
+ 	quatf abs_rotate_offset = { sqrt(0.5), 0, 0 ,sqrt(0.5) };
++	// USBHID: look at what this function does
+ 	oquatf_mult_me(out_quat, &abs_rotate_offset);
+ }
+ 
+@@ -87,12 +92,14 @@ static void handle_tracker_sensor_msg(drv_priv* priv, 
+ 
+ static void update_device(ohmd_device* device)
+ {
++	// USBHID: find out how to obtain the drv_priv from device
+ 	drv_priv* priv = drv_priv_get(device);
+ 	unsigned char buffer[FEATURE_BUFFER_SIZE];
+ 
+ 
+ 	// Read all the messages from the device.
+ 	while(true){
++		// USBHID: implement hid_read
+ 		int size = hid_read(priv->handle, buffer, FEATURE_BUFFER_SIZE);
+ 		if(size < 0){
+ 			LOGE("error reading from device");
+@@ -144,6 +151,7 @@ static void close_device(ohmd_device* device)
+ {
+ 	LOGD("closing device");
+ 	drv_priv* priv = drv_priv_get(device);
++	// USBHID: implement hid_close
+ 	hid_close(priv->handle);
+ 	free(priv);
+ }
+@@ -158,14 +166,14 @@ static char* _hid_to_unix_path(char* path)
  	sprintf (bus, "%.*s\n", len, path);
  	sprintf (dev, "%.*s\n", len, path + 5);
  
@@ -14,4 +69,42 @@ Index: src/drv_osvr_hdk/osvr.c
 +	sprintf (result, "/dev/uhid%d",
  		(int)strtol(dev, NULL, 16));
  	return result;
+ }
+ 
+ static ohmd_device* open_device(ohmd_driver* driver, ohmd_device_desc* desc)
+ {
++	// USBHID: implement omhd_alloc
+ 	drv_priv* priv = ohmd_alloc(driver->ctx, sizeof(drv_priv));
+ 	if(!priv)
+ 		goto cleanup;
+@@ -173,6 +181,7 @@ static ohmd_device* open_device(ohmd_driver* driver, o
+ 	priv->base.ctx = driver->ctx;
+ 
+ 	// Open the HID device
++	// USBHID: implement hid_open_path
+ 	priv->handle = hid_open_path(desc->path);
+ 
+ 	if(!priv->handle) {
+@@ -232,6 +241,7 @@ cleanup:
+ 
+ static void get_device_list(ohmd_driver* driver, ohmd_device_list* list)
+ {
++	// USBHID: implement hid_enumerate? seems to work though
+ 	struct hid_device_info* devs = hid_enumerate(OSVR_HDK2_ID, OSVR_HDK2_HMD);
+ 	struct hid_device_info* cur_dev = devs;
+ 
+@@ -251,12 +261,14 @@ static void get_device_list(ohmd_driver* driver, ohmd_
+ 		cur_dev = cur_dev->next;
+ 	}
+ 
++	// USBHID: if hid_enumerate is implemented, need to free enumeration, too
+ 	hid_free_enumeration(devs);
+ }
+ 
+ static void destroy_driver(ohmd_driver* drv)
+ {
+ 	LOGD("shutting down driver");
++	// USBHID: not sure if hid_exit needs to be implemented
+ 	hid_exit();
+ 	free(drv);
  }
