@@ -1,0 +1,19 @@
+$OpenBSD$
+
+Index: ILSpy.AddIn/ILSpy.AddIn.csproj
+--- ILSpy.AddIn/ILSpy.AddIn.csproj.orig
++++ ILSpy.AddIn/ILSpy.AddIn.csproj
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project>
++<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+ 
+   <PropertyGroup>
+@@ -153,4 +153,4 @@
+     <Folder Include="Packages\" />
+   </ItemGroup>
+ 
+-</Project>
+\ No newline at end of file
++</Project>

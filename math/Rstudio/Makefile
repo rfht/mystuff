@@ -13,6 +13,10 @@
 # - or fix this here:
 #   src/cpp/core/r_util/REnvironmentPosix.cpp:#define kLibRFileName "libR.so"
 # - doesn't really launch the interface - and just exits after a little
+# - logs in ~/.rstudio-desktop/log
+# - runs out of file descriptors, but not if uname -n 4096
+# - apparently the build process creates files with some random, changing
+#   names. This messes with the PLIST
 
 COMMENT =	integrated development environment for R
 
@@ -27,6 +31,8 @@ GH_TAGNAME =	v${V}
 
 DICTIONARY_URL = https://s3.amazonaws.com/rstudio-dictionaries/core-dictionaries.zip
 MATHJAX_URL =	https://s3.amazonaws.com/rstudio-buildtools/mathjax-26.zip
+GWT_URL = https://s3.amazonaws.com/rstudio-buildtools/gwt-2.7.0.zip
+GIN_URL = https://s3.amazonaws.com/rstudio-buildtools/gin-1.5.zip
 
 # for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
 #SHARED_LIBS =	???
@@ -41,10 +47,10 @@ PERMIT_PACKAGE_CDROM =	Yes
 #WANTLIB =		???
 
 MODULES =	devel/cmake
-BUILD_DEPENDS =	devel/boost
+BUILD_DEPENDS =	devel/boost \
+		devel/apache-ant
 LIB_DEPENDS =	security/openpam \
 		devel/llvm \
-		devel/boost \
 		devel/libinotify
 #TEST_DEPENDS =		???
 
@@ -67,6 +73,9 @@ CONFIGURE_ENV =	Qt5Core_DIR=/usr/local/lib/qt5/cmake/Qt5Core/ \
 		Qt5OpenGL_DIR=/usr/local/lib/qt5/cmake/Qt5OpenGL/ \
 		Qt5DBus_DIR=/usr/local/lib/qt5/cmake/Qt5DBus/
 
+MAKE_ENV =	HOME=${WRKDIR} \
+		ANT_OPTS="-Duser.home=${WRKDIR}"
+
 #NO_TEST =		Yes
 
 #TEST_TARGET =		???
@@ -76,12 +85,22 @@ post-extract:
 		ftp ${MATHJAX_URL} && \
 		unzip mathjax-26.zip && \
 		rm mathjax-26.zip && \
+		mkdir -p ../../src/gwt/lib/gwt && \
+		ftp ${GWT_URL} && \
+		unzip -d ../../src/gwt/lib/gwt gwt-2.7.0.zip && \
+		mv ../../src/gwt/lib/gwt/{gwt-,}2.7.0 && \
+		rm gwt-2.7.0.zip && \
+		mkdir -p ../../src/gwt/lib/gin/1.5 && \
+		ftp ${GIN_URL} && \
+		unzip -d ../../src/gwt/lib/gin/1.5 gin-1.5.zip && \
+		rm gin-1.5.zip && \
 		cd dictionaries && \
 		ftp ${DICTIONARY_URL} && \
 		unzip core-dictionaries.zip && \
 		rm core-dictionaries.zip
 
-post-install:
-	ln -sf ${TRUEPREFIX}/lib/rstudio/bin/rstudio /usr/local/bin
+post-patch:
+	sed -i "s,</java>,<jvmarg value=\"-Duser.home=${WRKDIR}\"/></java>,g" \
+		${WRKSRC}/src/gwt/build.xml
 
 .include <bsd.port.mk>

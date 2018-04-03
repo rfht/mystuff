@@ -1,0 +1,268 @@
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===>  Cleaning for ILSpy-3.1-rc
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===> ILSpy-3.1-rc depends on: mono-* -> mono-5.10.0.160p0
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===>  Checking files for ILSpy-3.1-rc
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+`/usr/ports/distfiles/ILSpy-3.1-rc.tar.gz' is up to date.
+>> (SHA256) ILSpy-3.1-rc.tar.gz: OK
+===>  Extracting for ILSpy-3.1-rc
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===>  Patching for ILSpy-3.1-rc
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===>   Applying OpenBSD patch patch-ICSharpCode_Decompiler_ICSharpCode_Decompiler_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Edit \ICSharpCode.Decompiler\ICSharpCode.Decompiler.csproj Add
+|Sdk="Microsoft.NET.Sdk" to the Project element. This is required due to a
+|tooling issue on Unix. Please do not commit this when contributing a pull
+|request!
+|- per github instructions
+|
+|Index: ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj
+|--- ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj.orig
+|+++ ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj
+--------------------------
+Patching file ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 612.
+done
+===>   Ignoring patchfile patch-ICSharpCode_Decompiler_ICSharpCode_Decompiler_csproj.orig
+===>   Applying OpenBSD patch patch-ICSharpCode_Decompiler_Tests_ICSharpCode_Decompiler_Tests_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj
+|--- ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj.orig
+|+++ ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj
+--------------------------
+Patching file ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 182.
+done
+===>   Applying OpenBSD patch patch-ILSpy_AddIn_ILSpy_AddIn_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: ILSpy.AddIn/ILSpy.AddIn.csproj
+|--- ILSpy.AddIn/ILSpy.AddIn.csproj.orig
+|+++ ILSpy.AddIn/ILSpy.AddIn.csproj
+--------------------------
+Patching file ILSpy.AddIn/ILSpy.AddIn.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 153.
+done
+===>   Applying OpenBSD patch patch-ILSpy_BamlDecompiler_ILSpy_BamlDecompiler_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj
+|--- ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj.orig
+|+++ ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj
+--------------------------
+Patching file ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 94.
+done
+===>   Applying OpenBSD patch patch-ILSpy_BamlDecompiler_Tests_ILSpy_BamlDecompiler_Tests_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj
+|--- ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj.orig
+|+++ ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj
+--------------------------
+Patching file ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 103.
+done
+===>   Applying OpenBSD patch patch-ILSpy_ILSpy_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: ILSpy/ILSpy.csproj
+|--- ILSpy/ILSpy.csproj.orig
+|+++ ILSpy/ILSpy.csproj
+--------------------------
+Patching file ILSpy/ILSpy.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 415.
+done
+===>   Applying OpenBSD patch patch-SharpTreeView_ICSharpCode_TreeView_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: SharpTreeView/ICSharpCode.TreeView.csproj
+|--- SharpTreeView/ICSharpCode.TreeView.csproj.orig
+|+++ SharpTreeView/ICSharpCode.TreeView.csproj
+--------------------------
+Patching file SharpTreeView/ICSharpCode.TreeView.csproj using Plan A...
+Hunk #1 succeeded at 1.
+done
+===>   Applying OpenBSD patch patch-TestPlugin_TestPlugin_csproj
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD$
+|
+|Index: TestPlugin/TestPlugin.csproj
+|--- TestPlugin/TestPlugin.csproj.orig
+|+++ TestPlugin/TestPlugin.csproj
+--------------------------
+Patching file TestPlugin/TestPlugin.csproj using Plan A...
+Hunk #1 succeeded at 1.
+Hunk #2 succeeded at 61.
+done
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===>  Compiler link: clang -> /usr/bin/clang
+===>  Compiler link: clang++ -> /usr/bin/clang++
+===>  Compiler link: cc -> /usr/bin/cc
+===>  Compiler link: c++ -> /usr/bin/c++
+===>  Configuring for ILSpy-3.1-rc
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+===>  Building for ILSpy-3.1-rc
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+The licensing info for ILSpy-3.1-rc is incomplete. (in devel/ilspy)
+Please notify the OpenBSD port maintainer: (in devel/ilspy)
+    Thomas Frohwein <frohwein@ymail.com> (in devel/ilspy)
+cd /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc && xbuild ILSpy.sln
+
+>>>> xbuild tool is deprecated and will be removed in future updates, use msbuild instead <<<<
+
+XBuild Engine Version 14.0
+Mono, Version 5.10.0.160
+Copyright (C) 2005-2013 Various Mono authors
+
+Build started 04/03/2018 10:09:49.
+__________________________________________________
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy/ILSpy.csproj: '<', hexadecimal value 0x3C, is an invalid attribute character. Line 4, position 3.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : Project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/cecil/Mono.Cecil.csproj referenced in the solution file, not found. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj:  warning : Could not find project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/Sdk.props, to import. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : Project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/cecil/symbols/pdb/Mono.Cecil.Pdb.csproj referenced in the solution file, not found. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj:  warning : Could not find project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/Sdk.props, to import. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj:  warning : Could not find project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/Sdk.props, to import. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : Don't know how to handle GlobalSection ExtensibilityGlobals, Ignoring.
+Project "/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln" (default target(s)):
+	Target ValidateSolutionConfiguration:
+		Building solution configuration "Debug|Any CPU".
+	Target Build:
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy/ILSpy.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy/ILSpy.csproj: '<', hexadecimal value 0x3C, is an invalid attribute character. Line 4, position 3.
+		Project "/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/SharpTreeView/ICSharpCode.TreeView.csproj" (default target(s)):
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/SharpTreeView/ICSharpCode.TreeView.csproj: error : No target found in the project
+		Done building project "/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/SharpTreeView/ICSharpCode.TreeView.csproj".-- FAILED
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj: /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj could not import "Sdk.props"
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj: /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj could not import "Sdk.props"
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj: /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj could not import "Sdk.props"
+	Task "MSBuild" execution -- FAILED
+	Done building target "Build" in project "/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln".-- FAILED
+Done building project "/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln".-- FAILED
+
+Build FAILED.
+
+Warnings:
+
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy/ILSpy.csproj: '<', hexadecimal value 0x3C, is an invalid attribute character. Line 4, position 3.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : Project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/cecil/Mono.Cecil.csproj referenced in the solution file, not found. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj:  warning : Could not find project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/Sdk.props, to import. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : Project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/cecil/symbols/pdb/Mono.Cecil.Pdb.csproj referenced in the solution file, not found. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj:  warning : Could not find project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/Sdk.props, to import. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj:  warning : Could not find project file /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/Sdk.props, to import. Ignoring.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln:  warning : Don't know how to handle GlobalSection ExtensibilityGlobals, Ignoring.
+
+Errors:
+
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln (default targets) ->
+(Build target) ->
+
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy/ILSpy.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy/ILSpy.csproj: '<', hexadecimal value 0x3C, is an invalid attribute character. Line 4, position 3.
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj: /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj could not import "Sdk.props"
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ICSharpCode.Decompiler.Tests/ICSharpCode.Decompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj: /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler/ILSpy.BamlDecompiler.csproj could not import "Sdk.props"
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.BamlDecompiler.Tests/ILSpy.BamlDecompiler.Tests.csproj: The attribute "Version" in element <PackageReference> is unrecognized.
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj: error : /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj: /usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.AddIn/ILSpy.AddIn.csproj could not import "Sdk.props"
+
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/ILSpy.sln (default targets) ->
+(Build target) ->
+/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/SharpTreeView/ICSharpCode.TreeView.csproj (default targets) ->
+
+	/usr/ports/pobj/ILSpy-3.1-rc/ILSpy-3.1-rc/SharpTreeView/ICSharpCode.TreeView.csproj: error : No target found in the project
+
+	 12 Warning(s)
+	 7 Error(s)
+
+Time Elapsed 00:00:00.5029850
+*** Error 1 in . (Makefile:144 'do-build')
+*** Error 1 in . (/usr/ports/infrastructure/mk/bsd.port.mk:2738 '/usr/ports/pobj/ILSpy-3.1-rc/.build_done')
+*** Error 1 in /usr/ports/mystuff/devel/ilspy (/usr/ports/infrastructure/mk/bsd.port.mk:2419 'build')
