@@ -3,3 +3,10 @@ Starts up sometimes, but is pretty crashy
 when loading/creating a project:
 OPENING: /home/thfr/code/godot/iso-example (::home::thfr::code::godot::iso-example)
 **ERROR** OS_Unix::execute - Could not create child process while executing: /usr/ports/mystuff/games/godot/godot
+
+LIB_DEPENDS graphics/glew not needed for games/godot ?
+
+ERROR: init: Condition ' pulse == __null ' is true. returned: ERR_CANT_OPEN
+   At: drivers/pulseaudio/audio_driver_pulseaudio.cpp:209.
+   ERROR: initialize: AudioDriverManager: all drivers failed, falling back to dummy driver                                                                        
+      At: servers/audio_server.cpp:153.

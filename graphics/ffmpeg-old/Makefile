@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.168 2018/02/27 08:00:40 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.166 2017/10/27 03:16:30 sthen Exp $
 
 COMMENT=	audio/video converter and streamer
 
-V=		20180219
+V=		20170825
 DISTNAME=	ffmpeg-git-${V}
 PKGNAME=	ffmpeg-${V}
-REVISION=	0
+REVISION=	2
 CATEGORIES=	graphics multimedia
 MASTER_SITES=	http://comstyle.com/source/
 EXTRACT_SUFX=	.tar.xz
@@ -29,7 +29,7 @@ PERMIT_PACKAGE_CDROM=	patents
 PERMIT_PACKAGE_FTP=	Yes
 
 WANTLIB=	SDL X11 Xext Xv ass bz2 c crypto fontconfig freetype fribidi \
-		gsm m mp3lame opus pthread sndio speex ssl v4l2 vorbis \
+		gsm m mp3lame opus pthread sndio speex ssl theora v4l2 vorbis \
 		vorbisenc vpx>=5 x264 x265>=2 xcb xcb-shape xcb-shm xcb-xfixes \
 		xvidcore z
 
@@ -45,6 +45,7 @@ LIB_DEPENDS=	archivers/bzip2 \
 		audio/gsm \
 		devel/sdl \
 		multimedia/libass \
+		multimedia/libtheora \
 		multimedia/libv4l \
 		multimedia/libvpx>=1.3.0 \
 		multimedia/x264 \
@@ -62,6 +63,13 @@ LIBpostproc_EXTRALIBS=
 LIBswresample_EXTRALIBS=-lm
 LIBswscale_EXTRALIBS=-lm
 
+.if ${MACHINE_ARCH:Marm}
+# uses ARM EABI
+FFMPEG_ARCH=	generic
+.else
+FFMPEG_ARCH=	${MACHINE_ARCH}
+.endif
+
 OPTFLAGS=	${CFLAGS}
 
 # until the system headers are fixed properly.
@@ -70,9 +78,12 @@ OPTFLAGS+=	-Wno-redundant-decls
 USE_GMAKE=	Yes
 CONFIGURE_STYLE= simple
 CONFIGURE_ARGS+= --enable-shared \
-		--arch=${MACHINE_ARCH} \
+		--arch=${FFMPEG_ARCH} \
 		--cc=${CC} \
 		--disable-altivec \
+		--disable-armv5te \
+		--disable-armv6 \
+		--disable-armv6t2 \
 		--disable-debug \
 		--disable-iconv \
 		--disable-indev=jack \

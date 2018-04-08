@@ -1,5 +1,8 @@
 # $OpenBSD: Makefile.template,v 1.72 2015/04/08 17:53:19 sthen Exp $
 
+# TODO:
+# - remove -j 4
+
 COMMENT =		2D and 3D game engine
 
 V =			3.0.2
@@ -25,14 +28,17 @@ GH_PROJECT =		godot
 GH_TAGNAME =		$V-stable
 
 MODULES =		devel/scons
+# does it need CFLAG -msse4.2 ??
 MODSCONS_FLAGS =	CC="${CC}" \
 			CXX="${CXX}" \
 			CFLAGS="${CFLAGS}" \
 			CCFLAGS="${CXXFLAGS}" \
 			LINKFLAGS="-lintl -lmpcdec" \
+			-j 4 \
 			platform=x11 \
 			progress=no \
 			verbose=yes \
+			use_llvm=yes \
 			builtin_enet=no \
 			builtin_freetype=no \
 			builtin_glew=no \

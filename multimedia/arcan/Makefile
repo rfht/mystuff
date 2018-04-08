@@ -6,6 +6,7 @@
 # - set configuration to Release instead of Debug?
 # - add lua dependency
 # - add other dependencies from make configure
+# - check log file for shared libs
 
 COMMENT =	desktop engine, display server, multimedia framework
 
