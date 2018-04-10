@@ -1,0 +1,9 @@
+SHADER ERROR: (null): Expected 'shader_type' at the beginning of shader.
+   At: :1.                                                                                                                                                     
+   ERROR: _update_shader: Condition ' err != OK ' is true.
+      At: drivers/gles3/rasterizer_storage_gles3.cpp:1697.
+
+
+likely related to multithreading:
+
+https://github.com/godotengine/godot/issues/15998

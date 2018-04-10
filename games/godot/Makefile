@@ -1,18 +1,19 @@
 # $OpenBSD: Makefile.template,v 1.72 2015/04/08 17:53:19 sthen Exp $
 
 # TODO:
-# - remove -j 4
+# - make hardcoded binary path portable with localbase
+# - double-check license
 
 COMMENT =		2D and 3D game engine
 
 V =			3.0.2
 DISTNAME =		godot-$V
 
-#SHARED_LIBS =		???
-
 CATEGORIES =		games
 
 HOMEPAGE =		https://godotengine.org/
+
+MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
 
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
@@ -28,17 +29,7 @@ GH_PROJECT =		godot
 GH_TAGNAME =		$V-stable
 
 MODULES =		devel/scons
-# does it need CFLAG -msse4.2 ??
-MODSCONS_FLAGS =	CC="${CC}" \
-			CXX="${CXX}" \
-			CFLAGS="${CFLAGS}" \
-			CCFLAGS="${CXXFLAGS}" \
-			LINKFLAGS="-lintl -lmpcdec" \
-			-j 4 \
-			platform=x11 \
-			progress=no \
-			verbose=yes \
-			use_llvm=yes \
+MODSCONS_FLAGS =	LINKFLAGS="-lintl -lmpcdec" \
 			builtin_enet=no \
 			builtin_freetype=no \
 			builtin_glew=no \
@@ -50,12 +41,15 @@ MODSCONS_FLAGS =	CC="${CC}" \
 			builtin_libwebp=no \
 			builtin_openssl=no \
 			builtin_opus=no \
-			builtin_zlib=no
+			builtin_zlib=no \
+			platform=x11 \
+			progress=no \
+			use_llvm=yes \
+			verbose=yes
 LIB_DEPENDS =		audio/musepack \
 			audio/opusfile \
 			audio/pulseaudio \
 			devel/gettext \
-			graphics/glew \
 			graphics/libwebp \
 			graphics/png \
 			multimedia/libtheora \
