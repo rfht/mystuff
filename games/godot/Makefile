@@ -37,6 +37,7 @@ MODSCONS_FLAGS =	LINKFLAGS="-lintl -lmpcdec" \
 			builtin_zlib=no \
 			platform=x11 \
 			progress=no \
+			target=release_debug \
 			verbose=yes
 LIB_DEPENDS =		audio/musepack \
 			audio/opusfile \
