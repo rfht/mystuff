@@ -1,18 +1,11 @@
 # $OpenBSD: Makefile.template,v 1.72 2015/04/08 17:53:19 sthen Exp $
 
-# TODO:
-# - make hardcoded binary path portable with localbase
-# - double-check license
+COMMENT =	2D and 3D game engine
 
-COMMENT =		2D and 3D game engine
-
-V =			3.0.2
-DISTNAME =		godot-$V
-
-CATEGORIES =		games
-
-HOMEPAGE =		https://godotengine.org/
-
+V =	3.0.2
+DISTNAME =	godot-$V
+CATEGORIES =	games
+HOMEPAGE =	https://godotengine.org/
 MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
 
 # MIT
@@ -44,7 +37,6 @@ MODSCONS_FLAGS =	LINKFLAGS="-lintl -lmpcdec" \
 			builtin_zlib=no \
 			platform=x11 \
 			progress=no \
-			use_llvm=yes \
 			verbose=yes
 LIB_DEPENDS =		audio/musepack \
 			audio/opusfile \
@@ -57,8 +49,15 @@ LIB_DEPENDS =		audio/musepack \
 
 NO_TEST =		Yes
 
+post-extract:
+	sed -i 's,OS::get_executable_path().utf8().get_data(),"${LOCALBASE}/bin/godot",' \
+		${WRKSRC}/drivers/unix/os_unix.cpp
+
 do-install:
 	${INSTALL_PROGRAM} ${WRKBUILD}/bin/godot.x11.tools.* \
 		${PREFIX}/bin/godot
 
 .include <bsd.port.mk>
+.if ${PROPERTIES:Mclang}
+MODSCONS_FLAGS +=	use_llvm=yes
+.endif
