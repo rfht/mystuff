@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_bttn.c
+--- components/files/odv_resource_bttn.c.orig
++++ components/files/odv_resource_bttn.c
+@@ -84,4 +84,5 @@ void odv_resource_clean_bttn(struct ODVResourceBttn *b
+         free(bttn->entries);
+     }
+     free(bttn);
+-}
+\ No newline at end of file
++}
++

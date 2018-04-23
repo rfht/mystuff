@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+include/libimagequant.h
+lib/libimagequant.so
+@lib lib/libimagequant.so.${LIBimagequant_VERSION}
+lib/pkgconfig/imagequant.pc

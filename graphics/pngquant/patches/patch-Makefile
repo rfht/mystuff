@@ -1,0 +1,16 @@
+$OpenBSD$
+
+fix man directory
+
+Index: Makefile
+--- Makefile.orig
++++ Makefile
+@@ -3,7 +3,7 @@
+ LIQSRCDIR ?= lib
+ BIN ?= pngquant
+ BINPREFIX ?= $(DESTDIR)$(PREFIX)/bin
+-MANPREFIX ?= $(DESTDIR)$(PREFIX)/share/man
++MANPREFIX ?= $(DESTDIR)$(PREFIX)/man
+ 
+ OBJS = pngquant.o pngquant_opts.o rwpng.o
+ 

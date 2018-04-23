@@ -1,8 +1,13 @@
 # $OpenBSD$
 
+V =	0.99.20180415
+DISTNAME =	vcmi-${V}
 GH_ACCOUNT = 		vcmi
 GH_PROJECT = 		vcmi
-GH_TAGNAME = 		0.99
+#GH_TAGNAME = 		0.99
+GH_COMMIT =		ad2c429d8fe1ad3dcfdd863be8471deb0e0f0ff4
+
+
 
 COMMENT =		rewrite of the HoMM3 engine
 

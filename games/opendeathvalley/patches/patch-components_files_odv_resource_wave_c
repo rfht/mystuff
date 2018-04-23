@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_wave.c
+--- components/files/odv_resource_wave.c.orig
++++ components/files/odv_resource_wave.c
+@@ -119,4 +119,5 @@ void odv_resource_clean_wave(struct ODVResourceWave *w
+         free(wave->entries);
+     }
+     free(wave);
+-}
+\ No newline at end of file
++}
++

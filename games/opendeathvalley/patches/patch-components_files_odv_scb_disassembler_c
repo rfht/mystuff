@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_scb_disassembler.c
+--- components/files/odv_scb_disassembler.c.orig
++++ components/files/odv_scb_disassembler.c
+@@ -573,4 +573,5 @@ void odv_scb_diassemble(unsigned int addr, const unsig
+         default:
+             printf("    %02X - FUU - %08X %08X\n", opcode, *(unsigned int*)(buf + 1), *(unsigned int*)(buf + 1 + 4));
+     }
+-}
+\ No newline at end of file
++}
++

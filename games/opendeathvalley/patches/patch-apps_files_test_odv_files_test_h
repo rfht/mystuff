@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: apps/files_test/odv_files_test.h
+--- apps/files_test/odv_files_test.h.orig
++++ apps/files_test/odv_files_test.h
+@@ -10,4 +10,5 @@
+ #include "odv_sxt_handler.h"
+ #include "odv_fnt_handler.h"
+ 
+-#endif /* OPENDV_TEST_H */
+\ No newline at end of file
++#endif /* OPENDV_TEST_H */
++

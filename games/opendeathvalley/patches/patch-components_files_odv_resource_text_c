@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_text.c
+--- components/files/odv_resource_text.c.orig
++++ components/files/odv_resource_text.c
+@@ -129,4 +129,5 @@ void odv_resource_clean_text(struct ODVResourceText *t
+         free(text->entries);
+     }
+     free(text);
+-}
+\ No newline at end of file
++}
++

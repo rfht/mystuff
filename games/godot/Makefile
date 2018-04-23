@@ -22,7 +22,12 @@ GH_PROJECT =		godot
 GH_TAGNAME =		$V-stable
 
 MODULES =		devel/scons
-MODSCONS_FLAGS =	LINKFLAGS="-lintl -lmpcdec" \
+# Can't disable builtin_bullet until has been updated to 2.88
+MODSCONS_FLAGS =	CC="${CC}" \
+			CXX="${CXX}" \
+			CFLAGS="${CFLAGS}" \
+			CXXFLAGS="${CXXFLAGS}" \
+			LINKFLAGS="${LDFLAGS} -lintl -lmpcdec" \
 			builtin_enet=no \
 			builtin_freetype=no \
 			builtin_glew=no \
@@ -31,34 +36,42 @@ MODSCONS_FLAGS =	LINKFLAGS="-lintl -lmpcdec" \
 			builtin_libpng=no \
 			builtin_libtheora=no \
 			builtin_libvorbis=no \
+			builtin_libvpx=no \
 			builtin_libwebp=no \
 			builtin_openssl=no \
 			builtin_opus=no \
+			builtin_pcre2=no \
 			builtin_zlib=no \
+			builtin_zstd=no \
 			platform=x11 \
 			progress=no \
 			target=release_debug \
-			verbose=yes
-LIB_DEPENDS =		audio/musepack \
+			verbose=yes \
+			warnings=all
+LIB_DEPENDS =		archivers/zstd \
+			audio/musepack \
 			audio/opusfile \
 			audio/pulseaudio \
+			devel/bullet \
 			devel/gettext \
+			devel/pcre2 \
 			graphics/libwebp \
 			graphics/png \
 			multimedia/libtheora \
+			multimedia/libvpx \
 			net/enet
 
 NO_TEST =		Yes
 
-post-extract:
-	sed -i 's,OS::get_executable_path().utf8().get_data(),"${LOCALBASE}/bin/godot",' \
-		${WRKSRC}/drivers/unix/os_unix.cpp
+post-patch:
+	${SUBST_CMD} ${WRKSRC}/drivers/unix/os_unix.cpp
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKBUILD}/bin/godot.x11.tools.* \
+	${INSTALL_PROGRAM} ${WRKBUILD}/bin/godot* \
 		${PREFIX}/bin/godot
 
+#.include <bsd.port.arch.mk>
+#.if ${PROPERTIES:Mclang}
+#MODSCONS_FLAGS +=	use_llvm=yes
+#.endif
 .include <bsd.port.mk>
-.if ${PROPERTIES:Mclang}
-MODSCONS_FLAGS +=	use_llvm=yes
-.endif

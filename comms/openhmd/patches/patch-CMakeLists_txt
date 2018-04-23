@@ -1,6 +1,7 @@
 $OpenBSD$
 
 set debug flags
+remove librt
 
 Index: CMakeLists.txt
 --- CMakeLists.txt.orig
@@ -14,3 +15,12 @@ Index: CMakeLists.txt
  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
  
  set(LIB_VERSION_MAJOR 0)
+@@ -144,7 +144,7 @@ if (OPENHMD_EXAMPLE_SDL)
+ endif (OPENHMD_EXAMPLE_SDL)
+ 
+ if (UNIX)
+-	set(LIBS ${LIBS} rt pthread)
++	set(LIBS ${LIBS} pthread)
+ endif (UNIX)
+ 
+ link_libraries(${LIBS})

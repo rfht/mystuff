@@ -1,0 +1,58 @@
+$OpenBSD$
+
+fix clang warning from
+https://github.com/fuzzylite/fuzzylite/commit/7679d81d2b26295e86a564c65c37f3f09a9e3dd6
+
+include dirs and lib dirs
+
+add stdc++
+
+set std to 11
+
+Index: fuzzylite/CMakeLists.txt
+--- fuzzylite/CMakeLists.txt.orig
++++ fuzzylite/CMakeLists.txt
+@@ -1,5 +1,8 @@
+-cmake_minimum_required(VERSION 2.8.8)
++cmake_minimum_required(VERSION 3.0)
+ 
++# Fix behavior of CMAKE_CXX_STANDARD
++cmake_policy(SET CMP0025 NEW)
++
+ if (APPLE)
+     set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+ endif()
+@@ -87,6 +90,10 @@ endif()
+ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+ #Address fl::null errors of literal null conversion
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-non-literal-null-conversion")
++    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 3.9)
++#TEMPORAL: flag removal to avoid warnings of `float` variadick in Operation::join
++	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-varargs")
++    endif()
+ endif()
+ 
+ 
+@@ -121,16 +128,17 @@ if(MSVC)
+ endif()
+ 
+ 
+-if(APPLE)
+-#Fix ld: symbol(s) not found for architecture x86_64 on mac
+-    set(FL_LIBS stdc++)
+-endif()
++set(FL_LIBS stdc++)
+ 
+ 
+ ###BUILD SECTION
+ 
+-include_directories(.)
++include_directories(.
++	"/usr/local/include")
+ 
++link_directories("/usr/local/lib")
++
++set (CMAKE_CXX_STANDARD 11)
+ file(STRINGS FL_HEADERS fl-headers)
+ file(STRINGS FL_SOURCES fl-sources)
+ file(STRINGS FL_TESTS fl-tests)

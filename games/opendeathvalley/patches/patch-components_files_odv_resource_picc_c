@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_picc.c
+--- components/files/odv_resource_picc.c.orig
++++ components/files/odv_resource_picc.c
+@@ -115,4 +115,5 @@ void odv_resource_clean_picc(struct ODVResourcePicc *p
+         free(picc->entries);
+     }
+     free(picc);
+-}
+\ No newline at end of file
++}
++

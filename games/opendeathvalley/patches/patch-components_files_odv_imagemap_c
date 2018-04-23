@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_imagemap.c
+--- components/files/odv_imagemap.c.orig
++++ components/files/odv_imagemap.c
+@@ -75,4 +75,5 @@ void odv_imagemap_clean(struct ODVImageMap *imgmap)
+         free(imgmap->images);
+     }
+     free(imgmap);
+-}
+\ No newline at end of file
++}
++

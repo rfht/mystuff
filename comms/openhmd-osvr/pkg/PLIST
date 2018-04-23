@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+include/openhmd/
+include/openhmd/openhmd.h
+lib/libopenhmd.a
+lib/libopenhmd.so

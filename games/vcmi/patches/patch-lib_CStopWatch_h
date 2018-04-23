@@ -1,7 +1,9 @@
 $OpenBSD$
---- lib/CStopWatch.h.orig	Sat Jun 29 15:14:13 2013
-+++ lib/CStopWatch.h	Sat Jun 29 08:08:42 2013
-@@ -1,6 +1,6 @@
+Index: lib/CStopWatch.h
+--- lib/CStopWatch.h.orig
++++ lib/CStopWatch.h
+@@ -9,7 +9,7 @@
+  */
  #pragma once
  
 -#ifdef __FreeBSD__
@@ -9,7 +11,7 @@ $OpenBSD$
  	#include <sys/types.h>
  	#include <sys/time.h>
  	#include <sys/resource.h>
-@@ -54,7 +54,7 @@ class CStopWatch (public)
+@@ -53,7 +53,7 @@ class CStopWatch (public)
  private:
  	si64 clock() 
  	{

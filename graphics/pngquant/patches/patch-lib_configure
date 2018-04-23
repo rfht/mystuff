@@ -1,0 +1,27 @@
+$OpenBSD$
+
+set compiler gcc->cc
+remove -O3
+
+Index: lib/configure
+--- lib/configure.orig
++++ lib/configure
+@@ -14,8 +14,7 @@ OPENMP=
+ EXTRA_CFLAGS=
+ EXTRA_LDFLAGS=
+ 
+-# make gcc default compiler unless CC is already set
+-CC=${CC:-gcc}
++CC=cc
+ 
+ help() {
+     printf "%4s %s\n" "" "$1"
+@@ -155,7 +154,7 @@ cflags "-std=c99 -I."
+ 
+ # DEBUG
+ if [ -z "$DEBUG" ]; then
+-    cflags "-O3 -DNDEBUG"
++    cflags "-DNDEBUG"
+     status "Debug" "no"
+ else
+     cflags "-O1 -g"

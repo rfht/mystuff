@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_handler.c
+--- components/files/odv_resource_handler.c.orig
++++ components/files/odv_resource_handler.c
+@@ -327,4 +327,5 @@ void odv_resourcetype_headerinfo(const struct ODVResou
+     printf("Signature : 0x%08X\n", re->signature);
+     printf("Index     : 0x%08X\n", re->index);
+     printf("[----------------------------------------]\n");
+-}*/
+\ No newline at end of file
++}*/
++

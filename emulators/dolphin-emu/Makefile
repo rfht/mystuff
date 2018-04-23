@@ -4,7 +4,7 @@ ONLY_FOR_ARCHS =	amd64
 
 COMMENT=		Nintendo GameCube and Wii emulator
 
-V =			20180318
+V =			0.20180421
 DISTNAME =		dolphin-emu-${V}
 PKGNAME=		dolphin-emu-${V}
 
@@ -28,7 +28,7 @@ WANTLIB =		GL GLU ICE SDL2 SM SoundTouch X11 Xext Xi Xrandr ao \
 
 GH_ACCOUNT =		dolphin-emu
 GH_PROJECT =		dolphin
-GH_COMMIT =		0c128f3abe3f261db88b4986ec4e8dedf85b5d9c
+GH_COMMIT =		9dcc8131dff2de8a76011e02fe762e9656085731
 
 MODULES =		devel/cmake
 LIB_DEPENDS=		archivers/lzo2 \
