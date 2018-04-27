@@ -16,6 +16,7 @@ WANTLIB += GL X11 Xau Xcursor Xdmcp Xext Xfixes Xi Xinerama Xrandr
 WANTLIB += Xrender c crypto enet execinfo freetype intl m mpcdec
 WANTLIB += ogg opus opusfile png pulse pulse-simple ssl theora
 WANTLIB += theoradec vorbis vorbisfile webp xcb z
+WANTLIB += pcre2-32 vpx zstd
 
 GH_ACCOUNT =		godotengine
 GH_PROJECT =		godot
@@ -52,7 +53,6 @@ LIB_DEPENDS =		archivers/zstd \
 			audio/musepack \
 			audio/opusfile \
 			audio/pulseaudio \
-			devel/bullet \
 			devel/gettext \
 			devel/pcre2 \
 			graphics/libwebp \
@@ -70,8 +70,4 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKBUILD}/bin/godot* \
 		${PREFIX}/bin/godot
 
-#.include <bsd.port.arch.mk>
-#.if ${PROPERTIES:Mclang}
-#MODSCONS_FLAGS +=	use_llvm=yes
-#.endif
 .include <bsd.port.mk>

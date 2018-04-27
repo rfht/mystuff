@@ -5,7 +5,7 @@ COMMENT =		zstandard fast real-time compression algorithm
 GH_ACCOUNT =		facebook
 GH_PROJECT =		zstd
 GH_TAGNAME =		v1.3.4
-SHARED_LIBS =		zstd	1.0	#1.3.4
+SHARED_LIBS =		zstd	0.1	#1.3.4
 
 CATEGORIES =		archivers
 

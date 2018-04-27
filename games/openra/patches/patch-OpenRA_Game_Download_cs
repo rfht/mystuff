@@ -1,0 +1,54 @@
+$OpenBSD$
+
+EXPERIMENTAL: fix DNS Resolution Error
+by drobban
+with DEBUG CODE at this point
+
+Index: OpenRA.Game/Download.cs
+--- OpenRA.Game/Download.cs.orig
++++ OpenRA.Game/Download.cs
+@@ -12,6 +12,8 @@
+ using System;
+ using System.ComponentModel;
+ using System.Net;
++using System.Net.Sockets;
++using System.Reflection;
+ 
+ namespace OpenRA
+ {
+@@ -45,6 +47,7 @@ namespace OpenRA
+ 
+ 		public Download(string url, string path, Action<DownloadProgressChangedEventArgs> onProgress, Action<AsyncCompletedEventArgs> onComplete)
+ 		{
++			Console.WriteLine("Do we get here?! and url is: " + url );
+ 			lock (syncObject)
+ 			{
+ 				wc = new WebClient { Proxy = null };
+@@ -56,8 +59,27 @@ namespace OpenRA
+ 
+ 		public Download(string url, Action<DownloadProgressChangedEventArgs> onProgress, Action<DownloadDataCompletedEventArgs> onComplete)
+ 		{
++			Console.WriteLine("This is where mirror-list is downloaded, url is: " + url);
+ 			lock (syncObject)
+ 			{
++
++				Console.WriteLine("IPv4: ", Socket.OSSupportsIPv4);
++				Uri uri_test = new Uri(url);
++				Console.WriteLine("This is the host: " + uri_test.Host);
++
++				// This works around the real problem.
++				// otherwise it throws SocketException and it isn't just WebClient-functionality that is affected.
++				// whatever logic that is sidestepped here needs to be sidestepped "globally"; at the moment this just happens
++				// when we download something.
++				var field = typeof(System.Net.Sockets.Socket).GetField("s_SupportsIPv4", BindingFlags.Static|BindingFlags.NonPublic);
++				field.SetValue(null, true);
++				//
++
++				Console.WriteLine("IPv4: ", Socket.OSSupportsIPv4);
++
++				IPHostEntry host = Dns.GetHostEntry(uri_test.Host);
++				Console.WriteLine(host.AddressList);
++
+ 				wc = new WebClient { Proxy = null };
+ 				wc.DownloadProgressChanged += (_, a) => onProgress(a);
+ 				wc.DownloadDataCompleted += (_, a) => { DisposeWebClient(); onComplete(a); };

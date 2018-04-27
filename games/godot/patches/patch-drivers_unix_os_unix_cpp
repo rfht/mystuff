@@ -10,7 +10,7 @@ Index: drivers/unix/os_unix.cpp
  	char resolved_path[MAXPATHLEN];
  
 -	realpath(OS::get_executable_path().utf8().get_data(), resolved_path);
-+	realpath("${LOCALBASE}/bin/godot", resolved_path);
++	realpath("${PREFIX}/bin/godot", resolved_path);
  
  	return String(resolved_path);
  #elif defined(__FreeBSD__)

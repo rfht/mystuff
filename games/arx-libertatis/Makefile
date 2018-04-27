@@ -30,7 +30,8 @@ RUN_DEPENDS =	devel/desktop-file-utils
 CONFIGURE_ARGS =	-DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
 			-DBUILD_CRASHREPORTER=OFF \
 			-DCMAKE_INSTALL_PREFIX=${LOCALBASE}/share/arx \
-			-DUSE_QT4=OFF
+			-DUSE_QT4=OFF \
+			-DUSE_QT5=OFF
 
 do-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/arx
