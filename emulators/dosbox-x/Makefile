@@ -12,8 +12,11 @@ CATEGORIES =	emulators
 
 MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
 
-#GPLv2
-PERMIT_PACKAGE_CDROM =	Yes
+# Needs double-checking of licenses. States GPLv2, but there are reports of other licenses of
+# modules pulled into this project that are proprietary
+PERMIT_PACKAGE_CDROM =	No
+PERMIT_PACKAGE_FTP =	No
+PERMIT_DISTFILES_FTP = 	No
 
 WANTLIB += ${COMPILER_LIBCXX} X11 c m pcap z SDL2 png
 
