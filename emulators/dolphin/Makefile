@@ -22,6 +22,12 @@
 # - alternative to patch for mem: tenzek | Dolphin.ini, [Core], Fastmem = False
 # - -> or not: "Looks like we still map the regions even with fastmem off.."
 # - SUBMIT comms/hidapi BEFORE SUBMITTING DOLPHIN!
+# - add patch to Dolphin.ini (Fastmem = False)
+# - LIB_DEPENDS comms/hidapi not needed for emulators/dolphin ?
+# - -> may need to disable the builtin hidapi
+# - location of Dolphin.ini ~/.config/dolphin-emu/Dolphin.ini
+# - default location of save files: ~/.share/dolphin-emu
+# - maybe mention shader cache stuttering, related to old mesa probably
 
 USE_WXNEEDED =		Yes
 
@@ -37,7 +43,7 @@ CATEGORIES =		emulators
 
 HOMEPAGE =		https://dolphin-emu.org/
 
-MAINTAINER =		Anthony J. Bentley <anthony@anjbe.name>
+MAINTAINER =		Thomas Frohwein <tfrohwein@fastmail.com>
 
 # GPLv2+
 PERMIT_PACKAGE_CDROM =	Yes
