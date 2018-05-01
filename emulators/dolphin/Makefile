@@ -15,6 +15,12 @@
 #   of a burden to care" (HdkR on #dolphin-emu)
 # - LIB_DEPENDS x11/qt5/qtbase,-main not needed for emulators/dolphin ?
 # - version number 0.DATE versus just DATE??
+# - runtime - can't allocate enough memory
+# - remove the '-z wxneeded' - shouldn't be needed if USE_WXNEEDED set
+# - mem patch to prevent allocation error:
+#   https://github.com/dolphin-emu/dolphin/wiki/Building-for-OpenBSD
+# - alternative to patch for mem: tenzek | Dolphin.ini, [Core], Fastmem = False
+# - -> or not: "Looks like we still map the regions even with fastmem off.."
 
 USE_WXNEEDED =		Yes
 
@@ -67,7 +73,6 @@ LIB_DEPENDS=		archivers/lzo2 \
 			x11/gtk+2
 
 CONFIGURE_ARGS +=	-Dmandir:=${PREFIX}/man \
-			-DCMAKE_EXE_LINKER_FLAGS="-z wxneeded" \
 			-DENABLE_ALSA=OFF \
 			-DENABLE_WX=OFF \
 			-DQt5_DIR="${LOCALBASE}/lib/qt5/cmake/Qt5"
