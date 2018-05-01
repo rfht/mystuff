@@ -33,6 +33,8 @@ CONFIGURE_ARGS =	-DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
 			-DUSE_QT4=OFF \
 			-DUSE_QT5=OFF
 
+NO_TEST =	Yes
+
 do-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/arx
 	${INSTALL_DATA_DIR} ${PREFIX}/share/applications
