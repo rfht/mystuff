@@ -1,13 +1,9 @@
 # $OpenBSD: Makefile.template,v 1.72 2015/04/08 17:53:19 sthen Exp $
 
 # TODO:
-# - remove audio/soundtouch dependency if using builtin
 # - double check license
-# - use Qt?
-# - who maintainer?
 # - recheck wantlib etc
 # - compare against Makefile.template because taken from pre-existing port
-# - needs this?: -DCMAKE_EXE_LINKER_FLAGS='-z wxneeded'
 # - double-check if all the dependencies still needed
 # - add /usr/local/include to include_directories?
 # - add comms/hidapi to dependencies if hidapi is imported first?
@@ -28,6 +24,9 @@
 # - location of Dolphin.ini ~/.config/dolphin-emu/Dolphin.ini
 # - default location of save files: ~/.share/dolphin-emu
 # - maybe mention shader cache stuttering, related to old mesa probably
+# - discuss naming dolphin vs. dolphin-emu
+# - mention using builtin soundtouch like with citra
+# - soundtouch variable type conflict occurs with ENABLE_PULSEAUDIO=OFF
 
 USE_WXNEEDED =		Yes
 

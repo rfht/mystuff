@@ -1,0 +1,22 @@
+$OpenBSD$
+
+remove check for builtin pugixml which we have in ports
+
+Index: libraries/CMakeLists.txt
+--- libraries/CMakeLists.txt.orig
++++ libraries/CMakeLists.txt
+@@ -153,14 +153,6 @@ add_library(peglib INTERFACE)
+ target_include_directories(peglib INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${PEGLIB_DIR}")
+ set(PEGLIB_LIBRARIES peglib PARENT_SCOPE)
+ 
+-# pugixml
+-set(PUGIXML_DIR "pugixml")
+-add_library(pugixml STATIC
+-   "${PUGIXML_DIR}/src/pugixml.cpp")
+-set_target_properties(pugixml PROPERTIES FOLDER libraries)
+-target_include_directories(pugixml INTERFACE "${PUGIXML_DIR}/src")
+-set(PUGIXML_LIBRARIES pugixml PARENT_SCOPE)
+-
+ # sdl2
+ if(DECAF_SDL)
+     if(PKGCONFIG_FOUND)
