@@ -21,6 +21,7 @@
 #   https://github.com/dolphin-emu/dolphin/wiki/Building-for-OpenBSD
 # - alternative to patch for mem: tenzek | Dolphin.ini, [Core], Fastmem = False
 # - -> or not: "Looks like we still map the regions even with fastmem off.."
+# - SUBMIT comms/hidapi BEFORE SUBMITTING DOLPHIN!
 
 USE_WXNEEDED =		Yes
 
@@ -61,6 +62,7 @@ LIB_DEPENDS=		archivers/lzo2 \
 			audio/openal \
 			audio/portaudio-svn \
 			audio/pulseaudio \
+			comms/hidapi \
 			converters/libiconv \
 			devel/libusb1 \
 			devel/sdl2 \
