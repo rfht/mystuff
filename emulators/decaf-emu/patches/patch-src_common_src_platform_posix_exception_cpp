@@ -1,0 +1,28 @@
+$OpenBSD$
+
+fix missing ucontext.h
+remove ->uc_mcontext which is not available
+
+Index: src/common/src/platform_posix_exception.cpp
+--- src/common/src/platform_posix_exception.cpp.orig
++++ src/common/src/platform_posix_exception.cpp
+@@ -11,8 +11,9 @@
+ #include <errno.h>
+ #include <signal.h>
+ #include <string.h>
+-#include <ucontext.h>
+ 
++typedef ucontext_t SContext;
++
+ namespace platform
+ {
+ 
+@@ -73,8 +74,6 @@ dispatchException(Exception *exception,
+          auto ctx = reinterpret_cast<ucontext_t *>(context);
+ #ifdef PLATFORM_APPLE
+          ctx->uc_mcontext->__ss.__rip = reinterpret_cast<uint64_t>(func);
+-#else
+-         ctx->uc_mcontext.gregs[REG_RIP] = reinterpret_cast<uint64_t>(func);
+ #endif
+          return;
+       }

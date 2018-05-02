@@ -1,3 +1,7 @@
-needs multilib ?? - disabled for now
+SOLVED: needs multilib ?? - disabled for now
 
-*** /usr/ports/pobj/pcsx2-0.20180416/bin/msgfmt was called without gettext-tools dependency ***
+SOLVED: *** /usr/ports/pobj/pcsx2-0.20180416/bin/msgfmt was called without gettext-tools dependency ***
+
+Needs proper install locations
+
+Doesn't seem to build a binary??

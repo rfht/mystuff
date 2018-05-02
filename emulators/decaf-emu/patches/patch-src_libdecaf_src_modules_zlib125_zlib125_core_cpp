@@ -1,0 +1,16 @@
+$OpenBSD$
+
+attempt to fix missing function inflateReset2
+
+Index: src/libdecaf/src/modules/zlib125/zlib125_core.cpp
+--- src/libdecaf/src/modules/zlib125/zlib125_core.cpp.orig
++++ src/libdecaf/src/modules/zlib125/zlib125_core.cpp
+@@ -261,7 +261,7 @@ static int
+ zlib125_inflateReset2(WZStream *wstrm, int32_t windowBits)
+ {
+    auto zstrm = getZStream(wstrm);
+-   return inflateReset2(zstrm, windowBits);
++   return inflateReset(zstrm);
+ }
+ 
+ static int

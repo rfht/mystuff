@@ -1,0 +1,18 @@
+$OpenBSD$
+
+attempt to fix linker error
+
+Index: src/decaf-sdl/CMakeLists.txt
+--- src/decaf-sdl/CMakeLists.txt.orig
++++ src/decaf-sdl/CMakeLists.txt
+@@ -24,9 +24,7 @@ target_link_libraries(decaf-sdl
+     ${EXCMD_LIBRARIES}
+     ${SDL2_LINK})
+ 
+-if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+-    target_link_libraries(decaf-sdl X11)
+-endif()
++target_link_libraries(decaf-sdl X11)
+ 
+ if(MSVC)
+     set_target_properties(decaf-sdl PROPERTIES

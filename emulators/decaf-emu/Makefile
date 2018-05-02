@@ -5,13 +5,20 @@
 # - double-check license
 # - add submodules (in folder 'libraries')
 # - textproc/pugixml could maybe run with port
+# - take graphics/glbinding from ports (I prepared it)
+# - replace hardcoded path in patch with LOCALBASE and SUBST_CMD
+# - put -DPLATFORM_POSIX in CONFIGURE_ARGS rather than patch?
+# - installs several truetype fonts; double-check stuff like
+#   DejaVuSansMono.LICENSE
+# - expand DESCR?
+# - decaf-cli and decaf-sdl need to be placed in proper bin directory
 
 COMMENT =	Wii U emulator
 
 V =		20180217
 HASH =		593cb873
 DISTNAME =	decaf-emu-${V}-${HASH}
-#PKGNAME =	???
+PKGNAME =	decaf-emu-${V}
 
 GH_ACCOUNT =	decaf-emu
 GH_PROJECT =	decaf-emu
@@ -32,27 +39,39 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 LIBBINREC =	84f37f0d21dc828cc5010e7bdf6713db283299f2
 FMT =		7a9c1ba190cb61b00f7ffac628ff30c9c0a9e076
-GLBINDING =	98d3695be4311770fc6cc99b30ad17073daf0587
 ADDRLIB =	d30a77f63a3bfbb91d580ed21cc82369e63d8c5c
 IMGUI =		6384eee34f08cb7eab8d835043e1738e4adcdf75
+GSL_LITE =	292615c3c2812bdb224843faa41310b30c1e483a
+SPDLOG =	813dcbcf637da5ee11a35943382c36c2a04b1bd8
+CPPTOML =	6b780c98c767cf1a9f36b06070db8cf07243354f
+FIXED_POINT =	7a084e2f54ef7ecff62f58df30f319185b75cebc
+EXCMD =		b48dab4954bdc074d7768e38065171441aaff7ce
 
 MASTER_SITES0 =	https://github.com/decaf-emu/libbinrec/archive/
 MASTER_SITES1 =	https://github.com/fmtlib/fmt/archive/
-MASTER_SITES2 =	https://github.com/cginternals/glbinding/archive/
-MASTER_SITES3 =	https://github.com/decaf-emu/addrlib/archive/
-MASTER_SITES4 =	https://github.com/ocornut/imgui/archive/
+MASTER_SITES2 =	https://github.com/decaf-emu/addrlib/archive/
+MASTER_SITES3 =	https://github.com/ocornut/imgui/archive/
+MASTER_SITES4 =	https://github.com/decaf-emu/gsl-lite/archive/
+MASTER_SITES5 =	https://github.com/gabime/spdlog/archive/
+MASTER_SITES6 =	https://github.com/skystrife/cpptoml/archive/
+MASTER_SITES7 =	https://github.com/johnmcfarlane/fixed_point/archive/
+MASTER_SITES8 =	https://github.com/exjam/excmd/archive/
 
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
 		${LIBBINREC}.tar.gz:0 \
 		${FMT}.tar.gz:1 \
-		${GLBINDING}.tar.gz:2 \
-		${ADDRLIB}.tar.gz:3 \
-		${IMGUI}.tar.gz:4
+		${ADDRLIB}.tar.gz:2 \
+		${IMGUI}.tar.gz:3 \
+		${GSL_LITE}.tar.gz:4 \
+		${SPDLOG}.tar.gz:5 \
+		${CPPTOML}.tar.gz:6 \
+		${FIXED_POINT}.tar.gz:7 \
+		${EXCMD}.tar.gz:8
 
 MODULES =	devel/cmake
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
-#LIB_DEPENDS =		???
+LIB_DEPENDS =	graphics/glbinding
 #TEST_DEPENDS =		???
 
 #MAKE_FLAGS =		???
@@ -105,13 +124,21 @@ MODULES =	devel/cmake
 post-extract:
 	rmdir	${WRKSRC}/libraries/libbinrec \
 		${WRKSRC}/libraries/fmt \
-		${WRKSRC}/libraries/glbinding \
 		${WRKSRC}/libraries/addrlib \
-		${WRKSRC}/libraries/imgui
+		${WRKSRC}/libraries/imgui \
+		${WRKSRC}/libraries/gsl-lite \
+		${WRKSRC}/libraries/spdlog \
+		${WRKSRC}/libraries/cpptoml \
+		${WRKSRC}/libraries/fixed_point \
+		${WRKSRC}/libraries/excmd
 	ln -s ${WRKDIR}/libbinrec-${LIBBINREC} ${WRKSRC}/libraries/libbinrec
 	ln -s ${WRKDIR}/fmt-${FMT} ${WRKSRC}/libraries/fmt
-	ln -s ${WRKDIR}/glbinding-${GLBINDING} ${WRKSRC}/libraries/glbinding
 	ln -s ${WRKDIR}/addrlib-${ADDRLIB} ${WRKSRC}/libraries/addrlib
 	ln -s ${WRKDIR}/imgui-${IMGUI} ${WRKSRC}/libraries/imgui
+	ln -s ${WRKDIR}/gsl-lite-${GSL_LITE} ${WRKSRC}/libraries/gsl-lite
+	ln -s ${WRKDIR}/spdlog-${SPDLOG} ${WRKSRC}/libraries/spdlog
+	ln -s ${WRKDIR}/cpptoml-${CPPTOML} ${WRKSRC}/libraries/cpptoml
+	ln -s ${WRKDIR}/fixed_point-${FIXED_POINT} ${WRKSRC}/libraries/fixed_point
+	ln -s ${WRKDIR}/excmd-${EXCMD} ${WRKSRC}/libraries/excmd
 
 .include <bsd.port.mk>

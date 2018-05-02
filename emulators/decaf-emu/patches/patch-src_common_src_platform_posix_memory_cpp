@@ -1,0 +1,22 @@
+$OpenBSD$
+
+fix proper function name
+
+Index: src/common/src/platform_posix_memory.cpp
+--- src/common/src/platform_posix_memory.cpp.orig
++++ src/common/src/platform_posix_memory.cpp
+@@ -85,12 +85,12 @@ createMemoryMappedFile(size_t size)
+ 
+    free(path);
+ 
+-#ifdef PLATFORM_APPLE
++#if defined(PLATFORM_APPLE) || defined(__OpenBSD__)
+    if (ftruncate(fd, size) == -1) {
+ #else
+    if (ftruncate64(fd, size) == -1) {
+ #endif
+-      gLog->error("createMemoryMappedFile({}) ftruncate64 failed with error: {}",
++      gLog->error("createMemoryMappedFile({}) ftruncate failed with error: {}",
+                   size, errno);
+    }
+ 

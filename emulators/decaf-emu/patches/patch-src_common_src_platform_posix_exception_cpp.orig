@@ -1,0 +1,17 @@
+$OpenBSD$
+
+fix missing ucontext.h
+
+Index: src/common/src/platform_posix_exception.cpp
+--- src/common/src/platform_posix_exception.cpp.orig
++++ src/common/src/platform_posix_exception.cpp
+@@ -11,7 +11,8 @@
+ #include <errno.h>
+ #include <signal.h>
+ #include <string.h>
+-#include <ucontext.h>
++
++typedef ucontext_t SContext;
+ 
+ namespace platform
+ {
