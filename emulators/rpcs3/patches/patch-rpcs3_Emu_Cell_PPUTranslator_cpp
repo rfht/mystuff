@@ -11,7 +11,7 @@ Index: rpcs3/Emu/Cell/PPUTranslator.cpp
  	: cpu_translator(context, module, false)
  	, m_info(info)
 -	, m_pure_attr(AttributeSet::get(m_context, AttributeSet::FunctionIndex, {Attribute::NoUnwind, Attribute::ReadNone}))
-+	, m_pure_attr(AttributeSet::get(m_context, AttributeList::FunctionIndex, {Attribute::NoUnwind, Attribute::ReadNone}))
++	, m_pure_attr(AttributeList::get(m_context, AttributeList::FunctionIndex, {Attribute::NoUnwind, Attribute::ReadNone}))
  {
  	// There is no weak linkage on JIT, so let's create variables with different names for each module part
  	const u32 gsuffix = m_info.name.empty() ? info.funcs[0].addr : info.funcs[0].addr - m_info.segs[0].addr;

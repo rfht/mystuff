@@ -3,6 +3,7 @@
 # TODO:
 # - double-check license
 # - import hidapi BEFORE this port
+# - build seems to depend on devel/llvm
 
 COMMENT =	emulator and debugger for Playstation 3
 
