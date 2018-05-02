@@ -1,7 +1,7 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # TODO:
-# - double-check license
+# - double-check license, especially additional licenses for submodules
 # - import hidapi BEFORE this port
 # - build seems to depend on devel/llvm
 
@@ -13,20 +13,17 @@ COMMENT =	emulator and debugger for Playstation 3
 GH_ACCOUNT =	RPCS3
 GH_PROJECT =	rpcs3
 GH_TAGNAME =	v0.0.5
-#GH_COMMIT =	abab123456789abacafeabab123123b1e4ble4bl
 
 # for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
 #SHARED_LIBS =	???
 
 CATEGORIES =	emulators
 
-#HOMEPAGE =	???	URL
 
 MAINTAINER =	Thomas Frohwein <tfrohwein@fastmail.com>
 
-#PERMIT_PACKAGE_CDROM =	Yes | Reason if No
-#PERMIT_PACKAGE_FTP =	Yes | Reason if No
-#PERMIT_DISTFILES_FTP =	Yes | Reason if No
+#GPLv2
+PERMIT_PACKAGE_CDROM =	Yes
 
 #WANTLIB =		???
 
@@ -53,11 +50,6 @@ MODULES =		devel/cmake \
 LIB_DEPENDS =		comms/hidapi
 #TEST_DEPENDS =		???
 
-#MAKE_FLAGS =		???
-#MAKE_ENV =		???
-#FAKE_FLAGS =		???
-#TEST_FLAGS =		???
-
 #SEPARATE_BUILD =	Yes (build in a directory other than WRKSRC)
 #SEPARATE_BUILD =	flavored (distinct flavors may share a common WRKSRC)
 #USE_GMAKE =		Yes
@@ -71,8 +63,6 @@ CONFIGURE_ARGS =	-DUSE_SYSTEM_LIBPNG=ON \
 
 CONFIGURE_ENV =	Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
 
-# Is the build automagic or is it interactive
-#
 #IS_INTERACTIVE =		Yes
 #TEST_IS_INTERACTIVE =		Yes
 
@@ -82,11 +72,6 @@ CONFIGURE_ENV =	Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
 #CFLAGS =		???
 #LDFLAGS =		???
 #MAKE_FILE =		???
-#PKG_ARCH =		??? (* for arch-independent packages)
-#WRKDIST =		??? if other than ${WRKDIR}/${DISTNAME}
-#WRKSRC =		??? if other than ${WRKDIST}
-#WRKBUILD =		??? if other than ${WRKSRC}
-#WRKCONF =		??? if other than ${WRKBUILD}
 
 #ALL_TARGET =		???
 #INSTALL_TARGET =	???
