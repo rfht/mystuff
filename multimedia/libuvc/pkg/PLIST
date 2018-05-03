@@ -1,0 +1,13 @@
+@comment $OpenBSD$
+include/libuvc/
+include/libuvc/libuvc.h
+include/libuvc/libuvc_config.h
+lib/cmake/
+lib/cmake/libuvc/
+lib/cmake/libuvc/libuvcConfig.cmake
+lib/cmake/libuvc/libuvcConfigVersion.cmake
+lib/cmake/libuvc/libuvcTargets${MODCMAKE_BUILD_SUFFIX}
+lib/cmake/libuvc/libuvcTargets.cmake
+lib/libuvc.a
+lib/libuvc.so
+lib/pkgconfig/libuvc.pc
