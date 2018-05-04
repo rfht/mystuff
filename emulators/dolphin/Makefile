@@ -27,6 +27,8 @@
 # - discuss naming dolphin vs. dolphin-emu
 # - mention using builtin soundtouch like with citra
 # - soundtouch variable type conflict occurs with ENABLE_PULSEAUDIO=OFF
+# - test '-DENABLE_GENERIC=ON' which disables all JITs... likely poor perf
+#   -> unplayably slow
 
 USE_WXNEEDED =		Yes
 

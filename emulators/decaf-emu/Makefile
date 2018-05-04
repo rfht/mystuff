@@ -12,6 +12,9 @@
 #   DejaVuSansMono.LICENSE
 # - expand DESCR?
 # - decaf-cli and decaf-sdl need to be placed in proper bin directory
+# - USE_WXNEEDED ??
+
+USE_WXNEEDED =	Yes
 
 COMMENT =	Wii U emulator
 

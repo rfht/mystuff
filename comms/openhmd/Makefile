@@ -1,8 +1,12 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
+# TODO:
+# - depends on converters/libiconv
+# - install the simple and openglexample binaries?
+
 COMMENT =	API and drivers for immersive technology
 
-V =	20180410
+V =		20180410
 DISTNAME =	openhmd-${V}
 #PKGNAME =	???
 
@@ -30,7 +34,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 MODULES =		devel/cmake
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
-#LIB_DEPENDS =		???
+LIB_DEPENDS =	devel/libusb1
 #TEST_DEPENDS =		???
 
 #MAKE_FLAGS =		???

@@ -1,0 +1,14 @@
+$OpenBSD$
+
+add links to usb-1.0 and iconv libraries
+
+Index: examples/simple/CMakeLists.txt
+--- examples/simple/CMakeLists.txt.orig
++++ examples/simple/CMakeLists.txt
+@@ -2,4 +2,4 @@ project (simple)
+ include_directories(${CMAKE_BINARY_DIR}/include)
+ link_directories(${CMAKE_BINARY_DIR})
+ add_executable(simple simple.c)
+-target_link_libraries(simple PRIVATE openhmd-shared m)
+\ No newline at end of file
++target_link_libraries(simple PRIVATE openhmd-shared m usb-1.0 iconv)
