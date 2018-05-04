@@ -1,0 +1,38 @@
+$OpenBSD$
+
+remove thirdparty stuff (curl, ssl, etc)
+remove sdl2/freeglut/glew which we should take from ports
+
+Index: cmake/third-party/CMakeLists.txt
+--- cmake/third-party/CMakeLists.txt.orig
++++ cmake/third-party/CMakeLists.txt
+@@ -11,8 +11,6 @@ endif (MSVC)
+ add_subdirectory ( box2d )
+ add_subdirectory ( chipmunk )
+ add_subdirectory ( contrib )
+-add_subdirectory ( crypto )
+-add_subdirectory ( curl )
+ 
+ if (BUILD_IOS OR BUILD_ANDROID)
+ 	add_subdirectory ( cares )
+@@ -42,7 +40,6 @@ add_subdirectory ( ogg )
+ add_subdirectory ( png )
+ add_subdirectory ( sfmt )
+ add_subdirectory ( sqlite3 )
+-add_subdirectory ( ssl )
+ add_subdirectory ( tinyxml )
+ add_subdirectory ( tlsf )
+ add_subdirectory ( vorbis )
+@@ -52,12 +49,6 @@ add_subdirectory ( zlib )
+ if (BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS)
+   set(DIRECTX OFF CACHE BOOL "SDL DirectX")
+   set (SDL_SHARED OFF)
+-  
+-  add_subdirectory(sdl2)
+-  if (BUILD_LINUX OR BUILD_WINDOWS)
+-  add_subdirectory ( freeglut )
+-  endif (BUILD_LINUX OR BUILD_WINDOWS)
+-  add_subdirectory ( glew )
+ endif (BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS)
+ 
+ #Build platform specific untz

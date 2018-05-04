@@ -1,0 +1,18 @@
+$OpenBSD$
+
+fix SDL2 include paths
+
+Index: 3rdparty/untz/src/native/sdl/UntzSystem.cpp
+--- 3rdparty/untz/src/native/sdl/UntzSystem.cpp.orig
++++ 3rdparty/untz/src/native/sdl/UntzSystem.cpp
+@@ -15,8 +15,8 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
+-#include <SDL.h>
+-#include <SDL_audio.h>
++#include <SDL2/SDL.h>
++#include <SDL2/SDL_audio.h>
+ #include <pthread.h>
+ #include <math.h>
+ 

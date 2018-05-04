@@ -1,0 +1,16 @@
+$OpenBSD$
+
+fix invalid cast (clang6 issue?)
+
+Index: src/zl-vfs/ZLVfsFile.cpp
+--- src/zl-vfs/ZLVfsFile.cpp.orig
++++ src/zl-vfs/ZLVfsFile.cpp
+@@ -128,7 +128,7 @@ char* ZLVfsFile::GetString ( char* string, int length 
+ 
+ 		do {
+ 			c = this->GetChar ();
+-			if ( c == ( int )EOF || c == ( int )NULL ) break;
++			if ( c == ( int )EOF || c == '\0' ) break;
+ 			
+ 			string [ i++ ] = ( char )c;
+ 			if ( i >= length ) return 0;

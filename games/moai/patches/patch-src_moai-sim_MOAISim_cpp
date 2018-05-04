@@ -1,0 +1,16 @@
+$OpenBSD$
+
+add OpenBSD to ifdefs
+
+Index: src/moai-sim/MOAISim.cpp
+--- src/moai-sim/MOAISim.cpp.orig
++++ src/moai-sim/MOAISim.cpp
+@@ -27,7 +27,7 @@
+ 	// Not sure if using mach API is disallowed in the app store. :/
+ 	#include <mach/mach.h>
+ 	#include <unistd.h>
+-#elif defined (__QNX__)
++#elif defined (__QNX__) || defined (__OpenBSD__)
+ 	#include <unistd.h>
+ #elif defined (__EMSCRIPTEN__)
+   #include <unistd.h>

@@ -1,0 +1,22 @@
+@comment $OpenBSD$
+@bin bin/1oom_classic_sdl1
+@bin bin/1oom_cmdline
+@bin bin/1oom_gfxconv
+@bin bin/1oom_lbxview_sdl1
+@bin bin/1oom_pbxmake
+@bin bin/1oom_saveconv
+share/doc/1oom/
+share/doc/1oom/example_pbxin.txt
+share/doc/1oom/fontdump.asm
+share/doc/1oom/format_gam.txt
+share/doc/1oom/format_lbx.txt
+share/doc/1oom/format_moo.txt
+share/doc/1oom/format_pbx.txt
+share/doc/1oom/format_save.txt
+share/doc/1oom/lbxmd5.txt
+share/doc/1oom/usage_classic.txt
+share/doc/1oom/usage_cmdline.txt
+share/doc/1oom/usage_common.txt
+share/doc/1oom/usage_gfxconv.txt
+share/doc/1oom/usage_lbxview.txt
+share/doc/1oom/usage_pbxmake.txt

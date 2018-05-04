@@ -1,0 +1,15 @@
+$OpenBSD$
+
+remove rt
+
+Index: cmake/host-sdl/CMakeLists.txt
+--- cmake/host-sdl/CMakeLists.txt.orig
++++ cmake/host-sdl/CMakeLists.txt
+@@ -45,7 +45,6 @@ endif (BUILD_WINDOWS)
+ if ( BUILD_LINUX )
+   target_link_libraries ( moai 
+     pthread 
+-    rt
+   )
+ endif ( BUILD_LINUX )
+ 

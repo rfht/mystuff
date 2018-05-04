@@ -1,0 +1,16 @@
+$OpenBSD$
+
+add to ifdef
+
+Index: src/moai-util/MOAIThread_posix.cpp
+--- src/moai-util/MOAIThread_posix.cpp.orig
++++ src/moai-util/MOAIThread_posix.cpp
+@@ -69,7 +69,7 @@ void MOAIThreadImpl::Sleep () {
+ 
+ 	#if defined( __APPLE__ )
+ 		pthread_yield_np ();
+-	#elif defined( __linux ) | defined ( __FLASCC__ ) | defined ( __QNX__ ) | defined ( __EMSCRIPTEN__ )
++	#elif defined( __linux ) | defined ( __FLASCC__ ) | defined ( __QNX__ ) | defined ( __EMSCRIPTEN__ ) | defined ( __OpenBSD__ )
+ 		#if defined( ANDROID ) | defined( NACL ) | defined ( __QNX__ ) | defined ( __EMSCRIPTEN__ )
+ 			sched_yield ();
+ 		#else

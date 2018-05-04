@@ -1,0 +1,19 @@
+$OpenBSD$
+
+add local & X11R6 include and link directories
+
+Index: cmake/CMakeLists.txt
+--- cmake/CMakeLists.txt.orig
++++ cmake/CMakeLists.txt
+@@ -16,6 +16,11 @@ get_filename_component(MOAI_ROOT "${CMAKE_CURRENT_SOUR
+ #
+ option ( BUILD_HOST "Build the bundled sample host for platform" TRUE ) 
+ 
++include_directories("/usr/local/include"
++	"/usr/X11R6/include")
++
++link_directories("/usr/local/lib"
++	"/usr/X11R6/lib")
+ 
+ #
+ # Multi-platform flags
