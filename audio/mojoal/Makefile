@@ -1,33 +1,33 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
-COMMENT =	free and open source API and drivers for immersive technology
+# TODO:
+# - double-check license (really zlib)
 
-V =	20180321
-DISTNAME =	openhmd-${V}
-#PKGNAME =	???
+COMMENT =	simple drop-in OpenAL implementation
 
-GH_ACCOUNT =	OpenHMD
-GH_PROJECT =	OpenHMD
-GH_COMMIT =	3e0a641d3512f1849335aed16fbe53e5ed4315a4
+# HG_CHANGESET and HG_COMMIT must be kept in sync
+HG_CHANGESET =	54
+HG_COMMIT =	4e51f671a22a
+V =		0.0.${HG_CHANGESET}
+DISTNAME =	mojoal-${HG_COMMIT}{${HG_COMMIT}}
+PKGNAME =	mojoal-${V}
 
+# for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
 #SHARED_LIBS =	???
 
-CATEGORIES =	comms
+CATEGORIES =	audio
 
-#HOMEPAGE =	???	URL
+HOMEPAGE =	https://icculus.org/mojoAL/
 
-MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
+MAINTAINER =	Thomas Frohwein <tfrohwein@fastmail.com>
 
-# BSL-1.0
+# zlib
 PERMIT_PACKAGE_CDROM =	Yes
 
 #WANTLIB =		???
 
-#MASTER_SITES =		???
-#MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=subdir/}
-#MASTER_SITES =		${MASTER_SITE_foo:=subdir/}
+MASTER_SITES =	https://hg.icculus.org/icculus/mojoAL/archive/
 
-MODULES =		devel/cmake
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
 #LIB_DEPENDS =		???
@@ -41,11 +41,6 @@ MODULES =		devel/cmake
 #SEPARATE_BUILD =	Yes (build in a directory other than WRKSRC)
 #SEPARATE_BUILD =	flavored (distinct flavors may share a common WRKSRC)
 #USE_GMAKE =		Yes
-#USE_GROFF =		Yes
-# Programs that require GNU libtool to build instead of the OpenBSD one
-# should use this option. Add a comment explaining why. Don't use this if
-# a port requires libtool's .m4 files but otherwise can use OpenBSD libtool,
-# in that case use "BUILD_DEPENDS=devel/libtool" instead.
 #USE_LIBTOOL=		gnu
 # Set CONFIGURE_STYLE to value corresponding to some standard configuration
 # 	  perl [modbuild]: perl's MakeMaker Makefile.PL (modbuild: perl's
@@ -79,7 +74,7 @@ MODULES =		devel/cmake
 #LDFLAGS =		???
 #MAKE_FILE =		???
 #PKG_ARCH =		??? (* for arch-independent packages)
-#WRKDIST =		??? if other than ${WRKDIR}/${DISTNAME}
+WRKDIST =	${WRKDIR}/mojoAL-${HG_COMMIT}
 #WRKSRC =		??? if other than ${WRKDIST}
 #WRKBUILD =		??? if other than ${WRKSRC}
 #WRKCONF =		??? if other than ${WRKBUILD}

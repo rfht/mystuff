@@ -1,0 +1,16 @@
+$OpenBSD$
+
+remove dependency with bad name
+
+Index: cmake/third-party/luaext/luacurl/CMakeLists.txt
+--- cmake/third-party/luaext/luacurl/CMakeLists.txt.orig
++++ cmake/third-party/luaext/luacurl/CMakeLists.txt
+@@ -6,6 +6,5 @@
+  
+  add_library (luacurl STATIC ${LUAEXT_SOURCES})
+  target_link_libraries ( luacurl curl ${LUA_LIB} )
+- add_dependencies ( luacurl lualib-static)
+  target_include_directories ( luacurl PUBLIC ${LUA_HEADERS})
+- set_target_properties( luacurl PROPERTIES FOLDER Third-Party )
+\ No newline at end of file
++ set_target_properties( luacurl PROPERTIES FOLDER Third-Party )

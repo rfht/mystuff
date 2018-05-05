@@ -1,19 +1,30 @@
 $OpenBSD$
 
 add local & X11R6 include and link directories
+set std=c++11 per entry on github moai-community
 
 Index: cmake/CMakeLists.txt
 --- cmake/CMakeLists.txt.orig
 +++ cmake/CMakeLists.txt
-@@ -16,6 +16,11 @@ get_filename_component(MOAI_ROOT "${CMAKE_CURRENT_SOUR
+@@ -16,7 +16,12 @@ get_filename_component(MOAI_ROOT "${CMAKE_CURRENT_SOUR
  #
  option ( BUILD_HOST "Build the bundled sample host for platform" TRUE ) 
  
 +include_directories("/usr/local/include"
 +	"/usr/X11R6/include")
-+
+ 
 +link_directories("/usr/local/lib"
 +	"/usr/X11R6/lib")
- 
++
  #
  # Multi-platform flags
+ #
+@@ -94,7 +99,7 @@ endif (BUILD_WINDOWS)
+ if ( BUILD_LINUX )
+   find_package ( OpenGL REQUIRED )
+   set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DPOSIX -std=gnu99 -DNDEBUG -DHAVE_MEMMOVE" )
+-  set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPOSIX " )
++  set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DPOSIX " )
+ endif ( BUILD_LINUX )
+ 
+ if ( BUILD_ANDROID )

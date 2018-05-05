@@ -5,6 +5,7 @@
 # - remove unnecessary thirdparty stuff
 # - change hardcoded path in patches to LOCALBASE, with SUBST_CMD
 # - is SDL_audio.h header from devel/sdl2? or sdl2-mixer?
+# - compiler line for std=c++11 in patch?
 
 COMMENT =	mobile platform for pro game developers
 
@@ -37,13 +38,19 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 #DISTFILES =		???
 
+COMPILER =	base-clang ports-gcc
+
 MODULES =	devel/cmake
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
-LIB_DEPENDS =	devel/sdl2 \
+LIB_DEPENDS =	devel/luafs \
+		devel/sdl2 \
 		graphics/freeglut \
 		graphics/glew \
-		net/curl
+		lang/luajit \
+		net/curl \
+		net/luasocket \
+		security/luacrypto
 #TEST_DEPENDS =		???
 
 #MAKE_FLAGS =		???
@@ -71,7 +78,27 @@ LIB_DEPENDS =	devel/sdl2 \
 # 	  simple: port has its own configure script
 #CONFIGURE_STYLE =	
 #CONFIGURE_SCRIPT =	??? (if other than configure)
-CONFIGURE_ARGS =	-DBUILD_LINUX=TRUE
+CONFIGURE_ARGS =	-DBUILD_LINUX=TRUE \
+			-DMOAI_BOX2D=TRUE \
+			-DMOAI_CHIPMUNK=TRUE \
+			-DMOAI_CURL=TRUE \
+			-DMOAI_CRYPTO=TRUE \
+			-DMOAI_EXPAT=TRUE \
+			-DMOAI_FREETYPE=TRUE \
+			-DMOAI_JSON=TRUE \
+			-DMOAI_MONGOOSE=TRUE \
+			-DMOAI_LUAEXT=TRUE \
+			-DMOAI_OGG=TRUE \
+			-DMOAI_OPENSSL=TRUE \
+			-DMOAI_SQLITE3=TRUE \
+			-DMOAI_TINYXML=TRUE \
+			-DMOAI_PNG=TRUE \
+			-DMOAI_SFMT=TRUE \
+			-DMOAI_VORBIS=TRUE \
+			-DMOAI_UNTZ=TRUE \
+			-DMOAI_LUAJIT=FALSE \
+			-DMOAI_HTTP_CLIENT=TRUE \
+			-DCMAKE_BUILD_TYPE=Release
 #CONFIGURE_ENV =	???
 
 #IS_INTERACTIVE =		Yes

@@ -2,11 +2,29 @@ $OpenBSD$
 
 remove rt
 fix name of libglut
+try to fix linker error
 
 Index: cmake/host-glut/CMakeLists.txt
 --- cmake/host-glut/CMakeLists.txt.orig
 +++ cmake/host-glut/CMakeLists.txt
-@@ -55,8 +55,7 @@ endif (BUILD_WINDOWS)
+@@ -37,12 +37,16 @@ file ( GLOB HOST_GLUT_HEADERS "${CMAKE_CURRENT_SOURCE_
+ 
+ add_executable ( moai ${HOST_GLUT_SOURCES} ${HOST_GLUT_HEADERS} )
+ 
++file ( GLOB ZLUTIL_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/zl-util/*.cpp" )
++
++
+ target_link_libraries ( moai 
+   host-modules
+   moai-sim
+   moai-util
+   moai-core
+   zlcore
++  ${ZLUTIL_SOURCES}
+ )
+ 
+ if ( BUILD_WINDOWS )
+@@ -55,8 +59,7 @@ endif (BUILD_WINDOWS)
  if ( BUILD_LINUX )
    target_link_libraries ( moai 
      pthread 

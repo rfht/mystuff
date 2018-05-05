@@ -5,18 +5,9 @@
 # - recheck wantlib etc
 # - compare against Makefile.template because taken from pre-existing port
 # - double-check if all the dependencies still needed
-# - add /usr/local/include to include_directories?
-# - add comms/hidapi to dependencies if hidapi is imported first?
 # - "Nobody on the project really cares about stable releases. It's too much
 #   of a burden to care" (HdkR on #dolphin-emu)
 # - LIB_DEPENDS x11/qt5/qtbase,-main not needed for emulators/dolphin ?
-# - version number 0.DATE versus just DATE??
-# - runtime - can't allocate enough memory
-# - remove the '-z wxneeded' - shouldn't be needed if USE_WXNEEDED set
-# - mem patch to prevent allocation error:
-#   https://github.com/dolphin-emu/dolphin/wiki/Building-for-OpenBSD
-# - alternative to patch for mem: tenzek | Dolphin.ini, [Core], Fastmem = False
-# - -> or not: "Looks like we still map the regions even with fastmem off.."
 # - SUBMIT comms/hidapi BEFORE SUBMITTING DOLPHIN!
 # - add patch to Dolphin.ini (Fastmem = False)
 # - LIB_DEPENDS comms/hidapi not needed for emulators/dolphin ?
@@ -29,6 +20,9 @@
 # - soundtouch variable type conflict occurs with ENABLE_PULSEAUDIO=OFF
 # - test '-DENABLE_GENERIC=ON' which disables all JITs... likely poor perf
 #   -> unplayably slow
+# - how alert users that 16G of datasize are needed?
+# - version numbering?
+# - pulse needed for soundtouch problem, but not used??
 
 USE_WXNEEDED =		Yes
 
@@ -36,7 +30,7 @@ ONLY_FOR_ARCHS =	amd64
 
 COMMENT=		Nintendo GameCube and Wii emulator
 
-V =			0.20180430
+V =			5.0.0.20180430
 DISTNAME =		dolphin-emu-${V}
 PKGNAME=		dolphin-${V}
 

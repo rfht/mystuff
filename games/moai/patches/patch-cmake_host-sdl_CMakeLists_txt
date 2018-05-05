@@ -1,10 +1,20 @@
 $OpenBSD$
 
 remove rt
+fix SDL2 path
 
 Index: cmake/host-sdl/CMakeLists.txt
 --- cmake/host-sdl/CMakeLists.txt.orig
 +++ cmake/host-sdl/CMakeLists.txt
+@@ -31,7 +31,7 @@ target_link_libraries ( moai 
+   moai-util
+   moai-core
+   zlcore
+-  SDL2-static
++  SDL2
+ )
+ 
+ if ( BUILD_WINDOWS )
 @@ -45,7 +45,6 @@ endif (BUILD_WINDOWS)
  if ( BUILD_LINUX )
    target_link_libraries ( moai 
