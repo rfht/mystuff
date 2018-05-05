@@ -13,7 +13,7 @@ DISTNAME =	mojoal-${HG_COMMIT}{${HG_COMMIT}}
 PKGNAME =	mojoal-${V}
 
 # for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
-#SHARED_LIBS =	???
+SHARED_LIBS =	mojoal		0.0	# changeset 54
 
 CATEGORIES =	audio
 
@@ -30,11 +30,11 @@ MASTER_SITES =	https://hg.icculus.org/icculus/mojoAL/archive/
 
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
-#LIB_DEPENDS =		???
+LIB_DEPENDS =	devel/sdl2
 #TEST_DEPENDS =		???
 
-#MAKE_FLAGS =		???
-#MAKE_ENV =		???
+MAKE_ENV =      LIBmojoal_VERSION=${LIBmojoal_VERSION}
+MAKE_FLAGS =    TARGET=so.${LIBmojoal_VERSION}
 #FAKE_FLAGS =		???
 #TEST_FLAGS =		???
 
@@ -70,8 +70,9 @@ MASTER_SITES =	https://hg.icculus.org/icculus/mojoAL/archive/
 #NO_BUILD =		Yes
 #NO_TEST =		Yes
 
-#CFLAGS =		???
-#LDFLAGS =		???
+CPPFLAGS =	"-I${LOCALBASE}/include/SDL2"
+CFLAGS+=	"-shared"
+LDFLAGS =	"-L/usr/local/lib -lSDL2"
 #MAKE_FILE =		???
 #PKG_ARCH =		??? (* for arch-independent packages)
 WRKDIST =	${WRKDIR}/mojoAL-${HG_COMMIT}
@@ -82,5 +83,9 @@ WRKDIST =	${WRKDIR}/mojoAL-${HG_COMMIT}
 #ALL_TARGET =		???
 #INSTALL_TARGET =	???
 #TEST_TARGET =		???
+
+do-build:
+	cd ${WRKSRC} && ${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} \
+		-o mojoal.so.${LIBmojoal_VERSION} mojoal.c
 
 .include <bsd.port.mk>
