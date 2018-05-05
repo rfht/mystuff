@@ -34,7 +34,8 @@ PERMIT_PACKAGE_CDROM =	Yes
 MODULES =		devel/cmake
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
-LIB_DEPENDS =	devel/libusb1
+LIB_DEPENDS =	comms/hidapi \
+		devel/libusb1
 #TEST_DEPENDS =		???
 
 #MAKE_FLAGS =		???

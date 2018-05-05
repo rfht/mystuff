@@ -3,8 +3,3 @@ with USB and Bluetooth HID-Class devices on Windows, Linux, FreeBSD, and Mac OS
 X. On OpenBSD (like on FreeBSD), the backend uses libusb-1.0 to communicate
 directly to a USB device. This back-end will of course not work with Bluetooth
 devices.
-
-HIDAPI also comes with a Test GUI. The Test GUI is cross-platform and uses Fox
-Toolkit (http://www.fox-toolkit.org).  It will build on every platform which
-HIDAPI supports.  Since it relies on a 3rd party library, building it is
-optional but recommended because it is so useful when debugging hardware.

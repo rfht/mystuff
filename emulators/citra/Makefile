@@ -4,12 +4,13 @@ USE_WXNEEDED =	Yes
 
 COMMENT =	nintendo 3DS emulator
 
-V=		670
+NIGHTLY =	670
+V=		0.0.${NIGHTLY}
 PKGNAME =	citra-${V}
 
 GH_ACCOUNT =	citra-emu
 GH_PROJECT =	citra-nightly
-GH_TAGNAME =	nightly-${V}
+GH_TAGNAME =	nightly-${NIGHTLY}
 
 CATEGORIES =	emulators
 

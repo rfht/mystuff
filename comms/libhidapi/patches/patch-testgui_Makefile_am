@@ -1,6 +1,6 @@
 $OpenBSD$
 
-shove hidraw out of here
+nuke hidraw
 
 Index: testgui/Makefile.am
 --- testgui/Makefile.am.orig

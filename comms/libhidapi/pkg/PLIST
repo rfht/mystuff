@@ -1,5 +1,4 @@
 @comment $OpenBSD$
-@bin bin/hidapi-libusb-testgui
 include/hidapi/
 include/hidapi/hidapi.h
 lib/libhdapi.so.{LIBhidapi-libusb_VERSION}
