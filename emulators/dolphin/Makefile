@@ -23,6 +23,7 @@
 # - how alert users that 16G of datasize are needed?
 # - version numbering?
 # - pulse needed for soundtouch problem, but not used??
+# - attempt to fix gamepad support
 
 USE_WXNEEDED =		Yes
 

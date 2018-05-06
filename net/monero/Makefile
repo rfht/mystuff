@@ -6,125 +6,56 @@
 # - double check that this is really BSD 3-Clause
 # - tries to bring in unbound in external folder. Not sure how to use
 #   system unbound
+# - compare submodule use to reference ppsspp
+# - check tests
+# - disable doxygen part? ('-DBUILD_DOCUMENTATION=OFF' ??)
+# - install zmq.hpp from files directory
+# - add reference and license to zmq.hpp
+# - submit net/libunbound before this port
+# - Absolute name forbidden: /etc/unbound/unbound.conf at /usr/libdata/perl5/OpenBSD/PackingElement.pm line 217, <$fh> line 52.
+#   *** Error 25 in mystuff/net/libunbound (/usr/ports/infrastructure/mk/bsd.port.mk:2880 'print-plist': @/usr/sbin/pkg_create -m -n -q   -DHIST...)
+#   *** Error 1 in /usr/ports (infrastructure/mk/bsd.port.subdir.mk:147 'print-plist')
+# - should monerod get an rc.d script? how?
+# - fix trailing whitespace in Makefile
+# - LIB_DEPENDS converters/libiconv not needed for net/monero ?
 
 COMMENT =	client for cryptocurrency
 
 V = 0.12.0.0
-#DISTNAME =	???
-#PKGNAME =	???
+DISTNAME =	monero-${V}{v${V}}
+PKGNAME =	monero-${V}
 
 GH_ACCOUNT =	monero-project
 GH_PROJECT =	monero
 GH_TAGNAME =	v${V}
 
-# for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
-#SHARED_LIBS =	???
-
 CATEGORIES =	net
 
-MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
+MAINTAINER =	Thomas Frohwein <frohwein@fastmail.com>
 
 #BSD 3-Clause
 PERMIT_PACKAGE_CDROM =	Yes
 
-#WANTLIB =		???
+WANTLIB += ${COMPILER_LIBCXX} boost_chrono-mt boost_date_time-mt
+WANTLIB += boost_filesystem-mt boost_program_options-mt boost_regex-mt
+WANTLIB += boost_serialization-mt boost_system-mt boost_thread-mt
+WANTLIB += c crypto curses m miniupnpc pcsclite readline sodium
+WANTLIB += ssl unbound zmq
 
 MODULES =	devel/cmake
 BUILD_DEPENDS =	devel/boost
-#RUN_DEPENDS =		???
-LIB_DEPENDS =	net/miniupnp/miniupnpc \
+LIB_DEPENDS =	converters/libiconv \
+		devel/boost \
+		net/libunbound \
+		net/miniupnp/miniupnpc \
 		net/zeromq \
-		converters/libiconv
-#TEST_DEPENDS =		???
+		security/pcsc-lite
 
-#MAKE_FLAGS =		???
-#MAKE_ENV =		???
-#FAKE_FLAGS =		???
-#TEST_FLAGS =		???
+CONFIGURE_ARGS =	-DBUILD_DOCUMENTATION=OFF \
+			-DBUILD_TESTS=ON
 
-# build/configuration variables
-#
-#SEPARATE_BUILD =	Yes (build in a directory other than WRKSRC)
-#SEPARATE_BUILD =	flavored (distinct flavors may share a common WRKSRC)
-#USE_GMAKE =		Yes
-#USE_GROFF =		Yes
-# Programs that require GNU libtool to build instead of the OpenBSD one
-# should use this option. Add a comment explaining why. Don't use this if
-# a port requires libtool's .m4 files but otherwise can use OpenBSD libtool,
-# in that case use "BUILD_DEPENDS=devel/libtool" instead.
-#USE_LIBTOOL=		gnu
-# Set CONFIGURE_STYLE to value corresponding to some standard configuration
-# 	  perl [modbuild]: perl's MakeMaker Makefile.PL (modbuild: perl's
-#	  Module::Build Build.PL)
-# 	  gnu [autoconf] [old] [dest]: gnu style configure (old: no
-# 	  sysconfdir), (dest: add DESTDIR, does not handle it),
-# 	  (autoconf: needed by port, implies gnu)
-# 	XXX: cygnus products do NOT use autoconf for making the main
-# 		configure from configure.in
-# 	  imake [noman]: port uses imake for configuration.
-#	  (noman: no man page installation)
-# 	  simple: port has its own configure script
-#CONFIGURE_STYLE =	
-#CONFIGURE_SCRIPT =	??? (if other than configure)
-#CONFIGURE_ARGS =	-DUNBOUND_INCLUDE_DIR=/usr/src/usr.
-#CONFIGURE_ENV =	???
-
-# for gnu stuff
-#AUTOCONF_VERSION =	??? (defaults to 2.13)
-#AUTOMAKE_VERSION =	??? (defaults to 1.4)
-# config.guess and others are copied here
-#MODGNU_CONFIG_GUESS_DIRS = ??? (defaults to ${WRKSRC})
-
-# Is the build automagic or is it interactive
-#
-#IS_INTERACTIVE =		Yes
-#TEST_IS_INTERACTIVE =		Yes
-
-# Assume you have one multiple choice flavor: 1 2 3 and switches a b.
-# You would write
-#
-#FLAVORS =	1 2 3 a b
-#FLAVOR ?=
-# grab multiple choice value
-#CHOICE = ${FLAVOR:Na:Nb}
-# check that CHOICE is 1 OR 2 OR 3, or error out
-#.if ${CHOICE} == "1"
-# code for 1
-#.elif ${CHOICE} == "2"
-# code for 2
-#.elif ${CHOICE} == "3"
-# code for 3
-#.else
-#ERRORS += "Fatal: Conflicting flavor: ${FLAVOR}"
-#.endif
-# check for switches
-#.if ${FLAVOR:Ma}
-# code for a
-#.endif
-#.if ${FLAVOR:Mb}
-# code for b
-#.endif
-
-# Things that we don't want to do for this port/package
-# Generally, DON'T set anything to No if it's not needed.
-# The time gained is not worth it.
-#
-#NO_BUILD =		Yes
 #NO_TEST =		Yes
 
-# Overrides for default values
-#
-#CFLAGS =		???
-#LDFLAGS =		???
-#MAKE_FILE =		???
-#PKG_ARCH =		??? (* for arch-independent packages)
-#WRKDIST =		??? if other than ${WRKDIR}/${DISTNAME}
-#WRKSRC =		??? if other than ${WRKDIST}
-#WRKBUILD =		??? if other than ${WRKSRC}
-#WRKCONF =		??? if other than ${WRKBUILD}
-
-#ALL_TARGET =		???
-#INSTALL_TARGET =	???
 #TEST_TARGET =		???
 
 .include <bsd.port.mk>
