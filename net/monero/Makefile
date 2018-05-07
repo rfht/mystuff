@@ -3,23 +3,20 @@
 # TODO:
 # - fix COMMENT
 # - source and binary distributions must retain copyright notice
+# - INSTALL COPYRIGHT NOTICE
 # - double check that this is really BSD 3-Clause
-# - tries to bring in unbound in external folder. Not sure how to use
-#   system unbound
 # - compare submodule use to reference ppsspp
-# - check tests
-# - disable doxygen part? ('-DBUILD_DOCUMENTATION=OFF' ??)
 # - install zmq.hpp from files directory
 # - add reference and license to zmq.hpp
-# - submit net/libunbound before this port
+# - submit net/libunbound before this port - or libeunbound
 # - Absolute name forbidden: /etc/unbound/unbound.conf at /usr/libdata/perl5/OpenBSD/PackingElement.pm line 217, <$fh> line 52.
 #   *** Error 25 in mystuff/net/libunbound (/usr/ports/infrastructure/mk/bsd.port.mk:2880 'print-plist': @/usr/sbin/pkg_create -m -n -q   -DHIST...)
 #   *** Error 1 in /usr/ports (infrastructure/mk/bsd.port.subdir.mk:147 'print-plist')
 # - should monerod get an rc.d script? how?
-# - fix trailing whitespace in Makefile
-# - LIB_DEPENDS converters/libiconv not needed for net/monero ?
+# - install utils/conf/monerod.conf in examples?
+# - 'monerod --help' mentions ~/.bitmonero/bitmonero.conf
 
-COMMENT =	client for cryptocurrency
+COMMENT =	client for Monero cryptocurrency
 
 V = 0.12.0.0
 DISTNAME =	monero-${V}{v${V}}
@@ -44,18 +41,14 @@ WANTLIB += ssl unbound zmq
 
 MODULES =	devel/cmake
 BUILD_DEPENDS =	devel/boost
-LIB_DEPENDS =	converters/libiconv \
-		devel/boost \
+LIB_DEPENDS =	devel/boost \
 		net/libunbound \
 		net/miniupnp/miniupnpc \
 		net/zeromq \
 		security/pcsc-lite
 
-CONFIGURE_ARGS =	-DBUILD_DOCUMENTATION=OFF \
-			-DBUILD_TESTS=ON
+CONFIGURE_ARGS =	-DBUILD_DOCUMENTATION=OFF
 
-#NO_TEST =		Yes
-
-#TEST_TARGET =		???
+NO_TEST =	Yes
 
 .include <bsd.port.mk>

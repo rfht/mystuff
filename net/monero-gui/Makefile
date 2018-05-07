@@ -1,37 +1,34 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # TODO:
-# - more precise license
-# - installing /etc/unbound/unbound.conf okay?
-# - fix: File /etc/unbound/unbound.conf could not be installed:
-#   Not a directory
-# - per bcallah might need to rename: something like libeunbound.so
-#   in case base unbound header/lib will ever get installed
+# - double-check license
+# - retain copyright notice
+# - use installed net/monero instead of submodule
+# - note: build.sh calls qmake-qt5
 
-COMMENT =	portable, linkable version of unbound
+COMMENT =	GUI for Monero cryptocurrency software
 
-V =		1.7.1
-DISTNAME =	unbound-${V}
+#DISTNAME =	???
 #PKGNAME =	???
+
+V =		0.12.0.0
+GH_ACCOUNT =	monero-project
+GH_PROJECT =	monero-gui
+GH_TAGNAME =	v${V}
 
 # for libtool- or cmake-based ports, have a look at WRKBUILD/shared_libs.log
 #SHARED_LIBS =	???
-SHARED_LIBS +=  unbound                   0.0 # 7.9
 
 CATEGORIES =	net
 
-HOMEPAGE =	https://www.unbound.net
-
 MAINTAINER =	Thomas Frohwein <tfrohwein@fastmail.com>
 
-# BSD
+# ? 3-clause-BSD?
 PERMIT_PACKAGE_CDROM =	Yes
 
 #WANTLIB =		???
 
-MASTER_SITES =	https://www.unbound.net/downloads/
-
-#MODULES =		???
+MODULES =	x11/qt5
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
 #LIB_DEPENDS =		???
@@ -64,22 +61,56 @@ MASTER_SITES =	https://www.unbound.net/downloads/
 # 	  imake [noman]: port uses imake for configuration.
 #	  (noman: no man page installation)
 # 	  simple: port has its own configure script
-CONFIGURE_STYLE =	gnu
+#CONFIGURE_STYLE =	
 #CONFIGURE_SCRIPT =	??? (if other than configure)
 #CONFIGURE_ARGS =	???
 #CONFIGURE_ENV =	???
 
-AUTOCONF_VERSION =	2.69
-AUTOMAKE_VERSION =	1.15
+# for gnu stuff
+#AUTOCONF_VERSION =	??? (defaults to 2.13)
+#AUTOMAKE_VERSION =	??? (defaults to 1.4)
 # config.guess and others are copied here
 #MODGNU_CONFIG_GUESS_DIRS = ??? (defaults to ${WRKSRC})
 
+# Is the build automagic or is it interactive
+#
 #IS_INTERACTIVE =		Yes
 #TEST_IS_INTERACTIVE =		Yes
 
+# Assume you have one multiple choice flavor: 1 2 3 and switches a b.
+# You would write
+#
+#FLAVORS =	1 2 3 a b
+#FLAVOR ?=
+# grab multiple choice value
+#CHOICE = ${FLAVOR:Na:Nb}
+# check that CHOICE is 1 OR 2 OR 3, or error out
+#.if ${CHOICE} == "1"
+# code for 1
+#.elif ${CHOICE} == "2"
+# code for 2
+#.elif ${CHOICE} == "3"
+# code for 3
+#.else
+#ERRORS += "Fatal: Conflicting flavor: ${FLAVOR}"
+#.endif
+# check for switches
+#.if ${FLAVOR:Ma}
+# code for a
+#.endif
+#.if ${FLAVOR:Mb}
+# code for b
+#.endif
+
+# Things that we don't want to do for this port/package
+# Generally, DON'T set anything to No if it's not needed.
+# The time gained is not worth it.
+#
 #NO_BUILD =		Yes
 #NO_TEST =		Yes
 
+# Overrides for default values
+#
 #CFLAGS =		???
 #LDFLAGS =		???
 #MAKE_FILE =		???
@@ -92,11 +123,5 @@ AUTOMAKE_VERSION =	1.15
 #ALL_TARGET =		???
 #INSTALL_TARGET =	???
 #TEST_TARGET =		???
-
-#pre-configure:
-#cd ${WRKSRC} && env -i 
-#AUTOCONF_VERSION=${AUTOCONF_VERSION} 
-#AUTOMAKE_VERSION=${AUTOMAKE_VERSION} 
-#autoreconf 
 
 .include <bsd.port.mk>
