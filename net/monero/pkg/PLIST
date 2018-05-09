@@ -10,3 +10,7 @@
 include/wallet/
 include/wallet/api/
 include/wallet/api/wallet2_api.h
+share/doc/monero/
+share/doc/monero/LICENSE-cppzmq
+share/doc/monero/LICENSE-monero
+share/doc/pkg-readmes/${FULLPKGNAME-}

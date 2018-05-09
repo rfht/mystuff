@@ -3,16 +3,17 @@
 # TODO:
 # - depends on converters/libiconv
 # - install the simple and openglexample binaries?
+# - remove the patche for wmr-dump
 
 COMMENT =	API and drivers for immersive technology
 
-V =		20180410
+V =		0.0.20180506
 DISTNAME =	openhmd-${V}
 #PKGNAME =	???
 
 GH_ACCOUNT =	OpenHMD
 GH_PROJECT =	OpenHMD
-GH_COMMIT =	13a1cf27e95eaecc5e6217687211c9be9d95239d
+GH_COMMIT =	ef9b9f99eacf74fa4c36d90b65c96f27297d5d50
 
 SHARED_LIBS +=  openhmd                   0.0 # 0.1
 
@@ -34,7 +35,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 MODULES =		devel/cmake
 #BUILD_DEPENDS =	???
 #RUN_DEPENDS =		???
-LIB_DEPENDS =	comms/hidapi \
+LIB_DEPENDS =	comms/libhidapi \
 		devel/libusb1
 #TEST_DEPENDS =		???
 

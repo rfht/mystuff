@@ -1,20 +1,10 @@
 $OpenBSD$
 
-set debug flags
 remove librt
 
 Index: CMakeLists.txt
 --- CMakeLists.txt.orig
 +++ CMakeLists.txt
-@@ -1,7 +1,7 @@
- cmake_minimum_required(VERSION 2.8)
- 
- project(openhmd C CXX)
--set(CMAKE_C_FLAGS "-std=c99")
-+set(CMAKE_C_FLAGS "-O0 -g -pipe -std=c99")
- set(CMAKE_POSITION_INDEPENDENT_CODE ON)
- 
- set(LIB_VERSION_MAJOR 0)
 @@ -144,7 +144,7 @@ if (OPENHMD_EXAMPLE_SDL)
  endif (OPENHMD_EXAMPLE_SDL)
  

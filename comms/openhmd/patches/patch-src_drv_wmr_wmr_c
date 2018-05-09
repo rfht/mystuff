@@ -1,0 +1,17 @@
+$OpenBSD$
+
+TEMPORARY: log dump of wmr
+
+Index: src/drv_wmr/wmr.c
+--- src/drv_wmr/wmr.c.orig
++++ src/drv_wmr/wmr.c
+@@ -280,6 +280,9 @@ unsigned char *read_config(wmr_priv *priv)
+ 
+ 	LOGI("Read %d-byte config data\n", data_size);
+ 
++	FILE *f = fopen("wmr-dump", "w");
++	fwrite(data, data_size, 1, f);
++	exit(0);
+ 	return data;
+ }
+ 

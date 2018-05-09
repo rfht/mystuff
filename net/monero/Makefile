@@ -1,7 +1,6 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # TODO:
-# - fix COMMENT
 # - source and binary distributions must retain copyright notice
 # - INSTALL COPYRIGHT NOTICE
 # - double check that this is really BSD 3-Clause
@@ -13,8 +12,14 @@
 #   *** Error 25 in mystuff/net/libunbound (/usr/ports/infrastructure/mk/bsd.port.mk:2880 'print-plist': @/usr/sbin/pkg_create -m -n -q   -DHIST...)
 #   *** Error 1 in /usr/ports (infrastructure/mk/bsd.port.subdir.mk:147 'print-plist')
 # - should monerod get an rc.d script? how?
-# - install utils/conf/monerod.conf in examples?
+# - install utils/conf/monerod.conf in examples? (use ${EXAMPLEDIR})
 # - 'monerod --help' mentions ~/.bitmonero/bitmonero.conf
+# - ok to include single file zmq.hpp from github?
+# - need to install license for zmq.hpp if included by just copying header file
+#   into the build?
+# - check licenses of 3rdparty/external modules
+# - add to README: advice on e.g. --limit-rate 500
+#   (see https://monero.stackexchange.com/questions/6651/my-gui-feels-buggy-freezes-all-the-time)
 
 COMMENT =	client for Monero cryptocurrency
 
@@ -39,6 +44,13 @@ WANTLIB += boost_serialization-mt boost_system-mt boost_thread-mt
 WANTLIB += c crypto curses m miniupnpc pcsclite readline sodium
 WANTLIB += ssl unbound zmq
 
+CPPZMQ =	4.2.2
+
+MASTER_SITES0 =	https://github.com/zeromq/cppzmq/archive/
+
+DISTFILES =	monero-${V}${EXTRACT_SUFX} \
+		v${CPPZMQ}.tar.gz:0
+
 MODULES =	devel/cmake
 BUILD_DEPENDS =	devel/boost
 LIB_DEPENDS =	devel/boost \
@@ -50,5 +62,15 @@ LIB_DEPENDS =	devel/boost \
 CONFIGURE_ARGS =	-DBUILD_DOCUMENTATION=OFF
 
 NO_TEST =	Yes
+
+post-extract:
+	ln -s ${WRKDIR}/cppzmq-${CPPZMQ}/zmq.hpp ${WRKSRC}/src
+
+post-install:
+	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/monero
+	${INSTALL_DATA} ${WRKSRC}/LICENSE \
+		${PREFIX}/share/doc/monero/LICENSE-monero
+	${INSTALL_DATA} ${WRKDIR}/cppzmq-${CPPZMQ}/LICENSE \
+		${PREFIX}/share/doc/monero/LICENSE-cppzmq
 
 .include <bsd.port.mk>
