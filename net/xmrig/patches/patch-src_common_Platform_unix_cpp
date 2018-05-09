@@ -1,0 +1,23 @@
+$OpenBSD$
+
+remove cpu affinity code that's not supported
+
+Index: src/common/Platform_unix.cpp
+--- src/common/Platform_unix.cpp.orig
++++ src/common/Platform_unix.cpp
+@@ -80,6 +80,7 @@ static inline char *createUserAgent()
+ 
+ bool Platform::setThreadAffinity(uint64_t cpu_id)
+ {
++#   ifndef __OpenBSD__
+     cpu_set_t mn;
+     CPU_ZERO(&mn);
+     CPU_SET(cpu_id, &mn);
+@@ -88,6 +89,7 @@ bool Platform::setThreadAffinity(uint64_t cpu_id)
+     return pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &mn) == 0;
+ #   else
+     return sched_setaffinity(gettid(), sizeof(cpu_set_t), &mn) == 0;
++#   endif
+ #   endif
+ }
+ 

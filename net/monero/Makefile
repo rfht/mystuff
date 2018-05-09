@@ -5,21 +5,15 @@
 # - INSTALL COPYRIGHT NOTICE
 # - double check that this is really BSD 3-Clause
 # - compare submodule use to reference ppsspp
-# - install zmq.hpp from files directory
-# - add reference and license to zmq.hpp
-# - submit net/libunbound before this port - or libeunbound
+# - submit net/libunbound before this port
 # - Absolute name forbidden: /etc/unbound/unbound.conf at /usr/libdata/perl5/OpenBSD/PackingElement.pm line 217, <$fh> line 52.
 #   *** Error 25 in mystuff/net/libunbound (/usr/ports/infrastructure/mk/bsd.port.mk:2880 'print-plist': @/usr/sbin/pkg_create -m -n -q   -DHIST...)
 #   *** Error 1 in /usr/ports (infrastructure/mk/bsd.port.subdir.mk:147 'print-plist')
 # - should monerod get an rc.d script? how?
 # - install utils/conf/monerod.conf in examples? (use ${EXAMPLEDIR})
 # - 'monerod --help' mentions ~/.bitmonero/bitmonero.conf
-# - ok to include single file zmq.hpp from github?
-# - need to install license for zmq.hpp if included by just copying header file
-#   into the build?
 # - check licenses of 3rdparty/external modules
-# - add to README: advice on e.g. --limit-rate 500
-#   (see https://monero.stackexchange.com/questions/6651/my-gui-feels-buggy-freezes-all-the-time)
+# - mention achieved HR of 90 with 6 threads on i7-6820HQ which isn't great
 
 COMMENT =	client for Monero cryptocurrency
 

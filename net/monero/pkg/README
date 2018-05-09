@@ -11,5 +11,17 @@ When monerod is started, it synchronizes with the blockchain and stores it in:
 
 ~/.bitmonero/lmdb/data.mdb
 
-As of May 2018, the size of the monero blockchain is reported to be
-approximately 40GiB.
+As of May 9, 2018 the size of the monero blockchain is 49.1GiB.
+
+Performance
+===========
+
+Running monerod may put a strain on your system's resources, especially during
+the initial synchronization of the blockchain. Temporary unresponsiveness of
+the system and DNS lookup failures have been observed, each lasting several
+seconds, but always temporary. To mitigate this, the following example
+arguments to monerod may be of interest:
+
+--max-concurrency 1
+--block-sync-size 10
+--limit-rate 500

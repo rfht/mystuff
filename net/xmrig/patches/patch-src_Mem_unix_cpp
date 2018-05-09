@@ -1,0 +1,16 @@
+$OpenBSD$
+
+remove unsupported mmap flags
+
+Index: src/Mem_unix.cpp
+--- src/Mem_unix.cpp.orig
++++ src/Mem_unix.cpp
+@@ -55,7 +55,7 @@ void Mem::allocate(MemInfo &info, bool enabled)
+ #   elif defined(__FreeBSD__)
+     info.memory = static_cast<uint8_t*>(mmap(0, info.size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_ALIGNED_SUPER | MAP_PREFAULT_READ, -1, 0));
+ #   else
+-    info.memory = static_cast<uint8_t*>(mmap(0, info.size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB | MAP_POPULATE, 0, 0));
++    info.memory = static_cast<uint8_t*>(mmap(0, info.size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0));
+ #   endif
+ 
+     if (info.memory == MAP_FAILED) {
