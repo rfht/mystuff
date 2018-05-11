@@ -1,7 +1,6 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # TODO:
-# - name one-oom? 1oom?
 # - double-check license
 # - double-check that configuration done correctly
 # - is audio/libsamplerate optional

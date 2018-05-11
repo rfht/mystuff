@@ -1,4 +1,4 @@
-@comment $OpenBSD$
+@comment $OpenBSD: PLIST,v$
 @bin bin/monero-blockchain-blackball
 @bin bin/monero-blockchain-export
 @bin bin/monero-blockchain-import
@@ -13,4 +13,4 @@ include/wallet/api/wallet2_api.h
 share/doc/monero/
 share/doc/monero/LICENSE-cppzmq
 share/doc/monero/LICENSE-monero
-share/doc/pkg-readmes/${FULLPKGNAME-}
+share/doc/pkg-readmes/${FULLPKGNAME}

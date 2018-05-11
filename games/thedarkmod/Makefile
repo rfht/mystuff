@@ -3,6 +3,7 @@
 # TODO:
 # - fix
 # - add license
+# - fix COMMENT
 
 COMMENT =	stealth game
 

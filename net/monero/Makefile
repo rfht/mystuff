@@ -14,6 +14,8 @@
 # - 'monerod --help' mentions ~/.bitmonero/bitmonero.conf
 # - check licenses of 3rdparty/external modules
 # - mention achieved HR of 90 with 6 threads on i7-6820HQ which isn't great
+# - what about others in external? (boost/archive, db_drivers, easylogging++,
+#   rapidjson)
 
 COMMENT =	client for Monero cryptocurrency
 
@@ -36,29 +38,34 @@ WANTLIB += ${COMPILER_LIBCXX} boost_chrono-mt boost_date_time-mt
 WANTLIB += boost_filesystem-mt boost_program_options-mt boost_regex-mt
 WANTLIB += boost_serialization-mt boost_system-mt boost_thread-mt
 WANTLIB += c crypto curses m miniupnpc pcsclite readline sodium
-WANTLIB += ssl unbound zmq
+WANTLIB += ssl zmq
 
 CPPZMQ =	4.2.2
+UNBOUND =	193bdc4ee3fe2b0d17e547e86512528c2614483a
 
 MASTER_SITES0 =	https://github.com/zeromq/cppzmq/archive/
+MASTER_SITES1 =	https://github.com/monero-project/unbound/archive/
 
 DISTFILES =	monero-${V}${EXTRACT_SUFX} \
-		v${CPPZMQ}.tar.gz:0
+		v${CPPZMQ}.tar.gz:0 \
+		${UNBOUND}.tar.gz:1
 
 MODULES =	devel/cmake
 BUILD_DEPENDS =	devel/boost
 LIB_DEPENDS =	devel/boost \
-		net/libunbound \
 		net/miniupnp/miniupnpc \
 		net/zeromq \
 		security/pcsc-lite
 
-CONFIGURE_ARGS =	-DBUILD_DOCUMENTATION=OFF
+CONFIGURE_ARGS =	-DBUILD_DOCUMENTATION=OFF \
+			-DINSTALL_VENDORED_LIBUNBOUND=ON
 
 NO_TEST =	Yes
 
 post-extract:
-	ln -s ${WRKDIR}/cppzmq-${CPPZMQ}/zmq.hpp ${WRKSRC}/src
+	rmdir	${WRKSRC}/external/unbound
+	ln -s	${WRKDIR}/${UNBOUND} ${WRKSRC}/external/unbound
+	ln -s	${WRKDIR}/cppzmq-${CPPZMQ}/zmq.hpp ${WRKSRC}/src
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/monero
