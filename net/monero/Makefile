@@ -4,18 +4,17 @@
 # - source and binary distributions must retain copyright notice
 # - INSTALL COPYRIGHT NOTICE
 # - double check that this is really BSD 3-Clause
-# - compare submodule use to reference ppsspp
-# - submit net/libunbound before this port
-# - Absolute name forbidden: /etc/unbound/unbound.conf at /usr/libdata/perl5/OpenBSD/PackingElement.pm line 217, <$fh> line 52.
-#   *** Error 25 in mystuff/net/libunbound (/usr/ports/infrastructure/mk/bsd.port.mk:2880 'print-plist': @/usr/sbin/pkg_create -m -n -q   -DHIST...)
-#   *** Error 1 in /usr/ports (infrastructure/mk/bsd.port.subdir.mk:147 'print-plist')
 # - should monerod get an rc.d script? how?
 # - install utils/conf/monerod.conf in examples? (use ${EXAMPLEDIR})
 # - 'monerod --help' mentions ~/.bitmonero/bitmonero.conf
 # - check licenses of 3rdparty/external modules
-# - mention achieved HR of 90 with 6 threads on i7-6820HQ which isn't great
 # - what about others in external? (boost/archive, db_drivers, easylogging++,
 #   rapidjson)
+# - double-check configure stage
+# - now installs lib/libunbound.a
+# - performance may be better with statically compiled unbound
+# - MAX HASHRATE ACHIEVED: 116 (7 threads), seem to be averaging 105-110
+#   at 55-60W, better even with 4 threads, mostly HR 115-117, up to 132
 
 COMMENT =	client for Monero cryptocurrency
 
@@ -64,7 +63,7 @@ NO_TEST =	Yes
 
 post-extract:
 	rmdir	${WRKSRC}/external/unbound
-	ln -s	${WRKDIR}/${UNBOUND} ${WRKSRC}/external/unbound
+	ln -s	${WRKDIR}/unbound-${UNBOUND} ${WRKSRC}/external/unbound
 	ln -s	${WRKDIR}/cppzmq-${CPPZMQ}/zmq.hpp ${WRKSRC}/src
 
 post-install:
