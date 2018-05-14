@@ -4,6 +4,15 @@
 # - fix
 # - add license
 # - fix COMMENT
+# - Error: O3 not found in regular CPPFLAGS, not removing this one.
+# - add CC and CXX to CONFIGURE_ARGS instead of _ENV?
+# - is devel/boost BDEP or LDEP?
+# - -m32 -O3 -march=pentium3 -ffast-math -> keep or nuke?
+# - several errors of not finding a file are shown during build, but don't abort
+#   the build
+# - can't find AL/al.h, but doesn't stop build
+# - https available
+# - add BUILD="release" to MODSCONS_FLAGS?
 
 COMMENT =	stealth game
 
@@ -11,7 +20,7 @@ DISTNAME =	thedarkmod.2.05
 
 CATEGORIES =	games
 
-#HOMEPAGE =	???	URL
+HOMEPAGE =	http://www.thedarkmod.com
 
 MAINTAINER =	Thomas Frohwein <frohwein@ymail.com>
 
@@ -32,29 +41,26 @@ BUILD_DEPENDS =		archivers/p7zip \
 #LIB_DEPENDS =		???
 
 #MAKE_FLAGS =		-std=c++11
-#MAKE_ENV =		CXXFLAGS=${CXXFLAGS}
-MAKE_ENV =              X11BASE="${X11BASE}" \
-			CC="${CC}" \
-			CXX="${CXX}" \
-			CFLAGS="${CFLAGS}" \
-			CXXFLAGS="${CXXFLAGS}"
 
 #SEPARATE_BUILD =	Yes (build in a directory other than WRKSRC)
 #SEPARATE_BUILD =	flavored (distinct flavors may share a common WRKSRC)
-#USE_GMAKE =		Yes
-# Programs that require GNU libtool to build instead of the OpenBSD one
-#CONFIGURE_STYLE =	
-#CONFIGURE_SCRIPT =	??? (if other than configure)
-CONFIGURE_ARGS =	-I/usr/X11R6/include
-#CXXFLAGS =		"-I/usr/X11R6/include"
-CONFIGURE_ENV =		CC="${CC}" CXX="${CXX}"
+# CXXFLAGS =		-I${X11BASE}/include -I${LOCALBASE}/include
+# CONFIGURE_ENV =		CC="${CC}" CXX="${CXX}"
 
-#MODSCONS_FLAGS =	BUILD="release" BUILD_GAMEPAK="1"
+CXXFLAGS+=	-I/usr/local/include
+MODSCONS_ENV =	CC=${CC} \
+		CFLAGS=${CFLAGS} \
+		CPPFLAGS="-I${LOCALBASE}/include" \
+		CXX=${CXX} \
+		CXXFLAGS=${CXXFLAGS} \
+		LINKFLAGS=${LDFLAGS} \
+		CPPPATH='/usr/local/include'
+
+MODSCONS_FLAGS =	ALSA=0 \
+			BUILD_GAMEPAK="1" \
+			--debug=explain
 
 do-extract:
 	7z x ${DISTDIR}/${DISTFILES} -o${WRKSRC}
-
-post-extract:
-	rm -rf ${WRKSRC}/include/boost
 
 .include <bsd.port.mk>

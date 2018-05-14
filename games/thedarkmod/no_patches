@@ -1,0 +1,66 @@
+$OpenBSD$
+
+add <string> for basic_string type
+fix namespace for basic_string
+
+Index: include/boost/chrono/system_clocks.hpp
+--- include/boost/chrono/system_clocks.hpp.orig
++++ include/boost/chrono/system_clocks.hpp
+@@ -65,6 +65,7 @@ TODO:
+ #include <boost/chrono/clock_string.hpp>
+ 
+ #include <ctime>
++#include <string>
+ 
+ # if defined( BOOST_CHRONO_POSIX_API )
+ #   if ! defined(CLOCK_REALTIME) && ! defined (__hpux__)
+@@ -176,20 +177,20 @@ namespace chrono {
+   template<class CharT>
+   struct clock_string<system_clock, CharT>
+   {
+-    static std::basic_string<CharT> name()
++    static boost::compute::basic_string<CharT> name()
+     {
+       static const CharT u[] =
+       { 's', 'y', 's', 't', 'e', 'm', '_', 'c', 'l', 'o', 'c', 'k' };
+-      static const std::basic_string<CharT> str(u, u + sizeof(u)
++      static const boost::compute::basic_string<CharT> str(u, u + sizeof(u)
+           / sizeof(u[0]));
+       return str;
+     }
+-    static std::basic_string<CharT> since()
++    static boost::compute::basic_string<CharT> since()
+     {
+       static const CharT
+           u[] =
+               { ' ', 's', 'i', 'n', 'c', 'e', ' ', 'J', 'a', 'n', ' ', '1', ',', ' ', '1', '9', '7', '0' };
+-      static const std::basic_string<CharT> str(u, u + sizeof(u)
++      static const boost::compute::basic_string<CharT> str(u, u + sizeof(u)
+           / sizeof(u[0]));
+       return str;
+     }
+@@ -200,20 +201,20 @@ namespace chrono {
+   template<class CharT>
+   struct clock_string<steady_clock, CharT>
+   {
+-    static std::basic_string<CharT> name()
++    static boost::compute::basic_string<CharT> name()
+     {
+       static const CharT
+           u[] =
+               { 's', 't', 'e', 'a', 'd', 'y', '_', 'c', 'l', 'o', 'c', 'k' };
+-      static const std::basic_string<CharT> str(u, u + sizeof(u)
++      static const boost::compute::basic_string<CharT> str(u, u + sizeof(u)
+           / sizeof(u[0]));
+       return str;
+     }
+-    static std::basic_string<CharT> since()
++    static boost::compute::basic_string<CharT> since()
+     {
+       const CharT u[] =
+       { ' ', 's', 'i', 'n', 'c', 'e', ' ', 'b', 'o', 'o', 't' };
+-      const std::basic_string<CharT> str(u, u + sizeof(u) / sizeof(u[0]));
++      const boost::compute::basic_string<CharT> str(u, u + sizeof(u) / sizeof(u[0]));
+       return str;
+     }
+   };

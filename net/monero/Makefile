@@ -15,6 +15,7 @@
 # - performance may be better with statically compiled unbound
 # - MAX HASHRATE ACHIEVED: 116 (7 threads), seem to be averaging 105-110
 #   at 55-60W, better even with 4 threads, mostly HR 115-117, up to 132
+# - devel/boost BDEP _and_ LDEP???
 
 COMMENT =	client for Monero cryptocurrency
 

@@ -1,6 +1,6 @@
 $OpenBSD$
 
-add local include dir, but make sure it's after WRKSRC/include
+add local include dir
 add png to linkflags and remove rt
 
 Index: sys/scons/SConscript.game
@@ -11,7 +11,7 @@ Index: sys/scons/SConscript.game
  
  local_env.Append( CPPDEFINES = [ 'GAME_DLL' ] )
 -local_env.Append( CPPFLAGS = [ '-Wno-deprecated', '-Winvalid-pch' ] )
-+local_env.Append( CPPFLAGS = [ '-Wno-deprecated', '-Winvalid-pch', '-Iinclude', '-I/usr/local/include' ] )
++local_env.Append( CPPFLAGS = [ '-Wno-deprecated', '-Winvalid-pch', '-I/usr/local/include' ] )
  
  # Link the runtime statically, link statically against libpng.a
  # the corresponding package libpng12-dev must be available on the system
