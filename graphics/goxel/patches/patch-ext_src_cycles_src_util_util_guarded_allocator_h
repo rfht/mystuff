@@ -1,0 +1,18 @@
+$OpenBSD$
+
+include <stdlib.h> on OpenBSD for malloc
+
+Index: ext_src/cycles/src/util/util_guarded_allocator.h
+--- ext_src/cycles/src/util/util_guarded_allocator.h.orig
++++ ext_src/cycles/src/util/util_guarded_allocator.h
+@@ -24,6 +24,10 @@
+ #  include "../../guardedalloc/MEM_guardedalloc.h"
+ #endif
+ 
++#ifdef __OpenBSD__
++#include <stdlib.h>
++#endif
++
+ CCL_NAMESPACE_BEGIN
+ 
+ /* Internal use only. */
