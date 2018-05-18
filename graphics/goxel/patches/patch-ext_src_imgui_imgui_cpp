@@ -1,0 +1,18 @@
+$OpenBSD$
+
+save imgui files in /tmp rather than PWD
+
+Index: ext_src/imgui/imgui.cpp
+--- ext_src/imgui/imgui.cpp.orig
++++ ext_src/imgui/imgui.cpp
+@@ -877,8 +877,8 @@ ImGuiIO::ImGuiIO()
+     DisplaySize = ImVec2(-1.0f, -1.0f);
+     DeltaTime = 1.0f/60.0f;
+     IniSavingRate = 5.0f;
+-    IniFilename = "imgui.ini";
+-    LogFilename = "imgui_log.txt";
++    IniFilename = "/tmp/imgui.ini";
++    LogFilename = "/tmp/imgui_log.txt";
+     MouseDoubleClickTime = 0.30f;
+     MouseDoubleClickMaxDist = 6.0f;
+     for (int i = 0; i < ImGuiKey_COUNT; i++)

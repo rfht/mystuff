@@ -1,0 +1,41 @@
+$OpenBSD$
+
+honor CC and CXX
+remove -Ofast
+CFLAGS, CXXFLAGS, and LDFLAGS should already be passed by scons module
+
+Index: SConstruct
+--- SConstruct.orig
++++ SConstruct
+@@ -25,9 +25,6 @@ if emscripten: target_os = 'js'
+ env = Environment(ENV = os.environ)
+ conf = env.Configure()
+ 
+-if clang:
+-    env.Replace(CC='clang', CXX='clang++')
+-
+ # Asan & Ubsan (need to come first).
+ # Cycles doesn't like libasan with clang, so we only use it on
+ # C code with clang.
+@@ -54,7 +51,7 @@ if debug:
+     if env['CC'] == 'gcc':
+         env.Append(CFLAGS='-Og', CXXFLAGS='-O1')
+ else:
+-    env.Append(CCFLAGS='-DNDEBUG', CFLAGS='-Ofast', CXXFLAGS='-Ofast')
++    env.Append(CCFLAGS='-DNDEBUG')
+ 
+ if profile or debug:
+     env.Append(CCFLAGS='-g')
+@@ -178,12 +175,5 @@ if target_os == 'js':
+ if sound:
+     env.Append(LIBS='openal')
+     env.Append(CCFLAGS='-DSOUND=OPENAL')
+-
+-# Append external environment flags
+-env.Append(
+-    CFLAGS=os.environ.get("CFLAGS", "").split(),
+-    CXXFLAGS=os.environ.get("CXXFLAGS", "").split(),
+-    LINKFLAGS=os.environ.get("LDFLAGS", "").split()
+-)
+ 
+ env.Program(target='goxel', source=sources)

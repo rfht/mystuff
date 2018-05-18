@@ -1,10 +1,12 @@
 # $OpenBSD: Makefile.template,v 1.77 2018/02/09 17:08:33 sthen Exp $
 
 # - double-check license
-# - doesn't honor CFLAGS/CXXFLAGS
+# - doesn't honor CXXFLAGS
+# - -Ofast in calls to clang and clang++
 # - double-check what's done in configure stage
 # - seems to create imgui.ini in current working directory
 # - SEPARATE_BUILD doesn't work for this
+# - add arches code to not set clang=1 on non-clang arches
 
 COMMENT =	free and open source 3D voxel editor
 
