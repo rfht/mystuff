@@ -1,0 +1,25 @@
+XMRig is a high performance Monero (XMR) CPU miner, with official support for
+Windows. Originally based on cpuminer-multi with heavy optimizations/rewrites
+and removing a lot of legacy code, since version 1.0.0 completely rewritten from
+scratch on C++.
+
+Features
+
+* High performance.
+* Official Windows support.
+* Small Windows executable, without dependencies.
+* x86/x64 support.
+* Support for backup (failover) mining server.
+* keepalived support.
+* Command line options compatible with cpuminer.
+* CryptoNight-Lite support for AEON.
+* Smart automatic CPU configuration.
+* Nicehash support
+* It's open source software.
+
+Other information
+
+* No HTTP support, only stratum protocol support.
+* No TLS support.
+* Default donation 5% (5 minutes in 100 minutes) can be reduced to 1% via
+command line option --donate-level.

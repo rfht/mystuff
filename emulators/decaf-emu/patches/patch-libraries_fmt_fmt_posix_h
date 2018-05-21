@@ -1,0 +1,16 @@
+$OpenBSD$
+
+change strtod_l to strtod
+
+Index: libraries/fmt/fmt/posix.h
+--- libraries/fmt/fmt/posix.h.orig
++++ libraries/fmt/fmt/posix.h
+@@ -348,7 +348,7 @@ class Locale {
+   // of the parsed input.
+   double strtod(const char *&str) const {
+     char *end = FMT_NULL;
+-    double result = strtod_l(str, &end, locale_);
++    double result = ::strtod(str, &end);
+     str = end;
+     return result;
+   }

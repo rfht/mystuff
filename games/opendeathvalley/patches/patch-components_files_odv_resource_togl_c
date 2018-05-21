@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_togl.c
+--- components/files/odv_resource_togl.c.orig
++++ components/files/odv_resource_togl.c
+@@ -84,4 +84,5 @@ void odv_resource_clean_togl(struct ODVResourceTogl *t
+         free(togl->entries);
+     }
+     free(togl);
+-}
+\ No newline at end of file
++}
++

@@ -1,0 +1,14 @@
+Arcan is a powerful development framework for creating virtually anything from
+user interfaces for specialized embedded applications all the way to full-blown
+standalone desktop environments.
+
+At its heart lies a robust and portable multimedia engine, with a well-tested
+and well-documented Lua scripting interface. The development emphasizes
+security, debuggability and performance -- guided by a principle of least
+surprise in terms of API design.
+
+For more details about capabilities, design, goals, current development,
+roadmap, changelogs, notes on contributing and so on, please refer to the
+arcan-wiki:
+
+https://github.com/letoram/arcan/wiki

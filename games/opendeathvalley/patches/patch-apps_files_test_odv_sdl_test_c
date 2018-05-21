@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: apps/files_test/odv_sdl_test.c
+--- apps/files_test/odv_sdl_test.c.orig
++++ apps/files_test/odv_sdl_test.c
+@@ -247,4 +247,5 @@ int main(int argc, char *argv[])
+     SDL_DestroyWindow(win);
+     SDL_Quit();
+     return 0;
+-}
+\ No newline at end of file
++}
++

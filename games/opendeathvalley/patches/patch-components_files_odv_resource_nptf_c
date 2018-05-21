@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_nptf.c
+--- components/files/odv_resource_nptf.c.orig
++++ components/files/odv_resource_nptf.c
+@@ -84,4 +84,5 @@ void odv_resource_clean_nptf(struct ODVResourceNptf *n
+         free(nptf->entries);
+     }
+     free(nptf);
+-}
+\ No newline at end of file
++}
++

@@ -1,0 +1,17 @@
+$OpenBSD$
+
+honor CC and CXX
+
+Index: SConstruct
+--- SConstruct.orig
++++ SConstruct
+@@ -25,9 +25,6 @@ if emscripten: target_os = 'js'
+ env = Environment(ENV = os.environ)
+ conf = env.Configure()
+ 
+-if clang:
+-    env.Replace(CC='clang', CXX='clang++')
+-
+ # Asan & Ubsan (need to come first).
+ # Cycles doesn't like libasan with clang, so we only use it on
+ # C code with clang.

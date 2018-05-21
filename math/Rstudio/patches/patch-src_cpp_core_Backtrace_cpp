@@ -1,0 +1,16 @@
+$OpenBSD$
+
+stub printBacktrace which relies on libexecinfo
+
+Index: src/cpp/core/Backtrace.cpp
+--- src/cpp/core/Backtrace.cpp.orig
++++ src/cpp/core/Backtrace.cpp
+@@ -46,7 +46,7 @@ std::string demangle(const std::string& name)
+ 
+ void printBacktrace(std::ostream& os)
+ {
+-#ifndef _WIN32
++#if !defined(_WIN32) && !defined(__OpenBSD__)
+    
+    os << "Backtrace (most recent calls first):" << std::endl << std::endl;
+    

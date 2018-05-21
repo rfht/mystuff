@@ -1,0 +1,2 @@
+assertion "path != NULL" failed: file "src/unix/fs.c", line 1307, function "uv_fs_open"
+Abort trap (core dumped)

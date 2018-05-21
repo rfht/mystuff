@@ -1,0 +1,77 @@
+$OpenBSD$
+
+remove steam header and associated achievement functions
+
+Index: src/CharacterCore.cpp
+--- src/CharacterCore.cpp.orig
++++ src/CharacterCore.cpp
+@@ -4,7 +4,6 @@
+ #include "Beans/SpawnBean.h"
+ #include "DatabaseManager.h"
+ #include "GlobalResource.h"
+-#include "Steam/AchievementManager.h"
+ #include "FileIO/CharacterCoreReader.h"
+ #include "FileIO/CharacterCoreWriter.h"
+ 
+@@ -259,7 +258,6 @@ void CharacterCore::setQuestTracked(const std::string&
+ 
+ void CharacterCore::setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos) {
+ 	m_data.waypointsUnlocked[map].insert({ objectID, pos });
+-	g_achievementManager->notifyAchievementCore(ACH_ALL_WAYPOINTS);
+ }
+ 
+ const QuestData* CharacterCore::getQuestData(const std::string& questID) const {
+@@ -556,7 +554,6 @@ void CharacterCore::learnModifier(SpellModifierType mo
+ 		m_data.modfiersLearned.insert({ modifierType, 0 });
+ 	}
+ 	m_data.modfiersLearned[modifierType] = std::min(3, m_data.modfiersLearned[modifierType] + 1);
+-	g_achievementManager->notifyAchievementCore(ACH_ALL_MODIFIERS);
+ }
+ 
+ void CharacterCore::learnHint(const std::string& hintKey) {
+@@ -584,9 +581,6 @@ void CharacterCore::addReputation(FractionID fraction,
+ 	}
+ 
+ 	m_data.reputationProgress.at(fraction) = std::min(100, m_data.reputationProgress.at(fraction) + amount);
+-	g_achievementManager->notifyAchievementCore(ACH_CLERIC_REP_70);
+-	g_achievementManager->notifyAchievementCore(ACH_NECRO_REP_70);
+-	g_achievementManager->notifyAchievementCore(ACH_THIEF_REP_70);
+ }
+ 
+ void CharacterCore::setGuild(FractionID fraction) {
+@@ -614,7 +608,6 @@ std::map<std::string, int>* CharacterCore::getItems() 
+ 
+ void CharacterCore::addGold(int gold) {
+ 	m_data.gold += std::max(gold, 0);
+-	g_achievementManager->notifyAchievementCore(ACH_GOLD_1000);
+ }
+ 
+ void CharacterCore::removeGold(int gold) {
+@@ -653,9 +646,6 @@ void CharacterCore::addItem(const std::string& item, i
+ 	else {
+ 		m_data.items.insert({ item, quantity });
+ 	}
+-
+-	g_achievementManager->notifyAchievementCore(ACH_ALL_KEYS);
+-	g_achievementManager->notifyAchievementCore(ACH_MASOCHIST);
+ }
+ 
+ bool CharacterCore::removeItem(const std::string& item, int quantity) {
+@@ -900,9 +890,6 @@ void CharacterCore::setCharacterJailed() {
+ 	equipItem(spawn->armor_id, ItemType::Equipment_body);
+ 	equipItem(spawn->weapon_id, ItemType::Equipment_weapon);
+ 
+-	// achievement for getting arrested
+-	g_achievementManager->unlockAchievement(ACH_CRIMINAL);
+-
+ 	delete spawn;
+ }
+ 
+@@ -925,7 +912,6 @@ void CharacterCore::setAchievementUnlocked(const std::
+ 
+ void CharacterCore::setBookRead(const std::string& itemId) {
+ 	m_data.booksRead.insert(itemId);
+-	g_achievementManager->notifyAchievementCore(ACH_ALL_BOOKS);
+ }
+ 
+ void CharacterCore::increaseDeathCount(const std::string& level) {

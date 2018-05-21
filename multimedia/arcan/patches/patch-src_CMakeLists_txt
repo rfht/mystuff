@@ -1,0 +1,30 @@
+$OpenBSD$
+
+remove failing GIT check
+add X11R6 include dir for GL/gl.h
+
+Index: src/CMakeLists.txt
+--- src/CMakeLists.txt.orig
++++ src/CMakeLists.txt
+@@ -27,6 +27,8 @@ set(SHARED_PERMISSIONS
+ set(SHARED_PERMISSIONS_DIR OWNER_WRITE OWNER_READ GROUP_WRITE
+ 	GROUP_READ WORLD_EXECUTE WORLD_READ)
+ 
++include_directories("/usr/X11R6/include")
++
+ # another hack to strip noisy / useless data away from message() abuse
+ include(ExternalProject)
+ include(CheckIncludeFiles)
+@@ -80,12 +82,7 @@ if (NOT DEFINED ENGINE_BUILDTAG)
+ 			string(STRIP ${GIT_BRANCH} GIT_BRANCH)
+ 		endif()
+ 
+-		if (${GIT_VERSION} STREQUAL "")
+-			amsg("${CLB_RED}missing git_version, using 'relukn' for build tag${CL_RST}")
+ 			set(ENGINE_BUILDTAG arcan-relukn-${VERSION})
+-		else()
+-			set(ENGINE_BUILDTAG arcan-git-${GIT_BRANCH}-${GIT_VERSION})
+-		endif()
+ 	else()
+ 		amsg("${CLB_RED}git not found, using 'relukn' for build tag${CL_RST}")
+ 		set(ENGINE_BUILDTAG arcan-relukn-${VERSION})

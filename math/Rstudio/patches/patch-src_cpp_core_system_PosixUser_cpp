@@ -1,0 +1,28 @@
+$OpenBSD$
+
+add missing header file
+change function names to match <sys/ucred.h>
+
+Index: src/cpp/core/system/PosixUser.cpp
+--- src/cpp/core/system/PosixUser.cpp.orig
++++ src/cpp/core/system/PosixUser.cpp
+@@ -32,6 +32,8 @@
+ #include <core/SafeConvert.hpp>
+ #include <core/system/System.hpp>
+ 
++#include <sys/ucred.h>
++
+ #include "config.h"
+ 
+ namespace rstudio {
+@@ -57,8 +59,8 @@ Error socketPeerIdentity(int socket, UserIdentity* pId
+    if (::getsockopt(socket, SOL_SOCKET, SO_PEERCRED, &cred, &length) < 0)
+       return systemError(errno, ERROR_LOCATION);
+       
+-   pIdentity->userId = cred.uid;
+-   pIdentity->groupId = cred.gid;
++   pIdentity->userId = cred.cr_uid;
++   pIdentity->groupId = cred.cr_gid;
+    return Success();
+ }
+ 

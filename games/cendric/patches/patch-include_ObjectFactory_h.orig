@@ -1,0 +1,32 @@
+$OpenBSD$
+
+remove reference to steam header
+set up AchievementID variable
+
+Index: include/ObjectFactory.h
+--- include/ObjectFactory.h.orig
++++ include/ObjectFactory.h
+@@ -5,7 +5,6 @@
+ #include "Enums/SpellID.h"
+ #include "Enums/MapDynamicTileID.h"
+ #include "Enums/LevelDynamicTileID.h"
+-#include "Steam/CendricAchievements.h"
+ 
+ class Enemy;
+ class Spell;
+@@ -21,6 +20,8 @@ typedef std::function<Enemy*(const Level*, Screen*)> E
+ typedef std::function<LevelDynamicTile*(LevelScreen*)> LevelDynamicTileConstructor;
+ typedef std::function<MapDynamicTile*(MapScreen*)> MapDynamicTileConstructor;
+ typedef std::function<Achievement*()> AchievementConstructor;
++
++int AchievementID;
+ 
+ class ObjectFactory final {
+ private:
+@@ -45,4 +46,4 @@ class ObjectFactory final { (private)
+ 	std::map<LevelDynamicTileID, LevelDynamicTileConstructor> levelDynamicTileRegistry;
+ 	std::map<MapDynamicTileID, MapDynamicTileConstructor> mapDynamicTileRegistry;
+ 	std::map<AchievementID, AchievementConstructor> achievementRegistry;
+-};
+\ No newline at end of file
++};

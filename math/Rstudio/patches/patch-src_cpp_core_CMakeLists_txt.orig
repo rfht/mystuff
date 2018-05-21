@@ -1,0 +1,33 @@
+$OpenBSD$
+
+don't look for librt
+add libinotify
+
+Index: src/cpp/core/CMakeLists.txt
+--- src/cpp/core/CMakeLists.txt.orig
++++ src/cpp/core/CMakeLists.txt
+@@ -18,6 +18,8 @@ project (CORE)
+ add_subdirectory(spelling/hunspell)
+ add_subdirectory(tex/synctex)
+ 
++link_directories("/usr/local/lib/inotify")
++
+ # include files
+ file(GLOB_RECURSE CORE_HEADER_FILES "*.h*")
+ 
+@@ -161,7 +163,6 @@ if (UNIX)
+    if(NOT APPLE)
+       find_library(UTIL_LIBRARIES util)
+       find_library(UUID_LIBRARIES uuid)
+-      find_library(RT_LIBRARIES rt)
+    endif()
+    find_package(ZLIB REQUIRED QUIET)
+ 
+@@ -319,6 +320,7 @@ target_link_libraries(
+    rstudio-core
+    ${Boost_LIBRARIES}
+    ${CORE_SYSTEM_LIBRARIES}
++   inotify
+ )
+ 
+ # define executable (for running unit tests)

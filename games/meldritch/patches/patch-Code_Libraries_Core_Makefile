@@ -1,0 +1,23 @@
+$OpenBSD$
+
+remove segment for other platforms with syntax error
+
+Index: Code/Libraries/Core/Makefile
+--- Code/Libraries/Core/Makefile.orig
++++ Code/Libraries/Core/Makefile
+@@ -15,15 +15,6 @@ CXXFILES=src/allocatorchunk.cpp src/allocator.cpp src/
+ 	src/TinyXML/tinyxmlparser.cpp src/windowwrapper.cpp src/xinputcontroller.cpp \
+ 	src/timedate.cpp src/printmanagerstream.cpp
+ 
+-ifeq ($(PLATFORM),Windows)
+-CXXFILES+=src/console.cpp src/consoleinput.cpp src/consolemanager.cpp src/exceptionhandler.cpp \
+-	src/exceptionuploadlog.cpp src/httpsocket.cpp src/mutex.cpp src/thread.cpp
+-endif
+-
+-ifeq ($(PLATFORM),MacOSX)
+-OBJCFILES+=src/objcjunk.mm
+-endif
+-
+ # Note: this should not be here...
+ INCLUDES=$(INC_ZLIB) $(INC_FRAMEWORK) $(INC_NDIALOG)
+ 

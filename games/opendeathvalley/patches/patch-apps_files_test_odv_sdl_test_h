@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: apps/files_test/odv_sdl_test.h
+--- apps/files_test/odv_sdl_test.h.orig
++++ apps/files_test/odv_sdl_test.h
+@@ -14,4 +14,5 @@
+ 
+ #include "odv_image_to_surface.h"
+ 
+-#endif /* OPENDV_TEST_H */
+\ No newline at end of file
++#endif /* OPENDV_TEST_H */
++

@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_cur.c
+--- components/files/odv_resource_cur.c.orig
++++ components/files/odv_resource_cur.c
+@@ -110,4 +110,5 @@ void odv_resource_clean_cur(struct ODVResourceCur *cur
+         free(cur->entries);
+     }
+     free(cur);
+-}
+\ No newline at end of file
++}
++

@@ -1,0 +1,19 @@
+@comment $OpenBSD$
+include/fmt/
+include/fmt/container.h
+include/fmt/format.cc
+include/fmt/format.h
+include/fmt/ostream.cc
+include/fmt/ostream.h
+include/fmt/posix.h
+include/fmt/printf.cc
+include/fmt/printf.h
+include/fmt/string.h
+include/fmt/time.h
+lib/cmake/
+lib/cmake/fmt/
+lib/cmake/fmt/fmt-config-version.cmake
+lib/cmake/fmt/fmt-config.cmake
+lib/cmake/fmt/fmt-targets${MODCMAKE_BUILD_SUFFIX}
+lib/cmake/fmt/fmt-targets.cmake
+lib/libfmt.a

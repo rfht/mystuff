@@ -1,0 +1,45 @@
+$OpenBSD$
+
+replace ucontext header and ucontext_t
+remove context handling from ucontext.h which we don't have
+
+Index: src/common/src/platform_posix_fiber.cpp
+--- src/common/src/platform_posix_fiber.cpp.orig
++++ src/common/src/platform_posix_fiber.cpp
+@@ -6,8 +6,11 @@
+ #include <array>
+ #include <errno.h>
+ #include <signal.h>
+-#include <ucontext.h>
+ 
++#ifdef __OpenBSD__
++typedef ucontext_t SContext;
++#endif
++
+ #ifdef DECAF_VALGRIND
+    #include <valgrind/valgrind.h>
+ #endif
+@@ -52,13 +55,6 @@ createFiber(FiberEntryPoint entry, void *entryParam)
+ #ifdef DECAF_VALGRIND
+    fiber->valgrindStackId = VALGRIND_STACK_REGISTER(&fiber->stack[0], &fiber->stack[fiber->stack.size() - 1]);
+ #endif
+-
+-   getcontext(&fiber->context);
+-   fiber->context.uc_stack.ss_sp = &fiber->stack[0];
+-   fiber->context.uc_stack.ss_size = fiber->stack.size();
+-   fiber->context.uc_link = nullptr;
+-
+-   makecontext(&fiber->context, reinterpret_cast<void(*)()>(&fiberEntryPoint), 1, fiber);
+    return fiber;
+ }
+ 
+@@ -76,9 +72,7 @@ void
+ swapToFiber(Fiber *current, Fiber *target)
+ {
+    if (!current) {
+-      setcontext(&target->context);
+    } else {
+-      swapcontext(&current->context, &target->context);
+    }
+ }
+ 

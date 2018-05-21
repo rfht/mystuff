@@ -1,0 +1,17 @@
+$OpenBSD$
+
+EXPERIMENTAL: hardcode path to r-ldpath
+
+Index: src/cpp/core/r_util/REnvironmentPosix.cpp
+--- src/cpp/core/r_util/REnvironmentPosix.cpp.orig
++++ src/cpp/core/r_util/REnvironmentPosix.cpp
+@@ -74,6 +74,9 @@ FilePath scanForRScript(const std::vector<std::string>
+ std::string extraLibraryPaths(const FilePath& ldPathsScript,
+                               const std::string& rHome)
+ {
++   std::string libraryPaths = "/usr/local/lib/rstudio/bin/r-ldpath";
++   return libraryPaths;
++
+    // no-op if no script is passed
+    if (ldPathsScript.empty())
+       return std::string();

@@ -1,0 +1,49 @@
+may also need to adde files from gin
+
+from FreeBSD:
+
+--- src/cpp/CMakeLists.txt.orig	2017-11-16 21:40:37 UTC
++++ src/cpp/CMakeLists.txt
+@@ -101,7 +101,6 @@ if(UNIX)
+       add_definitions(-Wformat -Wformat-security)
+	      add_definitions(-D_FORTIFY_SOURCE=2)
+		     add_definitions(-fstack-protector --param ssp-buffer-size=4)
+		     -      add_definitions(-pie -fPIE)
+			    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-z,relro,-z,now")
+				endif()
+--- src/cpp/core/CMakeLists.txt.orig	2017-11-16 21:40:37 UTC
++++ src/cpp/core/CMakeLists.txt
+@@ -143,16 +143,17 @@ if (UNIX)
+    }
+	"
+	    HAVE_SCANDIR_POSIX)
+	    -
+		# platform introspection
+		    check_symbol_exists(SA_NOCLDWAIT "signal.h" HAVE_SA_NOCLDWAIT)
+			check_symbol_exists(SO_PEERCRED "sys/socket.h" HAVE_SO_PEERCRED)
+			+   set(CMAKE_REQUIRED_LIBRARIES ${FREEBSD_LIBDIR}/libinotify.so)
+			    check_function_exists(inotify_init1 HAVE_INOTIFY_INIT1)
+			    +   set(CMAKE_REQUIRED_LIBRARIES "")
+				check_function_exists(getpeereid HAVE_GETPEEREID)
+				    check_function_exists(setresuid HAVE_SETRESUID)
+				    -   if(EXISTS "/proc/self")
+				    +   #if(EXISTS "/proc/self")
+					   set(HAVE_PROCSELF TRUE)
+					   -   endif()
+					   +   #endif()
+					       configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
+								   ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+
+--- src/cpp/server/CMakeLists.txt.orig	2017-11-16 21:40:37 UTC
++++ src/cpp/server/CMakeLists.txt
+@@ -124,6 +124,9 @@ include_directories(
+ # define executable
+  add_executable(rserver ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
+   
+   +# additional libraries
+   +target_link_libraries(rserver -L${FREEBSD_LIBDIR} -linotify)
+   +
+    # add origin rpath for suse/sles
+     if(RSTUDIO_PACKAGE_VARIANT STREQUAL "SLES")
+	 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+

@@ -1,0 +1,14 @@
+Goxel is a 3D program that lets you create voxel volumes, a bit similar to
+minecraft. The code is Open Source and fully available on Github.
+
+Features include:
+
+* Unlimited scene size: You can create voxels images as big as you want.
+* Layers support: Decompose your image into several layers for easy editing.
+* Many export formats: Goxel can export to obj, pyl, magica voxel, png, qubicle,
+  povray, and more.
+* 24 bits RGB colors.
+* Unlimited undo buffer.
+* Marching Cube rendering.
+* Procedural rendering.
+* Ray tracing.

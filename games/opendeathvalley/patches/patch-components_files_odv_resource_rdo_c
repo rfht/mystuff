@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_resource_rdo.c
+--- components/files/odv_resource_rdo.c.orig
++++ components/files/odv_resource_rdo.c
+@@ -84,4 +84,5 @@ void odv_resource_clean_rdo(struct ODVResourceRdo *rdo
+         free(rdo->entries);
+     }
+     free(rdo);
+-}
+\ No newline at end of file
++}
++

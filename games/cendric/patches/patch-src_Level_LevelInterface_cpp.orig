@@ -1,0 +1,22 @@
+$OpenBSD$
+
+remove steam header
+
+Index: src/Level/LevelInterface.cpp
+--- src/Level/LevelInterface.cpp.orig
++++ src/Level/LevelInterface.cpp
+@@ -2,7 +2,6 @@
+ #include "Level/LevelMainCharacter.h"
+ #include "Screens/LevelScreen.h"
+ #include "World/Item.h"
+-#include "Steam/AchievementManager.h"
+ 
+ LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
+ m_character(character) {
+@@ -185,4 +184,4 @@ LevelMainCharacter* LevelInterface::getMainCharacter()
+ 
+ CharacterCore* LevelInterface::getPermanentCore() const {
+ 	return m_permanentCore;
+-}
+\ No newline at end of file
++}

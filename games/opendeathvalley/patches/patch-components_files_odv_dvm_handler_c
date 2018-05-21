@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_dvm_handler.c
+--- components/files/odv_dvm_handler.c.orig
++++ components/files/odv_dvm_handler.c
+@@ -43,4 +43,5 @@ void odv_dvm_close(struct ODVDvm *dvm)
+     if (dvm->imgmap != NULL)
+         odv_imagemap_clean(dvm->imgmap);
+     free(dvm);
+-}
+\ No newline at end of file
++}
++

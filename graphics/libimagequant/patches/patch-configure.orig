@@ -1,0 +1,16 @@
+$OpenBSD$
+
+remove gcc as compiler. remove -O3
+
+Index: configure
+--- configure.orig
++++ configure
+@@ -15,7 +15,7 @@ EXTRA_CFLAGS=
+ EXTRA_LDFLAGS=
+ 
+ # make gcc default compiler unless CC is already set
+-CC=${CC:-gcc}
++CC=cc
+ 
+ help() {
+     printf "%4s %s\n" "" "$1"

@@ -1,0 +1,16 @@
+$OpenBSD$
+
+add missing header file
+
+Index: src/cpp/core/system/PosixUser.cpp
+--- src/cpp/core/system/PosixUser.cpp.orig
++++ src/cpp/core/system/PosixUser.cpp
+@@ -32,6 +32,8 @@
+ #include <core/SafeConvert.hpp>
+ #include <core/system/System.hpp>
+ 
++#include <sys/ucred.h>
++
+ #include "config.h"
+ 
+ namespace rstudio {

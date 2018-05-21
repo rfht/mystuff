@@ -1,0 +1,31 @@
+$OpenBSD$
+
+remove steam header and remove achievement function call
+
+Index: src/Level/LevelInterface.cpp
+--- src/Level/LevelInterface.cpp.orig
++++ src/Level/LevelInterface.cpp
+@@ -2,7 +2,6 @@
+ #include "Level/LevelMainCharacter.h"
+ #include "Screens/LevelScreen.h"
+ #include "World/Item.h"
+-#include "Steam/AchievementManager.h"
+ 
+ LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
+ m_character(character) {
+@@ -134,8 +133,6 @@ void LevelInterface::consumeItem(const std::string& it
+ 
+ 	m_screen->notifyItemChange(item->getID(), -1);
+ 	m_quickSlotBar->reload();
+-
+-	g_achievementManager->notifyAchievement(ACH_BOOZE, item->getID());
+ }
+ 
+ void LevelInterface::reloadInventory(const std::string& changedItemID) {
+@@ -185,4 +182,4 @@ LevelMainCharacter* LevelInterface::getMainCharacter()
+ 
+ CharacterCore* LevelInterface::getPermanentCore() const {
+ 	return m_permanentCore;
+-}
+\ No newline at end of file
++}

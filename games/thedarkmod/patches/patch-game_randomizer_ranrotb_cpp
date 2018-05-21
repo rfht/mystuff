@@ -1,0 +1,18 @@
+$OpenBSD$
+
+enable definition of _lrotl
+
+Index: game/randomizer/ranrotb.cpp
+--- game/randomizer/ranrotb.cpp.orig
++++ game/randomizer/ranrotb.cpp
+@@ -47,8 +47,8 @@ static bool versioned = RegisterVersionedFile("$Id: ra
+ // If your system doesn't have a rotate function for 32 bits integers,
+ // then use the definition below. If your system has the _lrotl function 
+ // then remove this.
+-// uint32 _lrotl (uint32 x, int r) {
+-//   return (x << r) | (x >> (sizeof(x)*8-r));}
++uint32 _lrotl (uint32 x, int r) {
++	return (x << r) | (x >> (sizeof(x)*8-r));}
+ #include "_lrotl.h"
+ 
+ // constructor:

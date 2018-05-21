@@ -1,0 +1,16 @@
+$OpenBSD$
+
+fix SDL2 lib name
+
+Index: cmake/third-party/untz/CMakeLists.txt
+--- cmake/third-party/untz/CMakeLists.txt.orig
++++ cmake/third-party/untz/CMakeLists.txt
+@@ -26,7 +26,7 @@ endif ( NOT MOAI_VORBIS )
+ 
+ add_library ( untz STATIC ${UNTZ_SOURCES} ${UNTZ_HEADERS} )
+ 
+-target_link_libraries( untz SDL2-static )
++target_link_libraries( untz SDL2 )
+ 
+ if (MOAI_VORBIS)
+   target_link_libraries ( untz vorbis )

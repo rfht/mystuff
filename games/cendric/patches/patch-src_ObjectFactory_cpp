@@ -1,0 +1,29 @@
+$OpenBSD$
+
+remove steam achievement header and associated functions
+
+Index: src/ObjectFactory.cpp
+--- src/ObjectFactory.cpp.orig
++++ src/ObjectFactory.cpp
+@@ -4,7 +4,6 @@
+ #include "Spells/Spell.h"
+ #include "Level/LevelDynamicTile.h"
+ #include "Map/MapDynamicTile.h"
+-#include "Steam/Achievement.h"
+ 
+ ObjectFactory* ObjectFactory::Instance() {
+ 	static ObjectFactory factory;
+@@ -51,11 +50,11 @@ MapDynamicTile* ObjectFactory::createMapDynamicTile(Ma
+ 	return instance;
+ }
+ 
+-void ObjectFactory::registerAchievement(AchievementID id, AchievementConstructor constructor) {
++void ObjectFactory::registerAchievement(int id, AchievementConstructor constructor) {
+ 	achievementRegistry.insert({ id, constructor });
+ }
+ 
+-Achievement* ObjectFactory::createAchievement(AchievementID id) {
++Achievement* ObjectFactory::createAchievement(int id) {
+ 	Achievement* instance = nullptr;
+ 	const auto& it = achievementRegistry.find(id);
+ 	if (it != achievementRegistry.end()) {

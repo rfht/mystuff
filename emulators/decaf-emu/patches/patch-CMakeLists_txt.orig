@@ -1,0 +1,17 @@
+$OpenBSD$
+
+add local include and lib directories
+
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -14,6 +14,9 @@ option(DECAF_QT "Build with Qt support" OFF)
+ set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
+ set(WUT_ROOT $ENV{WUT_ROOT} CACHE STRING "Path to wut install")
+ 
++include_directories("/usr/local/include")
++link_directories("/usr/local/lib")
++
+ if(DECAF_BUILD_WUT_TESTS AND (NOT DEVKITPPC OR NOT WUT_ROOT))
+     message(FATAL_ERROR "You must have defined DEVKITPPC and WUT_ROOT to build wut tests.")
+ endif()

@@ -1,0 +1,32 @@
+$OpenBSD$
+
+fix location for read-write files (saves, config, screenshots)
+
+Index: src/GlobalResource.cpp
+--- src/GlobalResource.cpp.orig
++++ src/GlobalResource.cpp
+@@ -1,12 +1,12 @@
+ #include "GlobalResource.h"
+ 
+-const std::string GlobalResource::SAVEGAME_FOLDER = "saves/";
+-const std::string GlobalResource::CONFIGURATION_PATH = "cendric.ini";
+-const std::string GlobalResource::QUICKSAVE_PATH = "saves/quicksave.sav";
+-const std::string GlobalResource::AUTOSAVE_PATH = "saves/autosave.sav";
++const std::string GlobalResource::SAVEGAME_FOLDER = "~/.local/share/cendric/saves/";
++const std::string GlobalResource::CONFIGURATION_PATH = "~/.local/share/cendric/cendric.ini";
++const std::string GlobalResource::QUICKSAVE_PATH = "~/.local/share/saves/quicksave.sav";
++const std::string GlobalResource::AUTOSAVE_PATH = "~/.local/share/saves/autosave.sav";
+ const std::string GlobalResource::NPC_FOLDER = "res/npc/";
+ const std::string GlobalResource::QUEST_FOLDER = "res/quest/";
+-const std::string GlobalResource::SCREENSHOT_FOLDER = "screenshots/";
++const std::string GlobalResource::SCREENSHOT_FOLDER = "~/.local/share/cendric/screenshots/";
+ 
+ const std::string GlobalResource::FONT_8 = "res/font/bitmap_font_8_default.png";
+ const std::string GlobalResource::FONT_8_SHADOWED = "res/font/bitmap_font_8_shadowed.png";
+@@ -120,4 +120,4 @@ const std::string GlobalResource::SOUND_GUI_NEGATIVE =
+ const std::string GlobalResource::SOUND_LEARNED_GEM = "res/sound/gui/spell_gem_learned.ogg";
+ const std::string GlobalResource::SOUND_LEARNED_SPELL = "res/sound/gui/spell_gem_learned.ogg";
+ const std::string GlobalResource::SOUND_MISC_UNLOCK = "res/sound/tile/unlock.ogg";
+-const std::string GlobalResource::MUSIC_MAIN = "res/music/title_theme.ogg";
+\ No newline at end of file
++const std::string GlobalResource::MUSIC_MAIN = "res/music/title_theme.ogg";

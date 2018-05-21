@@ -1,0 +1,133 @@
+scons: Reading SConscript files ...
+Loading build configuration from site.conf:
+  BUILD_GAMEPAK='0'
+  JOBS='1'
+  OPENMP='0'
+  NO_GCH='0'
+  DEDICATED='0'
+  SILENT='0'
+  GL_HARDLINK='0'
+  ID_MCHECK='2'
+  BUILD_ROOT='build'
+  ALSA='1'
+  CC='cc'
+  TARGET_CORE='1'
+  BUILD='debug'
+  TARGET_GAME='1'
+  TARGET_MONO='0'
+  BASEFLAGS=''
+  CXX='c++'
+  NOCURL='0'
+  DEBUG_MEMORY='0'
+  IDNET_HOST=''
+  LIBC_MALLOC='1'
+  ID_NOLANADDRESS='0'
+  TARGET_DEMO='0'
+Error: O3 not found in regular CPPFLAGS, not removing this one.
+Error: O3 not found in regular CPPFLAGS, not removing this one.
+scons: done reading SConscript files.
+
+Usage: scons [OPTIONS] [TARGET] [CONFIG]
+
+[OPTIONS] and [TARGET] are covered in command line options, use scons -H
+
+[CONFIG]: KEY="VALUE" [...]
+a number of configuration options saved between runs in the site.conf file
+erase site.conf to start with default settings again
+
+CC (default gcc)
+CXX (default g++)
+	Specify C and C++ compilers (defaults gcc and g++)
+	ex: CC="gcc-3.3"
+	You can use ccache and distcc, for instance:
+	CC="ccache distcc gcc" CXX="ccache distcc g++"
+
+JOBS (default 1)
+	Parallel build
+
+BUILD (default debug)
+	Use debug-all/debug/release/profile to select build settings
+	ex: BUILD="release"
+	debug-all: no optimisations, debugging symbols
+	debug: -O -g
+	profile: -pg -fprofile-arcs (to produce gmon.out, which can be analyzed with gprof)
+	release: all optimisations, including CPU target etc.
+
+BUILD_ROOT (default 'build')
+	change the build root directory
+
+TARGET_GAME (default 1)
+	Build the base game code
+
+BUILD_GAMEPAK (default 0)
+	Build a game pak
+
+BASEFLAGS (default '')
+	Add compile flags
+
+NOCONF (default 0, not saved)
+	ignore site configuration and use defaults + command line only
+	
+SILENT ( default 0, saved )
+	hide the compiler output, unless error
+
+NO_GCH (default 0)
+	Don't use precompiled headers when building.
+    
+OPENMP (default 0)
+	Enable OpenMP builds.
+
+DEDICATED (default 0)
+	Control regular / dedicated type of build:
+	0 - client
+	1 - dedicated server
+	2 - both
+
+TARGET_CORE (default 1)
+	Build the core
+
+TARGET_MONO (default 0)
+	Build a monolithic binary
+
+TARGET_DEMO (default 0)
+	Build demo client ( both a core and game, no mono )
+	NOTE: if you *only* want the demo client, set TARGET_CORE and TARGET_GAME to 0
+
+IDNET_HOST (default to source hardcoded)
+	Override builtin IDNET_HOST with your own settings
+	
+GL_HARDLINK (default 0)
+	Instead of dynamically loading the OpenGL libraries, use implicit dependencies
+	NOTE: no GL logging capability and no r_glDriver with GL_HARDLINK 1
+
+DEBUG_MEMORY (default 0)
+	Enables memory logging to file
+	
+LIBC_MALLOC (default 1)
+	Toggle idHeap memory / libc malloc usage
+	When libc malloc is on, memory size statistics are wrong ( no _msize )
+
+ID_NOLANADDRESS (default 0)
+	Don't recognize any IP as LAN address. This is useful when debugging network
+	code where LAN / not LAN influences application behaviour
+	
+ID_MCHECK (default 2)
+	Perform heap consistency checking
+	0: on in Debug / off in Release
+	1 forces on, 2 forces off
+	note that Doom has it's own block allocator/checking
+	this should not be considered a replacement, but an additional tool
+
+ALSA (default 1)
+	enable ALSA sound backend support
+	
+SETUP (default 0, not saved)
+    build a setup. implies release build
+
+SDK (default 0, not saved)
+	build an SDK release
+
+NOCURL (default 0)
+	set to 1 to disable usage of libcurl and http/ftp downloads feature
+
+Use scons -H for help about command-line options.

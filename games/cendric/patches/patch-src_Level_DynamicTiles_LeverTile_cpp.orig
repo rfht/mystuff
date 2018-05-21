@@ -1,0 +1,22 @@
+$OpenBSD$
+
+remove steam header
+
+Index: src/Level/DynamicTiles/LeverTile.cpp
+--- src/Level/DynamicTiles/LeverTile.cpp.orig
++++ src/Level/DynamicTiles/LeverTile.cpp
+@@ -3,7 +3,6 @@
+ #include "Level/LevelMainCharacter.h"
+ #include "GameObjectComponents/InteractComponent.h"
+ #include "Registrar.h"
+-#include "Steam/AchievementManager.h"
+ 
+ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
+ 
+@@ -126,4 +125,4 @@ std::string LeverTile::getSpritePath() const {
+ 
+ std::string LeverTile::getSoundPath() const {
+ 	return "res/sound/tile/lever_click.ogg";
+-}
+\ No newline at end of file
++}

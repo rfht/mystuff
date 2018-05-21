@@ -1,0 +1,15 @@
+$OpenBSD$
+
+remove steam header file
+
+Index: src/Level/Enemies/JeremyBoss.cpp
+--- src/Level/Enemies/JeremyBoss.cpp.orig
++++ src/Level/Enemies/JeremyBoss.cpp
+@@ -10,7 +10,6 @@
+ #include "GameObjectComponents/ParticleComponent.h"
+ #include "Registrar.h"
+ #include "GlobalResource.h"
+-#include "Steam/AchievementManager.h"
+ 
+ REGISTER_ENEMY(EnemyID::Boss_Jeremy, JeremyBoss)
+ 

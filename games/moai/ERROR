@@ -1,0 +1,13 @@
+moai-sim/libmoai-sim.a(MOAIParticleDistanceEmitter.cpp.o): In function `MOAIParticleDistanceEmitter::GetRandomDistance()':                                                                              
+MOAIParticleDistanceEmitter.cpp:(.text+0x2aa): warning: rand() may return deterministic values, is that what you want?                                                                                  
+moai-sim/libmoai-sim.a(MOAIAction.cpp.o): In function `MOAIAction::Update(float, unsigned int, bool)':                                                                                                  
+MOAIAction.cpp:(.text+0x22dd): undefined reference to `ZLDeviceTime::GetTimeInSeconds()'            
+MOAIAction.cpp:(.text+0x235b): undefined reference to `ZLDeviceTime::GetTimeInSeconds()'            
+moai-sim/libmoai-sim.a(MOAIInputMgr.cpp.o): In function `MOAIInputMgr::EnqueueTouchEvent(unsigned char, unsigned char, unsigned int, bool, float, float)':                                              
+MOAIInputMgr.cpp:(.text+0x882): undefined reference to `ZLDeviceTime::GetTimeInSeconds()'           
+moai-sim/libmoai-sim.a(MOAIRenderMgr.cpp.o): In function `MOAIRenderMgr::Render()':                 
+MOAIRenderMgr.cpp:(.text+0x89f): undefined reference to `ZLDeviceTime::GetTimeInSeconds()'          
+MOAIRenderMgr.cpp:(.text+0x9b5): undefined reference to `ZLDeviceTime::GetTimeInSeconds()'         
+moai-sim/libmoai-sim.a(MOAISim.cpp.o):MOAISim.cpp:(.text+0x5fb): more undefined references to `ZLDeviceTime::GetTimeInSeconds()' follow                                                                 
+c++: error: linker command failed with exit code 1 (use -v to see invocation)                       
+ninja: build stopped: subcommand failed.                

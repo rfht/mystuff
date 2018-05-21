@@ -1,0 +1,16 @@
+$OpenBSD$
+
+fix library name
+
+Index: cmake/zlcore/CMakeLists.txt
+--- cmake/zlcore/CMakeLists.txt.orig
++++ cmake/zlcore/CMakeLists.txt
+@@ -39,7 +39,7 @@ endif ( MOAI_CRYPTO )
+ # compulsory li
+ 
+ if (BUILD_LINUX OR BUILD_WINDOWS OR BUILD_OSX)
+-  target_link_libraries ( zlcore glew )
++  target_link_libraries ( zlcore GLEW )
+ endif (BUILD_LINUX OR BUILD_WINDOWS OR BUILD_OSX)
+ 
+ target_link_libraries ( zlcore zlvfs zlib )

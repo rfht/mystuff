@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_utils.h
+--- components/files/odv_utils.h.orig
++++ components/files/odv_utils.h
+@@ -13,4 +13,5 @@
+ 
+ void hex_dump(void *data, int size);
+ 
+-#endif /* OPENDV_UTILS_H */
+\ No newline at end of file
++#endif /* OPENDV_UTILS_H */
++

@@ -1,0 +1,24 @@
+$OpenBSD$
+
+remove steam header and associated function
+
+Index: src/Level/Enemies/MorgianaBoss.cpp
+--- src/Level/Enemies/MorgianaBoss.cpp.orig
++++ src/Level/Enemies/MorgianaBoss.cpp
+@@ -7,7 +7,6 @@
+ #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+ #include "Registrar.h"
+ #include "GlobalResource.h"
+-#include "Steam/AchievementManager.h"
+ 
+ REGISTER_ENEMY(EnemyID::Boss_Morgiana, MorgianaBoss)
+ 
+@@ -131,8 +130,6 @@ void MorgianaBoss::setDead() {
+ 			rec.boundingBox.left += 20.f;
+ 		}
+ 	}
+-
+-	g_achievementManager->notifyAchievement(ACH_MERCENARY_ORDER, "morgiana");
+ }
+ 
+ void MorgianaBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {

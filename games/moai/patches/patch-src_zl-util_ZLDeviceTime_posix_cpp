@@ -1,0 +1,16 @@
+$OpenBSD$
+
+add OpenBSD to ifdef
+
+Index: src/zl-util/ZLDeviceTime_posix.cpp
+--- src/zl-util/ZLDeviceTime_posix.cpp.orig
++++ src/zl-util/ZLDeviceTime_posix.cpp
+@@ -20,7 +20,7 @@
+ */
+ 
+ #include "pch.h"
+-#if defined ( __linux ) | defined ( __FLASCC__ ) | defined ( __QNX__ ) | defined ( __EMSCRIPTEN__ )
++#if defined ( __linux ) | defined ( __FLASCC__ ) | defined ( __QNX__ ) | defined ( __EMSCRIPTEN__ ) | defined ( __OpenBSD__ )
+ 
+ #include <zl-util/ZLDeviceTime.h>
+ #include <time.h>

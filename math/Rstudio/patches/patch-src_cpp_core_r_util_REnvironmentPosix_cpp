@@ -1,0 +1,36 @@
+$OpenBSD$
+
+EXPERIMENTAL: hardcode path to script
+
+Index: src/cpp/core/r_util/REnvironmentPosix.cpp
+--- src/cpp/core/r_util/REnvironmentPosix.cpp.orig
++++ src/cpp/core/r_util/REnvironmentPosix.cpp
+@@ -74,27 +74,7 @@ FilePath scanForRScript(const std::vector<std::string>
+ std::string extraLibraryPaths(const FilePath& ldPathsScript,
+                               const std::string& rHome)
+ {
+-   // no-op if no script is passed
+-   if (ldPathsScript.empty())
+-      return std::string();
+-
+-   // verify that script exists
+-   if (!ldPathsScript.exists())
+-   {
+-      LOG_WARNING_MESSAGE("r-ldpath script not found at " +
+-                          ldPathsScript.absolutePath());
+-      return std::string();
+-   }
+-
+-   // run script to capture paths
+-   std::string command = ldPathsScript.absolutePath() + " " + rHome;
+-   system::ProcessResult result;
+-   Error error = runCommand(command, core::system::ProcessOptions(), &result);
+-   if (error)
+-      LOG_ERROR(error);
+-   std::string libraryPaths = result.stdOut;
+-   boost::algorithm::trim(libraryPaths);
+-   
++   std::string libraryPaths = "/usr/local/lib/rstudio/bin";
+    return libraryPaths;
+ }
+ 

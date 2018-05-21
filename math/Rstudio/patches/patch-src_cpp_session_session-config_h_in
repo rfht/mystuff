@@ -1,0 +1,15 @@
+$OpenBSD$
+
+remove git related error
+
+Index: src/cpp/session/session-config.h.in
+--- src/cpp/session/session-config.h.in.orig
++++ src/cpp/session/session-config.h.in
+@@ -14,7 +14,6 @@
+  */
+ 
+ #define RSTUDIO_VERSION "${CPACK_PACKAGE_VERSION}"
+-#define RSTUDIO_GIT_REVISION_HASH "${RSTUDIO_GIT_REVISION_HASH}"
+ #cmakedefine RSTUDIO_SERVER
+ #cmakedefine RSTUDIO_UNVERSIONED_BUILD
+ #cmakedefine TRACE_PACKRAT_OUTPUT

@@ -1,0 +1,16 @@
+$OpenBSD$
+
+remove librt
+
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -144,7 +144,7 @@ if (OPENHMD_EXAMPLE_SDL)
+ endif (OPENHMD_EXAMPLE_SDL)
+ 
+ if (UNIX)
+-	set(LIBS ${LIBS} rt pthread)
++	set(LIBS ${LIBS} pthread)
+ endif (UNIX)
+ 
+ link_libraries(${LIBS})

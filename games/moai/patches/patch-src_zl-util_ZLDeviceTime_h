@@ -1,0 +1,16 @@
+$OpenBSD$
+
+add OpenBSD to ifdefs
+
+Index: src/zl-util/ZLDeviceTime.h
+--- src/zl-util/ZLDeviceTime.h.orig
++++ src/zl-util/ZLDeviceTime.h
+@@ -15,7 +15,7 @@ namespace ZLDeviceTime {
+ 		typedef uint64_t TimeStamp;
+ 	#elif ANDROID
+ 		typedef long TimeStamp;
+-	#elif __linux
++	#elif __linux || __OpenBSD__
+ 		#ifndef ANDROID
+ 			typedef long TimeStamp;
+ 		#else

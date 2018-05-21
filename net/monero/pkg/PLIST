@@ -1,0 +1,17 @@
+@comment $OpenBSD: PLIST,v$
+@bin bin/monero-blockchain-blackball
+@bin bin/monero-blockchain-export
+@bin bin/monero-blockchain-import
+@bin bin/monero-blockchain-usage
+@bin bin/monero-gen-trusted-multisig
+@bin bin/monero-wallet-cli
+@bin bin/monero-wallet-rpc
+@bin bin/monerod
+include/wallet/
+include/wallet/api/
+include/wallet/api/wallet2_api.h
+lib/libunbound.a
+share/doc/monero/
+share/doc/monero/LICENSE-cppzmq
+share/doc/monero/LICENSE-monero
+share/doc/pkg-readmes/${FULLPKGNAME}

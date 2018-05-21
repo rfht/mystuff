@@ -1,0 +1,40 @@
+XMR-Stak is a universal Stratum pool miner. This miner supports CPUs, AMD and
+NVIDIA gpus and can be used to mine the crypto currency Monero and Aeon.
+
+Features
+
+* support all common backends (CPU/x86, AMD-GPU and NVIDIA-GPU)
+* support all common OS (Linux, Windows and macOS)
+* supports algorithm cryptonight for Monero (XMR) and cryptonight-light (AEON)
+* easy to use
+* guided start (no need to edit a config file for the first start)
+* auto configuration for each backend
+* open source software (GPLv3)
+* TLS support
+* HTML statistics
+* JSON API for monitoring
+
+Besides Monero, following coins can be mined using this miner:
+
+* Aeon
+* BBSCoin
+* Croat
+* Edollar
+* Electroneum
+* Graft
+* Haven
+* Intense
+* Karbo
+* Sumokoin
+
+If your prefered coin is not listed, you can chose one of the following
+algorithms:
+
+* Cryptonight - 2 MiB scratchpad memory
+* Cryptonight-light - 1 MiB scratchpad memory
+
+Please note, this list is not complete, and is not an endorsement.
+
+By default the miner will donate 2% of the hashpower (2 minute in 100 minutes)
+to my pool. If you want to change that, edit donate-level.hpp before you build
+the binaries.

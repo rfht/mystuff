@@ -1,0 +1,14 @@
+$OpenBSD$
+
+remove rt library from linking
+
+Index: src/common/CMakeLists.txt
+--- src/common/CMakeLists.txt.orig
++++ src/common/CMakeLists.txt
+@@ -22,5 +22,5 @@ target_link_libraries(common
+ if(MSVC)
+     target_link_libraries(common Dbghelp)
+ elseif(UNIX AND NOT APPLE)
+-    target_link_libraries(common rt)
++    target_link_libraries(common)
+ endif()

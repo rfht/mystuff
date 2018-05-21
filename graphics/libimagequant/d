@@ -1,0 +1,1 @@
+Small, portable C library for high-quality conversion of RGBA images to 8-bit indexed-color (palette) images. The library is currently a part of the pngquant2 project.

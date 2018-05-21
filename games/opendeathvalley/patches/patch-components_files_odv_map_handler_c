@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_map_handler.c
+--- components/files/odv_map_handler.c.orig
++++ components/files/odv_map_handler.c
+@@ -43,4 +43,5 @@ void odv_map_close(struct ODVMap *mfile)
+     if (mfile->imgmap != NULL)
+         odv_imagemap_clean(mfile->imgmap);
+     free(mfile);
+-}
+\ No newline at end of file
++}
++

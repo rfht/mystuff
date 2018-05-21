@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_fxg_handler.c
+--- components/files/odv_fxg_handler.c.orig
++++ components/files/odv_fxg_handler.c
+@@ -121,4 +121,5 @@ void odv_fxg_close(struct ODVSoundFXGFile *sfile)
+         sfile->entries = NULL;
+     }
+     free(sfile);
+-}
+\ No newline at end of file
++}
++

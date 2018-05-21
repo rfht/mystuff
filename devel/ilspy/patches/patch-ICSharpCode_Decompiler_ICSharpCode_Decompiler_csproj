@@ -1,0 +1,25 @@
+$OpenBSD$
+
+Edit \ICSharpCode.Decompiler\ICSharpCode.Decompiler.csproj Add
+Sdk="Microsoft.NET.Sdk" to the Project element. This is required due to a
+tooling issue on Unix. Please do not commit this when contributing a pull
+request!
+- per github instructions
+
+Index: ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj
+--- ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj.orig
++++ ICSharpCode.Decompiler/ICSharpCode.Decompiler.csproj
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project>
++<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+ 
+   <PropertyGroup>
+@@ -612,4 +612,4 @@
+       <EmbeddedFiles Include="@(Compile)" />
+     </ItemGroup>
+   </Target>
+-</Project>
+\ No newline at end of file
++</Project>

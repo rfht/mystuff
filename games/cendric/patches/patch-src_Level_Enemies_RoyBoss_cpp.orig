@@ -1,0 +1,15 @@
+$OpenBSD$
+
+remove steam header
+
+Index: src/Level/Enemies/RoyBoss.cpp
+--- src/Level/Enemies/RoyBoss.cpp.orig
++++ src/Level/Enemies/RoyBoss.cpp
+@@ -7,7 +7,6 @@
+ #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+ #include "Registrar.h"
+ #include "GlobalResource.h"
+-#include "Steam/AchievementManager.h"
+ 
+ REGISTER_ENEMY(EnemyID::Boss_Roy, RoyBoss)
+ 

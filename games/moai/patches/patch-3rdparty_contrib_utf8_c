@@ -1,0 +1,16 @@
+$OpenBSD$
+
+point to malloc.h
+
+Index: 3rdparty/contrib/utf8.c
+--- 3rdparty/contrib/utf8.c.orig
++++ 3rdparty/contrib/utf8.c
+@@ -22,6 +22,8 @@
+ #include <stdarg.h>
+ #if defined ( WIN32 )
+ #include <malloc.h>
++#elif defined ( __OpenBSD__ )
++#include <sys/malloc.h>
+ #elif defined ( __FLASCC__ )
+ #else
+ #include <alloca.h>

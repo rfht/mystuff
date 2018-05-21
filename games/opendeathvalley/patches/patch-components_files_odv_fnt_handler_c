@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_fnt_handler.c
+--- components/files/odv_fnt_handler.c.orig
++++ components/files/odv_fnt_handler.c
+@@ -135,4 +135,5 @@ void odv_fnt_close(struct ODVFnt *fnt)
+     if (fnt->imgmap != NULL)
+         odv_imagemap_clean(fnt->imgmap);
+     free(fnt);
+-}
+\ No newline at end of file
++}
++

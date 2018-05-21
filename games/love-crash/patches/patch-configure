@@ -1,0 +1,22 @@
+$OpenBSD: patch-configure,v 1.2 2012/05/11 21:38:29 jasper Exp $
+Index: configure
+--- configure.orig
++++ configure
+@@ -19793,7 +19793,7 @@ for ac_lib in '' m; do
+     ac_res="none required"
+   else
+     ac_res=-l$ac_lib
+-    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
++    LIBS="-l$ac_lib -lvorbis -lm -logg $ac_func_search_save_LIBS"
+   fi
+   if ac_fn_cxx_try_link "$LINENO"; then :
+   ac_cv_search_sqrt=$ac_res
+@@ -19810,7 +19810,7 @@ else
+   ac_cv_search_sqrt=no
+ fi
+ rm conftest.$ac_ext
+-LIBS=$ac_func_search_save_LIBS
++LIBS="$ac_func_search_save_LIBS -lvorbis -lm -logg"
+ fi
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_sqrt" >&5
+ $as_echo "$ac_cv_search_sqrt" >&6; }

@@ -1,0 +1,12 @@
+-- Building libuvc with JPEG support.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /usr/ports/pobj/libuvc-0.0.6.20170822/libuvc-77b43d618e71698f52f7beb88c4b99b5f018259b
+-- Cache values
+BUILD_EXAMPLE:BOOL=OFF
+BUILD_TEST:BOOL=OFF
+CMAKE_BUILD_TARGET:STRING=Both
+CMAKE_BUILD_TYPE:STRING=Release
+CMAKE_INSTALL_PREFIX:PATH=/usr/local
+INSTALL_CMAKE_DIR:PATH=/usr/local/lib/cmake/libuvc
+jpeg_DIR:PATH=jpeg_DIR-NOTFOUND

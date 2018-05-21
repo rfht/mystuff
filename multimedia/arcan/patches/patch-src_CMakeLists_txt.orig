@@ -1,0 +1,30 @@
+$OpenBSD$
+
+remove failing GIT check
+add X11R6 include dir for GL/gl.h
+
+Index: src/CMakeLists.txt
+--- src/CMakeLists.txt.orig
++++ src/CMakeLists.txt
+@@ -80,12 +80,7 @@ if (NOT DEFINED ENGINE_BUILDTAG)
+ 			string(STRIP ${GIT_BRANCH} GIT_BRANCH)
+ 		endif()
+ 
+-		if (${GIT_VERSION} STREQUAL "")
+-			amsg("${CLB_RED}missing git_version, using 'relukn' for build tag${CL_RST}")
+ 			set(ENGINE_BUILDTAG arcan-relukn-${VERSION})
+-		else()
+-			set(ENGINE_BUILDTAG arcan-git-${GIT_BRANCH}-${GIT_VERSION})
+-		endif()
+ 	else()
+ 		amsg("${CLB_RED}git not found, using 'relukn' for build tag${CL_RST}")
+ 		set(ENGINE_BUILDTAG arcan-relukn-${VERSION})
+@@ -525,7 +520,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BIN
+ 
+ set(SHMIF_TUI true)
+ add_subdirectory(shmif)
+-include_directories(${ARCAN_SHMIF_INCLUDE_DIR})
++include_directories(${ARCAN_SHMIF_INCLUDE_DIR} "/usr/X11R6/include")
+ 
+ if (NO_FSRV)
+ 	set(FSRV_DISABLE DISABLE_FRAMESERVERS)

@@ -1,0 +1,16 @@
+RStudio is the premier integrated development environment for R. It is available
+in open source and commercial editions on the desktop (Windows, Mac, and Linux)
+and from a web browser to a Linux server running RStudio Server or RStudio
+Server Pro.
+
+Features include:
+
+* Syntax highlighting, code completion, and smart indentation
+* Execute R code directly from the source editor
+* Quickly jump to function definitions
+* Integrated R help and documentation
+* Easily manage multiple working directories using projects
+* Workspace browser and data viewer
+* Interactive debugger to diagnose and fix errors quickly
+* Extensive package development tools
+* Authoring with Sweave and R Markdown

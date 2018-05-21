@@ -1,0 +1,37 @@
+$OpenBSD$
+
+remove cpu affinity code that's not supported on OpenBSD
+
+add sys/types.h and sys/param.h (from FreeBSD) - may not be needed
+ - but FreeBSD states that param.h may be needed for i386
+
+Index: src/cpp/core/system/PosixSched.cpp
+--- src/cpp/core/system/PosixSched.cpp.orig
++++ src/cpp/core/system/PosixSched.cpp
+@@ -16,6 +16,8 @@
+ #include <core/system/PosixSched.hpp>
+ 
+ #include <sched.h>
++#include <sys/types.h>
++#include <sys/param.h>
+ 
+ #include <core/Error.hpp>
+ 
+@@ -40,7 +42,7 @@ bool isCpuAffinityEmpty(const CpuAffinity& cpus)
+ 
+ Error getCpuAffinity(CpuAffinity* pCpus)
+ {
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__OpenBSD__)
+    cpu_set_t cs;
+    CPU_ZERO(&cs);
+    if (::sched_getaffinity(0, sizeof(cs), &cs) == -1)
+@@ -65,7 +67,7 @@ Error getCpuAffinity(CpuAffinity* pCpus)
+ 
+ Error setCpuAffinity(const CpuAffinity& cpus)
+ {
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__OpenBSD__)
+    cpu_set_t cs;
+    CPU_ZERO(&cs);
+ 

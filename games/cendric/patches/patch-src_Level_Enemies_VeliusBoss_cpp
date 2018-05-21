@@ -1,0 +1,37 @@
+$OpenBSD$
+
+remove steam header and remove associated achievement functions
+
+Index: src/Level/Enemies/VeliusBoss.cpp
+--- src/Level/Enemies/VeliusBoss.cpp.orig
++++ src/Level/Enemies/VeliusBoss.cpp
+@@ -13,7 +13,6 @@
+ #include "ObjectFactory.h"
+ #include "Registrar.h"
+ #include "GlobalResource.h"
+-#include "Steam/AchievementManager.h"
+ #include "FileIO/LevelReader.h"
+ 
+ REGISTER_ENEMY(EnemyID::Boss_Velius, VeliusBoss)
+@@ -263,14 +262,6 @@ void VeliusBoss::handleVeliusDead() {
+ 	if (m_isIninaDead) {
+ 		m_screen->getCharacterCore()->setConditionFulfilled("npc_inina4", "dead");
+ 		m_screen->getCharacterCore()->setQuestState("missing_inina", QuestState::Failed);
+-	}
+-
+-	// achievements
+-	if (m_isKorayDead && m_isRobertDead && m_isIninaDead) {
+-		g_achievementManager->unlockAchievement(ACH_KILL_ALL_MAGES);
+-	}
+-	if (!m_isKorayDead && !m_isRobertDead && !m_isIninaDead) {
+-		g_achievementManager->unlockAchievement(ACH_SAVE_ALL_MAGES);
+ 	}
+ }
+ 
+@@ -985,4 +976,4 @@ bool VeliusBoss::isBlocked() const {
+ 
+ std::string VeliusBoss::getSpritePath() const {
+ 	return "res/texture/bosses/spritesheet_boss_velius.png";
+-}
+\ No newline at end of file
++}

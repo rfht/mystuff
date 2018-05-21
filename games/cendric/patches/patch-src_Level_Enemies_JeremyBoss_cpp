@@ -1,0 +1,24 @@
+$OpenBSD$
+
+remove steam header file and associated achievement function
+
+Index: src/Level/Enemies/JeremyBoss.cpp
+--- src/Level/Enemies/JeremyBoss.cpp.orig
++++ src/Level/Enemies/JeremyBoss.cpp
+@@ -10,7 +10,6 @@
+ #include "GameObjectComponents/ParticleComponent.h"
+ #include "Registrar.h"
+ #include "GlobalResource.h"
+-#include "Steam/AchievementManager.h"
+ 
+ REGISTER_ENEMY(EnemyID::Boss_Jeremy, JeremyBoss)
+ 
+@@ -50,8 +49,6 @@ void JeremyBoss::setDead() {
+ 			rec.boundingBox.left += 20.f;
+ 		}
+ 	}
+-
+-	g_achievementManager->notifyAchievement(ACH_MERCENARY_ORDER, "jeremy");
+ }
+ 
+ void JeremyBoss::loadAttributes() {

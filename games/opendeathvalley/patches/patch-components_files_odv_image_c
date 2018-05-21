@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_image.c
+--- components/files/odv_image.c.orig
++++ components/files/odv_image.c
+@@ -142,4 +142,5 @@ void odv_image_clean(struct ODVImage *img)
+     if (img->buf != NULL)
+         free(img->buf);
+     free(img);
+-}
+\ No newline at end of file
++}
++

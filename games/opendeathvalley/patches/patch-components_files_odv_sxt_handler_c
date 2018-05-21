@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_sxt_handler.c
+--- components/files/odv_sxt_handler.c.orig
++++ components/files/odv_sxt_handler.c
+@@ -43,4 +43,5 @@ void odv_sxt_close(struct ODVSxt *sxt)
+     if (sxt->imgmap != NULL)
+         odv_imagemap_clean(sxt->imgmap);
+     free(sxt);
+-}
+\ No newline at end of file
++}
++

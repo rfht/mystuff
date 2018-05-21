@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add newline
+
+Index: components/files/odv_dvd_handler.c
+--- components/files/odv_dvd_handler.c.orig
++++ components/files/odv_dvd_handler.c
+@@ -465,4 +465,5 @@ void odv_dvd_close(struct ODVDDvdFile *dfile)
+         free(dfile->entries);
+     }
+     free(dfile);
+-}
+\ No newline at end of file
++}
++

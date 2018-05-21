@@ -1,0 +1,28 @@
+-- The C compiler identification is Clang 6.0.0
+-- The CXX compiler identification is Clang 6.0.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- No build type selected, default to Release
+-- Configuring incomplete, errors occurred!
+See also "/usr/ports/pobj/rpcs3-0.0.5/rpcs3-0.0.5/CMakeFiles/CMakeOutput.log".
+-- Cache values
+CCACHE_FOUND:FILEPATH=CCACHE_FOUND-NOTFOUND
+CMAKE_BUILD_TYPE:STRING=
+CMAKE_INSTALL_PREFIX:PATH=/usr/local
+PNG_SHARED:BOOL=OFF
+PNG_TESTS:BOOL=OFF
+Qt5_DIR:PATH=Qt5_DIR-NOTFOUND
+USE_NATIVE_INSTRUCTIONS:BOOL=ON
+VULKAN_PREBUILT:BOOL=OFF
+WITHOUT_LLVM:BOOL=OFF
+WITH_GDB:BOOL=OFF

@@ -1,0 +1,5 @@
+01 Apr 2018 03:40:27 [rdesktop] WARNING r-ldpath script not found at /usr/ports/mystuff/math/session/r-ldpath; LOGGED FROM: std::string rstudio::core::r_util::(anonymous namespace)::extraLibraryPaths(const rstudio::core::FilePath &, const std::string &) /usr/ports/pobj/rstudio-1.1.444/rstudio-1.1.444/src/cpp/core/r_util/REnvironmentPosix.cpp:85
+
+01 Apr 2018 19:08:29 [rdesktop] WARNING r-ldpath script not found at /home/session/r-ldpath; LOGGED FROM: std::string rstudio::core::r_util::(anonymous namespace)::extraLibraryPaths(const rstudio::core::FilePath &, const std::string &) /usr/ports/pobj/rstudio-1.1.444/rstudio-1.1.444/src/cpp/core/r_util/REnvironmentPosix.cpp:85
+
+Also needs LD_LIBRARY_PATH=/usr/local/lib/inotify
