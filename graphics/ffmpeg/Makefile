@@ -31,13 +31,14 @@ PERMIT_PACKAGE_FTP=	Yes
 WANTLIB=	SDL X11 Xext Xv ass bz2 c crypto fontconfig freetype fribidi \
 		gsm m mp3lame opus pthread sndio speex ssl v4l2 vorbis \
 		vorbisenc vpx>=5 x264 x265>=2 xcb xcb-shape xcb-shm xcb-xfixes \
-		xvidcore z
+		xvidcore z fdk-aac theora
 
 BUILD_DEPENDS=	textproc/texi2html
 .if ${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "i386"
 BUILD_DEPENDS+=	devel/yasm
 .endif
 LIB_DEPENDS=	archivers/bzip2 \
+		audio/fdk-aac \
 		audio/lame \
 		audio/libvorbis \
 		audio/opus \
@@ -45,6 +46,7 @@ LIB_DEPENDS=	archivers/bzip2 \
 		audio/gsm \
 		devel/sdl \
 		multimedia/libass \
+		multimedia/libtheora \
 		multimedia/libv4l \
 		multimedia/libvpx>=1.3.0 \
 		multimedia/x264 \
@@ -52,7 +54,7 @@ LIB_DEPENDS=	archivers/bzip2 \
 		multimedia/xvidcore
 
 # inter-library dependencies for the current configuration
-LIBavcodec_EXTRALIBS=-L${LOCALBASE}/lib -lgsm -lmp3lame -lopus -lspeex -lvorbis -lvorbisenc -lvpx -lx264 -lx265 -lxvidcore -ltheora -lz -pthread
+LIBavcodec_EXTRALIBS=-L${LOCALBASE}/lib -lgsm -lmp3lame -lopus -lspeex -lvorbis -lvorbisenc -lvpx -lx264 -lx265 -lxvidcore -ltheora -lfdk-aac -lz -pthread
 LIBavdevice_EXTRALIBS=-L${LOCALBASE}/lib -L${X11BASE}/lib -lX11 -lXext -lXv -lxcb-render -lxcb-shape -lxcb-shm -lxcb-xfixes -lxcb -lsndio -lv4l2
 LIBavfilter_EXTRALIBS=-L${LOCALBASE}/lib -L${X11BASE}/lib -lass -lfontconfig -lfreetype -lfribidi
 LIBavformat_EXTRALIBS=-L${LOCALBASE}/lib -lbz2 -lssl -lcrypto -pthread
@@ -93,6 +95,7 @@ CONFIGURE_ARGS+= --enable-shared \
 		--enable-fontconfig \
 		--enable-gpl \
 		--enable-libass \
+		--enable-libfdk-aac \
 		--enable-libfreetype \
 		--enable-libfribidi \
 		--enable-libgsm \
