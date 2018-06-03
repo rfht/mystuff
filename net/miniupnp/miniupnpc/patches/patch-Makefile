@@ -1,0 +1,30 @@
+$OpenBSD: patch-Makefile,v 1.4 2014/02/03 13:30:52 dcoppa Exp $
+
+use MODPY_BIN
+
+Index: Makefile
+--- Makefile.orig
++++ Makefile
+@@ -172,11 +172,11 @@ check:	validateminixml validateminiwget validateupnpre
+ everything:	all $(EXECUTABLES_ADDTESTS)
+ 
+ pythonmodule:	$(LIBRARY) miniupnpcmodule.c setup.py
+-	MAKE=$(MAKE) python setup.py build
++	MAKE=$(MAKE) ${MODPY_BIN} setup.py build
+ 	touch $@
+ 
+ installpythonmodule:	pythonmodule
+-	MAKE=$(MAKE) python setup.py install
++	MAKE=$(MAKE) ${MODPY_BIN} setup.py install
+ 
+ pythonmodule3:	$(LIBRARY) miniupnpcmodule.c setup.py
+ 	MAKE=$(MAKE) python3 setup.py build
+@@ -298,7 +298,7 @@ ifneq (, $(findstring darwin, $(OS)))
+ #	$(CC) -dynamiclib $(LDFLAGS) -Wl,-install_name,$(SONAME) -o $@ $^
+ 	$(CC) -dynamiclib $(LDFLAGS) -Wl,-install_name,$(INSTALLDIRLIB)/$(SONAME) -o $@ $^
+ else
+-	$(CC) -shared $(LDFLAGS) -Wl,-soname,$(SONAME) -o $@ $^
++	$(CC) -shared $(LDFLAGS) -o $@ $^
+ endif
+ 
+ upnpc-static:	upnpc.o $(LIBRARY)

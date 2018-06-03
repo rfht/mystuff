@@ -1,0 +1,15 @@
+$OpenBSD$
+
+add List.h which defines ID_INLINE
+
+Index: idlib/math/Math.h
+--- idlib/math/Math.h.orig
++++ idlib/math/Math.h
+@@ -23,6 +23,7 @@
+ #include <cmath>
+ #include <limits> // before FLT_EPSILON is #undefined
+ #include <boost/numeric/ublas/matrix.hpp> // before FLT_EPSILON is #undefined
++#include "../containers/List.h"	// contains ID_INLINE
+ 
+ #ifdef __linux__
+ #include "../../sys/sys_public.h"

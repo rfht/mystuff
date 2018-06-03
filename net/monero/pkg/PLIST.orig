@@ -7,20 +7,9 @@
 @bin bin/monero-wallet-cli
 @bin bin/monero-wallet-rpc
 @bin bin/monerod
-include/miniupnpc/igd_desc_parse.h
-include/miniupnpc/miniupnpc.h
-include/miniupnpc/miniupnpc_declspec.h
-include/miniupnpc/miniupnpctypes.h
-include/miniupnpc/miniwget.h
-include/miniupnpc/portlistingparse.h
-include/miniupnpc/upnpcommands.h
-include/miniupnpc/upnpdev.h
-include/miniupnpc/upnperrors.h
-include/miniupnpc/upnpreplyparse.h
 include/wallet/
 include/wallet/api/
 include/wallet/api/wallet2_api.h
-lib/libminiupnpc.a
 lib/libunbound.a
 share/doc/monero/
 share/doc/monero/LICENSE-cppzmq

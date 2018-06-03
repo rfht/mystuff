@@ -5,7 +5,7 @@ remove check for zmq.hpp
 Index: CMakeLists.txt
 --- CMakeLists.txt.orig
 +++ CMakeLists.txt
-@@ -838,15 +838,11 @@ if(CMAKE_C_COMPILER_ID STREQUAL "Clang" AND ARCH_WIDTH
+@@ -833,15 +833,11 @@ if(CMAKE_C_COMPILER_ID STREQUAL "Clang" AND ARCH_WIDTH
    list(APPEND EXTRA_LIBRARIES ${ATOMIC})
  endif()
  

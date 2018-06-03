@@ -1,0 +1,15 @@
+$OpenBSD$
+
+link against libminiupnpc from ports
+
+Index: src/daemon/CMakeLists.txt
+--- src/daemon/CMakeLists.txt.orig
++++ src/daemon/CMakeLists.txt
+@@ -93,6 +93,7 @@ target_link_libraries(daemon
+     serialization
+     daemon_rpc_server
+     epee
++    miniupnpc
+     ${EPEE_READLINE}
+     version
+     ${Boost_CHRONO_LIBRARY}

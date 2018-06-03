@@ -1,0 +1,19 @@
+$OpenBSD: patch-miniupnpcmodule_c,v 1.2 2013/05/17 10:59:31 dcoppa Exp $
+
+Fix error: expected expression before '/' token
+
+--- miniupnpcmodule.c.orig	Thu Aug 30 10:15:18 2012
++++ miniupnpcmodule.c	Thu May 16 13:09:01 2013
+@@ -256,9 +256,9 @@ Py_END_ALLOW_THREADS
+ 	}
+ 	else
+ 	{
+-		// TODO: RAISE an Exception. See upnpcommands.h for errors codes.
+-		// upnperrors.c
+-		//Py_RETURN_FALSE;
++		/* TODO: RAISE an Exception. See upnpcommands.h for errors codes. */
++		/* upnperrors.c */
++		/* Py_RETURN_FALSE; */
+ 		/* TODO: have our own exception type ! */
+ 		PyErr_SetString(PyExc_Exception, strupnperror(r));
+ 		return NULL;

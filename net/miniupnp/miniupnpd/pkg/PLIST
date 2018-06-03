@@ -1,0 +1,8 @@
+@comment $OpenBSD: PLIST,v 1.2 2013/05/17 10:59:31 dcoppa Exp $
+@man man/man8/miniupnpd.8
+@bin sbin/miniupnpd
+share/doc/pkg-readmes/${FULLPKGNAME}
+share/examples/miniupnpd/
+share/examples/miniupnpd/miniupnpd.conf
+@sample ${SYSCONFDIR}/miniupnpd.conf
+@rcscript ${RCDIR}/miniupnpd

@@ -1,0 +1,16 @@
+$OpenBSD$
+
+replace gets with fgets
+
+Index: src/Libraries/FIX/Tests/FixTest/fixtest.c
+--- src/Libraries/FIX/Tests/FixTest/fixtest.c.orig
++++ src/Libraries/FIX/Tests/FixTest/fixtest.c
+@@ -531,7 +531,7 @@ void test_atofix(void)
+ 	extern fix atofix(char *p);
+ 
+ 	printf("Enter number: ");
+-	gets(buff);
++	fgets(buff, sizeof(buff), stdin);
+ 	a = atofix(buff);
+ 	fix_sprint(buff, a);
+ 	puts(buff);
