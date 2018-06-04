@@ -1,0 +1,133 @@
+$OpenBSD$
+
+fix *64 function names
+
+Index: src/ints/bios_vhd.cpp
+--- src/ints/bios_vhd.cpp.orig
++++ src/ints/bios_vhd.cpp
+@@ -59,15 +59,15 @@ imageDiskVHD::ErrorCodes imageDiskVHD::Open(const char
+ 	assert(sizeof(VHDFooter) == 512);
+ 	assert(sizeof(DynamicHeader) == 1024);
+ 	//open file and clear C++ buffering
+-	FILE* file = fopen64(fileName, readOnly ? "rb" : "rb+");
++	FILE* file = fopen(fileName, readOnly ? "rb" : "rb+");
+ 	if (!file) return ERROR_OPENING;
+ 	setbuf(file, NULL);
+ 	//check that length of file is > 512 bytes
+-	if (fseeko64(file, 0L, SEEK_END)) { fclose(file); return INVALID_DATA; }
+-	if (ftello64(file) < 512) { fclose(file); return INVALID_DATA; }
++	if (fseeko(file, 0L, SEEK_END)) { fclose(file); return INVALID_DATA; }
++	if (ftello(file) < 512) { fclose(file); return INVALID_DATA; }
+ 	//read footer
+-	if (fseeko64(file, -512L, SEEK_CUR)) { fclose(file); return INVALID_DATA; }
+-	Bit64u footerPosition = (Bit64u)((Bit64s)ftello64(file)); /* make sure to sign extend! */
++	if (fseeko(file, -512L, SEEK_CUR)) { fclose(file); return INVALID_DATA; }
++	Bit64u footerPosition = (Bit64u)((Bit64s)ftello(file)); /* make sure to sign extend! */
+ 	if ((Bit64s)footerPosition < 0LL) { fclose(file); return INVALID_DATA; }
+ 	VHDFooter originalfooter;
+ 	VHDFooter footer;
+@@ -78,7 +78,7 @@ imageDiskVHD::ErrorCodes imageDiskVHD::Open(const char
+ 	//verify checksum on footer
+ 	if (!footer.IsValid()) {
+ 		//if invalid, read header, and verify checksum on header
+-		if (fseeko64(file, 0L, SEEK_SET)) { fclose(file); return INVALID_DATA; }
++		if (fseeko(file, 0L, SEEK_SET)) { fclose(file); return INVALID_DATA; }
+ 		if (fread(&originalfooter, sizeof(Bit8u), 512, file) != 512) { fclose(file); return INVALID_DATA; }
+ 		//convert from big-endian if necessary
+ 		footer = originalfooter;
+@@ -126,7 +126,7 @@ imageDiskVHD::ErrorCodes imageDiskVHD::Open(const char
+ 	}
+ 	//read dynamic disk header (applicable for dynamic and differencing types)
+ 	DynamicHeader dynHeader;
+-	if (fseeko64(file, footer.dataOffset, SEEK_SET)) { delete vhd; return INVALID_DATA; }
++	if (fseeko(file, footer.dataOffset, SEEK_SET)) { delete vhd; return INVALID_DATA; }
+ 	if (fread(&dynHeader, sizeof(Bit8u), 1024, file) != 1024) { delete vhd; return INVALID_DATA; }
+ 	//swap byte order and validate checksum
+ 	dynHeader.SwapByteOrder();
+@@ -146,7 +146,7 @@ imageDiskVHD::ErrorCodes imageDiskVHD::Open(const char
+ 				Bit32u dataLength = dynHeader.parentLocatorEntry[i].platformDataLength;
+ 				Bit8u* buffer = 0;
+ 				if (dataOffset && dataLength && ((Bit64u)dataOffset + dataLength) <= footerPosition) {
+-					if (fseeko64(file, dataOffset, SEEK_SET)) { delete vhd; return INVALID_DATA; }
++					if (fseeko(file, dataOffset, SEEK_SET)) { delete vhd; return INVALID_DATA; }
+ 					buffer = (Bit8u*)malloc(dataLength + 2);
+ 					if (buffer == 0) { delete vhd; return INVALID_DATA; }
+ 					if (fread(buffer, sizeof(Bit8u), dataLength, file) != dataLength) { free(buffer); delete vhd; return INVALID_DATA; }
+@@ -309,7 +309,7 @@ Bit8u imageDiskVHD::Read_AbsoluteSector(Bit32u sectnum
+ 		Bit32u bitNum = sectorOffset % 8;
+ 		bool hasData = currentBlockDirtyMap[byteNum] & (1 << (7 - bitNum));
+ 		if (hasData) {
+-			if (fseeko64(diskimg, ((Bit64u)currentBlockSectorOffset + blockMapSectors + sectorOffset) * 512, SEEK_SET)) return 0x05; //can't seek
++			if (fseeko(diskimg, ((Bit64u)currentBlockSectorOffset + blockMapSectors + sectorOffset) * 512, SEEK_SET)) return 0x05; //can't seek
+ 			if (fread(data, sizeof(Bit8u), 512, diskimg) != 512) return 0x05; //can't read
+ 			return 0;
+ 		}
+@@ -330,7 +330,7 @@ Bit8u imageDiskVHD::Write_AbsoluteSector(Bit32u sectnu
+ 	if (!currentBlockAllocated) {
+ 		if (!copiedFooter) {
+ 			//write backup of footer at start of file (should already exist, but we never checked to be sure it is readable or matches the footer we used)
+-			if (fseeko64(diskimg, 0, SEEK_SET)) return 0x05;
++			if (fseeko(diskimg, 0, SEEK_SET)) return 0x05;
+ 			if (fwrite(originalFooter.cookie, sizeof(Bit8u), 512, diskimg) != 512) return 0x05;
+ 			copiedFooter = true;
+ 			//flush the data to disk after writing the backup footer
+@@ -339,9 +339,9 @@ Bit8u imageDiskVHD::Write_AbsoluteSector(Bit32u sectnu
+ 		//calculate new location of footer, and round up to nearest 512 byte increment "just in case"
+ 		Bit64u newFooterPosition = (((footerPosition - 512 + blockMapSize + dynamicHeader.blockSize) + 511) / 512) * 512;
+ 		//attempt to extend the length appropriately first (on some operating systems this will extend the file)
+-		if (fseeko64(diskimg, newFooterPosition + 512, SEEK_SET)) return 0x05;
++		if (fseeko(diskimg, newFooterPosition + 512, SEEK_SET)) return 0x05;
+ 		//now write the footer
+-		if (fseeko64(diskimg, newFooterPosition, SEEK_SET)) return 0x05;
++		if (fseeko(diskimg, newFooterPosition, SEEK_SET)) return 0x05;
+ 		if (fwrite(originalFooter.cookie, sizeof(Bit8u), 512, diskimg) != 512) return 0x05;
+ 		//save the new block location and new footer position
+ 		Bit32u newBlockSectorNumber = (Bit32u)((footerPosition + 511) / 512);
+@@ -349,12 +349,12 @@ Bit8u imageDiskVHD::Write_AbsoluteSector(Bit32u sectnu
+ 		//clear the dirty flags for the new footer position
+ 		for (Bit32u i = 0; i < blockMapSize; i++) currentBlockDirtyMap[i] = 0;
+ 		//write the dirty map
+-		if (fseeko64(diskimg, newBlockSectorNumber * 512, SEEK_SET)) return 0x05;
++		if (fseeko(diskimg, newBlockSectorNumber * 512, SEEK_SET)) return 0x05;
+ 		if (fwrite(currentBlockDirtyMap, sizeof(Bit8u), blockMapSize, diskimg) != blockMapSize) return 0x05;
+ 		//flush the data to disk after expanding the file, before allocating the block in the BAT
+ 		if (fflush(diskimg)) return 0x05;
+ 		//update the BAT
+-		if (fseeko64(diskimg, dynamicHeader.tableOffset + (blockNumber * 4), SEEK_SET)) return 0x05;
++		if (fseeko(diskimg, dynamicHeader.tableOffset + (blockNumber * 4), SEEK_SET)) return 0x05;
+ 		Bit32u newBlockSectorNumberBE = SDL_SwapBE32(newBlockSectorNumber);
+ 		if (fwrite(&newBlockSectorNumberBE, sizeof(Bit8u), 4, diskimg) != 4) return false;
+ 		currentBlockAllocated = true;
+@@ -369,12 +369,12 @@ Bit8u imageDiskVHD::Write_AbsoluteSector(Bit32u sectnu
+ 	//if the sector hasn't been marked as dirty, mark it as dirty
+ 	if (!hasData) {
+ 		currentBlockDirtyMap[byteNum] |= 1 << (7 - bitNum);
+-		if (fseeko64(diskimg, currentBlockSectorOffset * 512, SEEK_SET)) return 0x05; //can't seek
++		if (fseeko(diskimg, currentBlockSectorOffset * 512, SEEK_SET)) return 0x05; //can't seek
+ 		if (fwrite(currentBlockDirtyMap, sizeof(Bit8u), blockMapSize, diskimg) != blockMapSize) return 0x05;
+ 	}
+ 	//current sector has now been marked as dirty
+ 	//write the sector
+-	if (fseeko64(diskimg, ((Bit64u)currentBlockSectorOffset + blockMapSectors + sectorOffset) * 512, SEEK_SET)) return 0x05; //can't seek
++	if (fseeko(diskimg, ((Bit64u)currentBlockSectorOffset + blockMapSectors + sectorOffset) * 512, SEEK_SET)) return 0x05; //can't seek
+ 	if (fwrite(data, sizeof(Bit8u), 512, diskimg) != 512) return 0x05; //can't write
+ 	return 0;
+ }
+@@ -392,7 +392,7 @@ imageDiskVHD::VHDTypes imageDiskVHD::GetVHDType(const 
+ bool imageDiskVHD::loadBlock(const Bit32u blockNumber) {
+ 	if (currentBlock == blockNumber) return true;
+ 	if (blockNumber >= dynamicHeader.maxTableEntries) return false;
+-	if (fseeko64(diskimg, dynamicHeader.tableOffset + (blockNumber * 4), SEEK_SET)) return false;
++	if (fseeko(diskimg, dynamicHeader.tableOffset + (blockNumber * 4), SEEK_SET)) return false;
+ 	Bit32u blockSectorOffset;
+ 	if (fread(&blockSectorOffset, sizeof(Bit8u), 4, diskimg) != 4) return false;
+ 	blockSectorOffset = SDL_SwapBE32(blockSectorOffset);
+@@ -401,7 +401,7 @@ bool imageDiskVHD::loadBlock(const Bit32u blockNumber)
+ 		currentBlockAllocated = false;
+ 	}
+ 	else {
+-		if (fseeko64(diskimg, blockSectorOffset * (Bit64u)512, SEEK_SET)) return false;
++		if (fseeko(diskimg, blockSectorOffset * (Bit64u)512, SEEK_SET)) return false;
+ 		currentBlock = 0xFFFFFFFF;
+ 		currentBlockAllocated = true;
+ 		currentBlockSectorOffset = blockSectorOffset;

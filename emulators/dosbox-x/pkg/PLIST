@@ -1,4 +1,4 @@
-@comment $OpenBSD$
+@comment $OpenBSD: PLIST,v$
 @bin bin/dosbox-x
 share/dosbox-x/
 share/dosbox-x/CHANGELOG

@@ -1,0 +1,23 @@
+$OpenBSD$
+
+this script doesn't need bash
+remove -j option (shouldn't be needed)
+
+Index: vs2015/sdl/build-dosbox.sh
+--- vs2015/sdl/build-dosbox.sh.orig
++++ vs2015/sdl/build-dosbox.sh
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ rm -Rfv linux-host || exit 1
+ mkdir -p linux-host || exit 1
+ 
+@@ -46,7 +46,7 @@ cat >>include/SDL_config.h <<_EOF
+ _EOF
+ fi
+ 
+-make -j || exit 1
++make || exit 1
+ make install || exit 1  # will install into ./linux-host
+ 
+ # STOP DELETING THE FILE!!!!! I need it for Windows builds!

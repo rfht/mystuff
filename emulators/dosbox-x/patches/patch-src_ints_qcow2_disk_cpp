@@ -5,7 +5,7 @@ replace *64 functions
 Index: src/ints/qcow2_disk.cpp
 --- src/ints/qcow2_disk.cpp.orig
 +++ src/ints/qcow2_disk.cpp
-@@ -30,7 +30,7 @@ using namespace std;
+@@ -33,7 +33,7 @@ using namespace std;
  //Public function to read a QCow2 header.
  	QCow2Image::QCow2Header QCow2Image::read_header(FILE* qcow2File){
  		QCow2Header header;
@@ -14,7 +14,7 @@ Index: src/ints/qcow2_disk.cpp
  		if (1 != fread(&header, sizeof header, 1, qcow2File)){
  			clearerr(qcow2File);  /*If we fail, reset the file stream's status*/
  			return QCow2Header(); /*Return an empty header*/
-@@ -66,7 +66,7 @@ using namespace std;
+@@ -69,7 +69,7 @@ using namespace std;
  		if (header.backing_file_offset != 0 && header.backing_file_size != 0){
  			char* backing_file_name = new char[header.backing_file_size + 1];
  			backing_file_name[header.backing_file_size] = 0;
@@ -23,7 +23,7 @@ Index: src/ints/qcow2_disk.cpp
  			fread(backing_file_name, header.backing_file_size, 1, file);
  			if (backing_file_name[0] != 0x2F){
  				for (int image_name_index = (int)strlen(imageName); image_name_index > -1; image_name_index--){
-@@ -252,10 +252,10 @@ using namespace std;
+@@ -255,10 +255,10 @@ using namespace std;
  
  //Pad a file with zeros if it doesn't end on a cluster boundary.
  	Bit8u QCow2Image::pad_file(Bit64u& new_file_length){
@@ -36,7 +36,7 @@ Index: src/ints/qcow2_disk.cpp
  		const Bit64u padding_size = (cluster_size - (old_file_length % cluster_size)) % cluster_size;
  		new_file_length = old_file_length + padding_size;
  		if (0 == padding_size){
-@@ -272,7 +272,7 @@ using namespace std;
+@@ -275,7 +275,7 @@ using namespace std;
  //Read data of arbitrary length that is present in the image file.
  	Bit8u QCow2Image::read_allocated_data(Bit64u file_offset, Bit8u* data, Bit64u data_size)
  	{
@@ -45,7 +45,7 @@ Index: src/ints/qcow2_disk.cpp
  			return 0x05;
  		}
  		if (1 != fread(data, data_size, 1, file)){
-@@ -387,7 +387,7 @@ using namespace std;
+@@ -391,7 +391,7 @@ using namespace std;
  
  //Write data of arbitrary length to the image file.
  	Bit8u QCow2Image::write_data(Bit64u file_offset, Bit8u* data, Bit64u data_size){

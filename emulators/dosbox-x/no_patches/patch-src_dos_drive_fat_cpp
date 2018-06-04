@@ -5,7 +5,7 @@ fix function names *64
 Index: src/dos/drive_fat.cpp
 --- src/dos/drive_fat.cpp.orig
 +++ src/dos/drive_fat.cpp
-@@ -682,7 +682,7 @@ fatDrive::fatDrive(const char *sysFilename, Bit32u byt
+@@ -680,7 +680,7 @@ fatDrive::fatDrive(const char *sysFilename, Bit32u byt
  		imgDTA    = new DOS_DTA(imgDTAPtr);
  	}
  
@@ -14,7 +14,7 @@ Index: src/dos/drive_fat.cpp
  	if(!diskfile) {created_successfully = false;return;}
  
      // all disk I/O is in sector-sized blocks.
-@@ -703,25 +703,25 @@ fatDrive::fatDrive(const char *sysFilename, Bit32u byt
+@@ -701,18 +701,18 @@ fatDrive::fatDrive(const char *sysFilename, Bit32u byt
  		loadedDisk = new QCow2Disk(qcow2_header, diskfile, (Bit8u *)sysFilename, filesize, bytesector, (filesize > 2880));
  	}
  	else{
@@ -23,16 +23,7 @@ Index: src/dos/drive_fat.cpp
          assert(sizeof(bootbuffer.bootcode) >= 256);
          fread(bootbuffer.bootcode,256,1,diskfile); // look for magic signatures
  
-         const char *ext = strrchr(sysFilename,'.');
- 
-         if (ext != NULL && !strcasecmp(ext, ".d88")) {
--            fseeko64(diskfile, 0L, SEEK_END);
--            filesize = (Bit32u)(ftello64(diskfile) / 1024L);
-+            fseeko(diskfile, 0L, SEEK_END);
-+            filesize = (Bit32u)(ftello(diskfile) / 1024L);
-             loadedDisk = new imageDiskD88(diskfile, (Bit8u *)sysFilename, filesize, (filesize > 2880));
-         }
-         else if (!memcmp(bootbuffer.bootcode,"VFD1.",5)) { /* FDD files */
+         if (!memcmp(bootbuffer.bootcode,"VFD1.",5)) { /* FDD files */
 -            fseeko64(diskfile, 0L, SEEK_END);
 -            filesize = (Bit32u)(ftello64(diskfile) / 1024L);
 +            fseeko(diskfile, 0L, SEEK_END);

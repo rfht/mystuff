@@ -1,4 +1,4 @@
-@comment $OpenBSD$
+@comment $OpenBSD: PLIST,v$
 @bin bin/citra
 @bin bin/citra-qt
 @bin bin/citra-room

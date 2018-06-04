@@ -6,7 +6,7 @@ fix man path
 Index: CMakeLists.txt
 --- CMakeLists.txt.orig
 +++ CMakeLists.txt
-@@ -27,20 +27,6 @@ endif()
+@@ -29,20 +29,6 @@ endif()
  # Sanity check : Check that all submodules are present
  # =======================================================================
  
@@ -27,7 +27,7 @@ Index: CMakeLists.txt
  configure_file(${CMAKE_SOURCE_DIR}/dist/compatibility_list/compatibility_list.qrc
                 ${CMAKE_BINARY_DIR}/dist/compatibility_list/compatibility_list.qrc
                 COPYONLY)
-@@ -393,11 +379,11 @@ endif()
+@@ -397,11 +383,11 @@ endif()
  if(UNIX)
      if(ENABLE_SDL2)
          install(FILES "${CMAKE_SOURCE_DIR}/dist/citra.6"

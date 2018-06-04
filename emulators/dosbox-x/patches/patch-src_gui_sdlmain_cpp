@@ -1,0 +1,25 @@
+$OpenBSD$
+
+add missing macro manually
+remove error if using SDL1
+
+Index: src/gui/sdlmain.cpp
+--- src/gui/sdlmain.cpp.orig
++++ src/gui/sdlmain.cpp
+@@ -26,6 +26,8 @@
+  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  */
+ 
++#define SDL_HAX_NOREFRESH 0x10000000
++
+ #ifdef WIN32
+ # ifndef WIN32_LEAN_AND_MEAN
+ #  define WIN32_LEAN_AND_MEAN
+@@ -108,7 +110,6 @@ void GFX_OpenGLRedrawScreen(void);
+ #if !defined(C_SDL2)
+ # include "SDL_version.h"
+ # ifndef SDL_DOSBOX_X_SPECIAL
+-#  error This code must be compiled using the SDL 1.x library provided in this source repository
+ # endif
+ #endif
+ 
