@@ -1,4 +1,4 @@
-@comment $OpenBSD$
+@comment $OpenBSD: PLIST,v$
 include/hidapi/
 include/hidapi/hidapi.h
 lib/libhdapi.so.{LIBhidapi-libusb_VERSION}
@@ -13,3 +13,4 @@ share/doc/hidapi/LICENSE-gpl3.txt
 share/doc/hidapi/LICENSE-orig.txt
 share/doc/hidapi/LICENSE.txt
 share/doc/hidapi/README.txt
+share/doc/pkg-readmes/${FULLPKGNAME}

@@ -2,7 +2,7 @@
 
 COMMENT =	library for communicating with USB and Bluetooth HID devices
 
-V =		0.8.0.20160128
+V =		0.8.0pre20160128
 DISTNAME =	libhidapi-${V}
 
 GH_ACCOUNT =	signal11
